@@ -36,7 +36,7 @@
             </div>
             @else
             <div class="card card-default"><div class="card-header">
-                    Create Team Site
+                    Create Tenant Site
                 </div>
                 <div class="card-body">
                     <form class="form-horizontal" method="POST" action="/newsite">
