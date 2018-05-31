@@ -112,7 +112,7 @@ return [
     */
 
     'attributes' => [
-        'team' => 'team'
+        'team' => 'site'
     ],
 
 ];
