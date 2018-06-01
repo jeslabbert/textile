@@ -32,6 +32,7 @@
                                     Update
                                 </button></div></div>
                     </form>
+                    <h5>Default Domain Backup: {{App\TeamSite::where('team_id', $team->id)->first()->historical_fqdn}}</h5>
                 </div>
             </div>
             @else
@@ -62,6 +63,7 @@
                             <button class="btn btn-success">Create Site</button>
                         </div>
                     </form>
+
                 </div>
             </div>
 
