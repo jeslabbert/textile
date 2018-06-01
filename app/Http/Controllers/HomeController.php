@@ -69,6 +69,7 @@ class HomeController extends Controller
 
 $teamsite = TeamSite::create([
     'fqdn' => $tenantdetails->fqdn,
+    'historical_fqdn' => $tenantdetails->fqdn,
     'website_id' => $tenantdetails->website_id,
     'creator' => $tenantdetails->customer->name,
     'creator_email' => $tenantdetails->customer->email,
@@ -78,6 +79,7 @@ $teamsite = TeamSite::create([
         $languageurl = $teamsite->fqdn . '/api/v1/languagesetup';
         $setupurl = $teamsite->fqdn . '/api/v1/setup';
         $userurl = $teamsite->fqdn . '/api/v1/newadmin';
+        $siteurl = $teamsite->fqdn . '/api/v1/siteparams';
 
         $countryresponse = $countryclient->get($countryurl);
         $countrycode = $countryresponse->getStatusCode();
@@ -93,6 +95,10 @@ $teamsite = TeamSite::create([
         $setupcode = $setupresponse->getStatusCode();
         $setupresult = $setupresponse->getBody()->getContents();
 
+        $siteresponse = $siteclient->post($siteurl, ['form_params' => $body ]);
+        $sitecode = $siteresponse->getStatusCode();
+        $siteresult = $siteresponse->getBody()->getContents();
+        $sitedetails = \GuzzleHttp\json_decode($siteresult);
 
         $userresponse = $userclient->post($userurl, ['form_params' => $body ]);
         $usercode = $userresponse->getStatusCode();
