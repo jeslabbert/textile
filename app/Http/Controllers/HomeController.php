@@ -42,6 +42,7 @@ class HomeController extends Controller
         $languageclient = new \GuzzleHttp\Client();
         $setupclient = new \GuzzleHttp\Client();
         $userclient = new \GuzzleHttp\Client();
+        $siteclient = new \GuzzleHttp\Client();
 
         $tenanturl = 'http://cloud.taskmule.com/api/v1/sites/create';
 
