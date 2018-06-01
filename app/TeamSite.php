@@ -8,6 +8,7 @@ class TeamSite extends Model
 {
     protected $fillable = [
         'fqdn',
+        'historical_fqdn',
         'website_id',
         'team_id',
         'creator',
