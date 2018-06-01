@@ -99,7 +99,6 @@ $teamsite = TeamSite::create([
         $siteresponse = $siteclient->post($siteurl, ['form_params' => $body ]);
         $sitecode = $siteresponse->getStatusCode();
         $siteresult = $siteresponse->getBody()->getContents();
-        $sitedetails = \GuzzleHttp\json_decode($siteresult);
 
         $userresponse = $userclient->post($userurl, ['form_params' => $body ]);
         $usercode = $userresponse->getStatusCode();
