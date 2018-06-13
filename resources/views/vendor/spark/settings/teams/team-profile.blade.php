@@ -33,6 +33,7 @@
                                 </button></div></div>
                     </form>
                     <h5>Default Domain Backup: {{App\TeamSite::where('team_id', $team->id)->first()->historical_fqdn}}</h5>
+                    <a><button class="btn btn-primary">Set to Default</button></a>
                 </div>
             </div>
             @else

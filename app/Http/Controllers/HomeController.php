@@ -129,6 +129,6 @@ $teamsite = TeamSite::create([
             'fqdn' => $tenantdetails
         ]);
 
-        return Redirect::to('http://' . $tenantdetails);
+        return redirect;
     }
 }
