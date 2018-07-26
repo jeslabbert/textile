@@ -72,6 +72,8 @@ $teamsite = TeamSite::create([
     'fqdn' => $tenantdetails->fqdn,
     'historical_fqdn' => $tenantdetails->fqdn,
     'website_id' => $tenantdetails->website_id,
+    'creator' => 'System',
+    'creator_email' => 'info@taskmule.com',
     'team_id' => $request->team_id
 ]);
         $countryurl = $teamsite->fqdn . '/api/v1/countrysetup';
