@@ -44,7 +44,7 @@ class HomeController extends Controller
         $userclient = new \GuzzleHttp\Client();
         $siteclient = new \GuzzleHttp\Client();
 
-        $tenanturl = 'http://cloud.qrcloud.test/api/v1/sites/create';
+        $tenanturl = 'http://cloud.taskmule.com/api/v1/sites/create';
 
         $body['_token'] = $request->_token;
         $body['subname'] = 'tm000' . $request->subname;
