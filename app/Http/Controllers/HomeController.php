@@ -44,7 +44,7 @@ class HomeController extends Controller
         $userclient = new \GuzzleHttp\Client();
         $siteclient = new \GuzzleHttp\Client();
 
-        $tenanturl = 'http://cloud.taskmule.com/api/v1/sites/create';
+        $tenanturl = 'http://cloud.qrcloud.test/api/v1/sites/create';
 
         $body['_token'] = $request->_token;
         $body['subname'] = 'tm000' . $request->subname;
@@ -72,8 +72,6 @@ $teamsite = TeamSite::create([
     'fqdn' => $tenantdetails->fqdn,
     'historical_fqdn' => $tenantdetails->fqdn,
     'website_id' => $tenantdetails->website_id,
-    'creator' => $tenantdetails->customer->name,
-    'creator_email' => $tenantdetails->customer->email,
     'team_id' => $request->team_id
 ]);
         $countryurl = $teamsite->fqdn . '/api/v1/countrysetup';
