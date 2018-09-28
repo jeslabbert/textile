@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\TeamSite;
+use App\SiteTotal;
 use Illuminate\Http\Request;
 
-class TeamSiteController extends Controller
+class SiteTotalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,43 +41,21 @@ class TeamSiteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\TeamSite  $teamSite
+     * @param  \App\SiteTotal  $siteTotal
      * @return \Illuminate\Http\Response
      */
-    public function show(TeamSite $teamSite)
+    public function show(SiteTotal $siteTotal)
     {
-
+        //
     }
-    public function sitebilling(TeamSite $teamSite)
-    {
-        $tenantclient = new \GuzzleHttp\Client();
 
-        $tenanturl = $teamSite->fqdn;
-
-//        $body['_token'] = $request->_token;
-//        $body['domainname'] = $request->domainname;
-//        $body['site_id'] = $request->website_id;
-
-        $tenantresponse = $tenantclient->post($tenanturl);
-
-        $tenantcode = $tenantresponse->getStatusCode();
-        $tenantresult = $tenantresponse->getBody()->getContents();
-dd($tenantcode, $tenantresult);
-        $tenantdetails = \GuzzleHttp\json_decode($tenantresult);
-
-        $teamsite = TeamSite::where('website_id', $request->website_id)->update([
-            'fqdn' => $tenantdetails
-        ]);
-
-        return redirect;
-    }
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\TeamSite  $teamSite
+     * @param  \App\SiteTotal  $siteTotal
      * @return \Illuminate\Http\Response
      */
-    public function edit(TeamSite $teamSite)
+    public function edit(SiteTotal $siteTotal)
     {
         //
     }
@@ -86,10 +64,10 @@ dd($tenantcode, $tenantresult);
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TeamSite  $teamSite
+     * @param  \App\SiteTotal  $siteTotal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TeamSite $teamSite)
+    public function update(Request $request, SiteTotal $siteTotal)
     {
         //
     }
@@ -97,10 +75,10 @@ dd($tenantcode, $tenantresult);
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\TeamSite  $teamSite
+     * @param  \App\SiteTotal  $siteTotal
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TeamSite $teamSite)
+    public function destroy(SiteTotal $siteTotal)
     {
         //
     }
