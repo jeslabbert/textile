@@ -58,27 +58,6 @@ class TeamSiteController extends Controller
 //        $body['domainname'] = $request->domainname;
 //        $body['site_id'] = $request->website_id;
 
-
-        $url = 'http://'.$teamSite->fqdn;
-
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);// this should be set to true in production
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $billingResponseData = curl_exec($ch);
-        if(curl_errno($ch)) {
-            return curl_error($ch);
-        }
-        curl_close($ch);
-        dd($billingResponseData);
-        $responseResult = \GuzzleHttp\json_decode($billingResponseData);
-
-
-        dd($responseResult);
-
-
         $tenantresponse = $tenantclient->post($tenanturl);
 
         $tenantcode = $tenantresponse->getStatusCode();
