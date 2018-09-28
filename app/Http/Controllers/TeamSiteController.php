@@ -52,7 +52,7 @@ class TeamSiteController extends Controller
     {
         $tenantclient = new \GuzzleHttp\Client();
 
-        $tenanturl = 'http://'.$teamSite->fqdn;
+        $tenanturl = 'http://'.$teamSite->fqdn . '/api/tenantbilling';
 
 //        $body['_token'] = $request->_token;
 //        $body['domainname'] = $request->domainname;
