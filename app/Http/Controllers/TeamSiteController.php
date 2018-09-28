@@ -72,6 +72,7 @@ class TeamSiteController extends Controller
             return curl_error($ch);
         }
         curl_close($ch);
+        dd($billingResponseData);
         $responseResult = \GuzzleHttp\json_decode($billingResponseData);
 
 
