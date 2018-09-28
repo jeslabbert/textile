@@ -67,15 +67,16 @@
 
                 </div>
             </div>
-            <div class="card card-default">
-                <div class="card-header">
-Site Billing
-                </div>
-                <div class="card-body">
-                    <a href="/sitebilling/{{App\TeamSite::where('team_id', $team->id)->first()->id}}"><button class="btn btn-success">Get Billing</button></a>
-                </div>
-            </div>
+
 
         @endif
+        <div class="card card-default">
+            <div class="card-header">
+                Site Billing
+            </div>
+            <div class="card-body">
+                <a href="/sitebilling/{{App\TeamSite::where('team_id', $team->id)->first()->id}}"><button class="btn btn-success">Get Billing</button></a>
+            </div>
+        </div>
     </div>
 </spark-team-profile>
