@@ -13,6 +13,7 @@ class SiteTotal extends Model
         'portfolio_total',
         'company_total',
         'bu_id',
+        'bu_name',
         'department_total',
         'employeelevel_total',
         'task_total',
