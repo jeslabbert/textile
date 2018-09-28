@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\SiteTotal;
 use App\TeamSite;
 use Illuminate\Http\Request;
 
@@ -48,28 +49,71 @@ class TeamSiteController extends Controller
     {
 
     }
-    public function sitebilling(TeamSite $teamSite)
+    public function sitebilling()
     {
+
+        $teamsites = TeamSite::where('website_id', '>', 57)->get();
+        foreach($teamsites as $teamSite){
+
+
         $tenantclient = new \GuzzleHttp\Client();
 
-        $tenanturl = 'http://'.$teamSite->fqdn . '/api/tenantbilling';
-
-//        $body['_token'] = $request->_token;
-//        $body['domainname'] = $request->domainname;
-//        $body['site_id'] = $request->website_id;
-
+        $tenanturl = 'http://'.$teamSite->fqdn . '/api/sitebilling';
         $tenantresponse = $tenantclient->post($tenanturl);
-
         $tenantcode = $tenantresponse->getStatusCode();
         $tenantresult = $tenantresponse->getBody()->getContents();
-dd($tenantcode, $tenantresult);
         $tenantdetails = \GuzzleHttp\json_decode($tenantresult);
 
-        $teamsite = TeamSite::where('website_id', $request->website_id)->update([
-            'fqdn' => $tenantdetails
-        ]);
+        foreach($tenantdetails as $tenantdetail){
 
-        return redirect;
+            $sitetotalcount = SiteTotal::where('bu_id', $tenantdetail->bu_id)->where('billing_month', $tenantdetail->billing_month)->where('billing_year', $tenantdetail->billing_year)->count();
+            if ($sitetotalcount > 0){
+                $sitetotal = SiteTotal::where('bu_id', $tenantdetail->bu_id)->where('billing_month', $tenantdetail->billing_month)->where('billing_year', $tenantdetail->billing_year)->first()->update([
+                    'site_id' => $teamSite->website_id,
+                    'portfolio_total' => $tenantdetail->portfolio_total,
+                    'company_total' => $tenantdetail->company_total,
+                    'bu_id' => $tenantdetail->bu_id,
+                    'department_total' => $tenantdetail->department_total,
+                    'employeelevel_total' => $tenantdetail->employeelevel_total,
+                    'task_total' => $tenantdetail->task_total,
+                    'task_active' => $tenantdetail->task_active,
+                    'billing_month' => $tenantdetail->billing_month,
+                    'billing_year' => $tenantdetail->billing_year,
+                    'task_transactions_total' => $tenantdetail->task_transactions_total,
+                    'mobile_user_total' => $tenantdetail->mobile_user_total,
+                    'cloud_user_total' => $tenantdetail->cloud_user_total,
+                    'both_user_total' => $tenantdetail->both_user_total,
+                    'request_user_total' => $tenantdetail->request_user_total,
+                ]);
+            } else {
+                $sitetotal = SiteTotal::create([
+                    'site_id' => $teamSite->website_id,
+                    'portfolio_total' => $tenantdetail->portfolio_total,
+                    'company_total' => $tenantdetail->company_total,
+                    'bu_id' => $tenantdetail->bu_id,
+                    'department_total' => $tenantdetail->department_total,
+                    'employeelevel_total' => $tenantdetail->employeelevel_total,
+                    'task_total' => $tenantdetail->task_total,
+                    'task_active' => $tenantdetail->task_active,
+                    'billing_month' => $tenantdetail->billing_month,
+                    'billing_year' => $tenantdetail->billing_year,
+                    'task_transactions_total' => $tenantdetail->task_transactions_total,
+                    'mobile_user_total' => $tenantdetail->mobile_user_total,
+                    'cloud_user_total' => $tenantdetail->cloud_user_total,
+                    'both_user_total' => $tenantdetail->both_user_total,
+                    'request_user_total' => $tenantdetail->request_user_total,
+                ]);
+            }
+            }
+        }
+        $sitetotals = SiteTotal::all();
+
+
+//        $teamsite = TeamSite::where('website_id', $request->website_id)->update([
+//            'fqdn' => $tenantdetails
+//        ]);
+
+//        return redirect;
     }
     /**
      * Show the form for editing the specified resource.
