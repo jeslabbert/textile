@@ -18,4 +18,4 @@ Route::get('/home', 'HomeController@show');
 Route::post('/newsite', 'HomeController@newsite');
 Route::post('/updatesite', 'HomeController@updatesite');
 
-Route::get('/sitebilling', 'TeamSiteController@sitebilling');
+Route::get('/sitebilling/{teamSite}', 'TeamSiteController@sitebilling');
