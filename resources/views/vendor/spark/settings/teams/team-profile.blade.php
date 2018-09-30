@@ -70,6 +70,7 @@
 
 
         @endif
+        @if (App\TeamSite::where('team_id', $team->id)->count() > 0)
         <div class="card card-default">
             <div class="card-header">
                 Site Billing
@@ -78,5 +79,6 @@
                 <a href="/sitebilling/{{App\TeamSite::where('team_id', $team->id)->first()->id}}"><button class="btn btn-success">Get Billing</button></a>
             </div>
         </div>
+            @endif
     </div>
 </spark-team-profile>
