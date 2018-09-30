@@ -110,9 +110,7 @@ class TeamSiteController extends Controller
             }
             $team = Team::where('id', $teamSite->team_id)->first();
 
-            $team->invoiceFor('One Time Fee', 500, [
-                'description' => 'your invoice description here',
-            ]);
+            $team->invoiceFor('One Time Fee', 500);
 //            $team->charge(340);
         }
         $sitetotals = SiteTotal::all();
