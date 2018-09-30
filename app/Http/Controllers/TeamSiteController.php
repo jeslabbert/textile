@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\SiteTotal;
 use App\TeamSite;
 use Illuminate\Http\Request;
+use Laravel\Spark\Team;
 
 class TeamSiteController extends Controller
 {
@@ -52,7 +53,7 @@ class TeamSiteController extends Controller
     public function sitebilling()
     {
 
-        $teamsites = TeamSite::where('website_id', '>', 61)->get();
+        $teamsites = TeamSite::where('website_id', '>', 27)->get();
         foreach($teamsites as $teamSite){
 
 
@@ -107,6 +108,13 @@ class TeamSiteController extends Controller
                 ]);
             }
             }
+            $team = Team::where('id', $teamSite->team_id)->first();
+
+            $test = $team->invoiceFor('One Time Fee', 500, [
+                'description' => 'your invoice description here',
+            ]);
+            dd($test);
+//            $team->charge(340);
         }
         $sitetotals = SiteTotal::all();
 

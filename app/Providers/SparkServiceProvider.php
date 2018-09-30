@@ -85,13 +85,26 @@ class SparkServiceProvider extends ServiceProvider
 
         Spark::freeTeamPlan()
             ->features([
-                'First', 'Second', 'Third'
+                '1 to 5 Tasks'
             ]);
 
-        Spark::teamPlan('Basic', 'provider-id-1')
+        Spark::teamPlan('Bronze Plan', 'taskmule-bronze-eur')
+            ->price(1)
+            ->features([
+                '6 to 20 Tasks', '600 Transactions'
+            ]);
+
+        Spark::teamPlan('Silver Plan', 'taskmule-silver-eur')
             ->price(10)
             ->features([
-                'First', 'Second', 'Third'
+                '21 to 100 Tasks', '3000 Transactions'
             ]);
+
+        Spark::teamPlan('Gold Plan', 'taskmule-gold-eur')
+            ->price(100)
+            ->features([
+                '101 to 500 Tasks', '15000 Transactions'
+            ]);
+
     }
 }
