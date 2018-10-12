@@ -11,6 +11,7 @@ return [
     "slug_input_explanation" => "This slug is used to identify your site in URLs.",
     "plan_allows_no_more_teams" => "Your current plan doesn't allow you to create more sites",
     "team" => " Team",
+    "commission_split" => " Commission Split",
     "update_team_name" => "Update Site Name",
     "team_name_was_updated" => " Your site name has been updated!",
     "current_teams" => " Current Sites",
