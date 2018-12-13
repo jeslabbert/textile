@@ -12,6 +12,8 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+    require('node-waves');
+    require('mdbootstrap');
 } catch (e) {}
 
 /**

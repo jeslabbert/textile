@@ -20,6 +20,7 @@
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     @includeIf('spark::nav.user-left')
+
                 </ul>
 
                 <a @click="showNotifications" class="notification-pill mx-auto mb-3 mb-md-0 mr-md-0 ml-md-auto">
@@ -50,6 +51,11 @@
                             <span class="d-none d-md-block">@{{ user.name }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+
+
+                            <a class="dropdown-item" href="/settings#/profile">
+                                <i class="fa fa-fw text-left fa-btn fa-user-secret"></i> {{__('Profile')}}
+                            </a>
                             <!-- Impersonation -->
                             @if (session('spark:impersonator'))
                                 <h6 class="dropdown-header">{{__('Impersonation')}}</h6>
@@ -70,20 +76,20 @@
                             <!-- Subscription Reminders -->
                             @include('spark::nav.subscriptions')
 
-                            <!-- Settings -->
-                            <h6 class="dropdown-header">{{__('Settings')}}</h6>
+                            {{--<!-- Settings -->--}}
+                            {{--<h6 class="dropdown-header">{{__('Settings')}}</h6>--}}
 
-                            <!-- Your Settings -->
-                            <a class="dropdown-item" href="/settings">
-                                <i class="fa fa-fw text-left fa-btn fa-cog"></i> {{__('Your Settings')}}
-                            </a>
+                            {{--<!-- Your Settings -->--}}
+                            {{--<a class="dropdown-item" href="/settings">--}}
+                                {{--<i class="fa fa-fw text-left fa-btn fa-cog"></i> {{__('Your Settings')}}--}}
+                            {{--</a>--}}
 
-                            <div class="dropdown-divider"></div>
+                            {{--<div class="dropdown-divider"></div>--}}
 
-                            @if (Spark::usesTeams() && (Spark::createsAdditionalTeams() || Spark::showsTeamSwitcher()))
-                                <!-- Team Settings -->
-                                @include('spark::nav.teams')
-                            @endif
+                            {{--@if (Spark::usesTeams() && (Spark::createsAdditionalTeams() || Spark::showsTeamSwitcher()))--}}
+                                {{--<!-- Team Settings -->--}}
+                                {{--@include('spark::nav.teams')--}}
+                            {{--@endif--}}
 
                             @if (Spark::hasSupportAddress())
                                 <!-- Support -->

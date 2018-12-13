@@ -26,15 +26,14 @@ class SparkServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $sendSupportEmailsTo = null;
-
+    protected $sendSupportEmailsTo = 'justin@icarative.com';
     /**
      * All of the application developer e-mail addresses.
      *
      * @var array
      */
     protected $developers = [
-        //
+        'justin@icarative.com'
     ];
 
     /**
