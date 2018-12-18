@@ -33,6 +33,11 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function sites()
+    {
+        return view('vendor.spark.sites');
+    }
+
     public function newsite(Request $request)
     {
         $input = $request->all();

@@ -14,8 +14,11 @@
 Route::get('/', 'WelcomeController@show');
 
 Route::get('/home', 'HomeController@show');
+Route::get('/sites', 'HomeController@sites');
 
 Route::post('/newsite', 'HomeController@newsite');
 Route::post('/updatesite', 'HomeController@updatesite');
+
+Route::post('/teamcommission', 'TeamCommissionController@store');
 
 Route::get('/sitebilling', 'TeamSiteController@sitebilling');

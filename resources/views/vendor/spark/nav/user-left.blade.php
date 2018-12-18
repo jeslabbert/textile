@@ -6,7 +6,7 @@
 </li>
 -->
 <li class="nav-link">
-    <a class="nav-link" href="/settings#/teams">Sites</a>
+    <a class="nav-link" href="/sites">Sites</a>
 </li>
 {{--<li class="nav-link">--}}
     {{--<a href="/about">About</a>--}}

@@ -49,13 +49,13 @@
                         </li>
                         @if (Spark::usesApi())
                         <li class="nav-item ">
-                            <a class="nav-link" href="#api" aria-controls="api" role="tab" data-toggle="tab">
-                                <svg class="icon-20 " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 20 20 ">
-                                    <path d="M20 14v4c0 1-1 2-2 2h-4v-2c0-1-1-2-2-2s-2 1-2 2v2H6c-1 0-2-1-2-2v-4H2c-1 0-2-1-2-2s1-2 2-2h2V6c0-1
-              1-2 2-2h4V2c0-1 1-2 2-2s2 1 2 2v2h4c1 0 2 1 2 2v4h-2c-1 0-2 1-2 2s1 2 2 2h2z "/>
-                                </svg>
-                                {{__('API')}}
-                            </a>
+                        <a class="nav-link" href="#api" aria-controls="api" role="tab" data-toggle="tab">
+                        <svg class="icon-20 " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 20 20 ">
+                        <path d="M20 14v4c0 1-1 2-2 2h-4v-2c0-1-1-2-2-2s-2 1-2 2v2H6c-1 0-2-1-2-2v-4H2c-1 0-2-1-2-2s1-2 2-2h2V6c0-1
+                        1-2 2-2h4V2c0-1 1-2 2-2s2 1 2 2v2h4c1 0 2 1 2 2v4h-2c-1 0-2 1-2 2s1 2 2 2h2z "/>
+                        </svg>
+                        {{__('API')}}
+                        </a>
                         </li>
                         @endif
                     </ul>
@@ -78,6 +78,11 @@
                     <!-- User Management -->
                     <div role="tabcard" class="tab-pane" id="users">
                         @include('spark::kiosk.users')
+                    </div>
+
+                    <!-- API Management -->
+                    <div role="tabcard" class="tab-pane" id="api">
+                        @include('spark::kiosk.api')
                     </div>
                 </div>
             </div>

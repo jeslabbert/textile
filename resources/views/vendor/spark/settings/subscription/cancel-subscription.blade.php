@@ -2,7 +2,7 @@
     <div>
         <div class="card card-default">
             <div class="card-body">
-                <button class="btn btn-outline-danger"
+                <button class="btn btn-danger"
                 @click="confirmCancellation"
                 :disabled="form.busy">
 

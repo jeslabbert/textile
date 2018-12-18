@@ -8,17 +8,18 @@
             @include('spark::settings.teams.update-team-name')
         </div>
         @if (App\TeamSite::where('team_id', $team->id)->count() > 0)
-            <a href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}">Visit Site</a>
+
             <div class="card card-default"><div class="card-header">
-                    Update Team Site
+                    Update Team Site -
+                    <button data-toggle="modal" data-target="#sitedns" class="btn btn-link btn-sm pull-right"><i style="color: black;" class="fa fa-info"></i></button>
+                    <a class="btn btn-link btn-sm pull-right" href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}"><i style="color: black;" class="fa fa-info"></i> Visit Site</a>
                 </div>
                 <div class="card-body">
                     <form class="form-horizontal" method="POST" action="/updatesite">
                         {{ csrf_field() }}
                         <input id="sitename" type="hidden" class="form-control" name="website_id" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>
-                        <div class="form-group row">
+                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">Domain Name</label>
-                            <h5>Please create an A record for the domain name that you want to use in your DNS panel. It should point to 154.66.198.90 with a maximum TTL of 3600</h5>
                             <div class="col-md-6">
                                 <input id="domainname" type="text" class="form-control" name="domainname" value="{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" required>
                                 <span class="invalid-feedback" style="display: none;">
@@ -26,15 +27,23 @@
                                 </span>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">Default Domain Backup</label>
+                            <div class="col-md-6">
+                                <input id="domainname" type="text" class="form-control" value="{{App\TeamSite::where('team_id', $team->id)->first()->historical_fqdn}}" readonly>
+                            </div>
 
+                        </div>
 
-                        <div class="form-group row mb-0"><div class="offset-md-4 col-md-6"><button type="submit" class="btn btn-primary">
+                        <div class="form-group row mb-0"><div class="offset-md-4 col-md-6">
+                                <a><button class="btn btn-primary">Set to Default</button></a><button type="submit" class="btn btn-primary">
 
                                     Update
                                 </button></div></div>
                     </form>
-                    <h5>Default Domain Backup: {{App\TeamSite::where('team_id', $team->id)->first()->historical_fqdn}}</h5>
-                    <a><button class="btn btn-primary">Set to Default</button></a>
+
+                    <h5> </h5>
+
                 </div>
             </div>
             @else
@@ -71,50 +80,32 @@
 
 
         @endif
-        @if (App\TeamSite::where('team_id', $team->id)->count() > 0)
-        <div class="card card-default">
-            <div class="card-header">
-                Site Billing
-            </div>
-            <hr>
-            <div class="row">
-                <form>
-                    <input class="hidden" type="hidden" name="team_id" value="{{$team->id}}">
-              <div class="col-md-6 col-sm-9">
-                  <h4 style="    margin-left: 10px;
-    margin-right: 10px;">Commission Split</h4>
-                  <div class="row" style="    margin-left: 10px;
-    margin-right: 10px;">
-                      <div class="col-xs-3" style="padding: 5px;">Support - </div>
-                      <div class="col-xs-6" style="padding: 5px;">
-                          <output for="fader" id="firstcomm">50</output>
-                          <input type="range" min="0" max="100" value="50" name="commission" id="fader"
-                                 step="1" oninput="outputUpdate(value)">
-                          <output for="fader" id="secondcomm">50</output>
-                      </div>
-                      <div class="col-xs-3" style="padding: 5px;"> - Sales</div>
-                  </div>
-              </div>
-                <div class="col-md-6 col-sm-5">
 
+    </div>
+
+            <div class="modal fade" id="sitedns" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        DNS Settings
+                    </h5>
+                </div>
+
+                <div class="modal-body">
+                    <p>Please create an A record for the domain name that you want to use in your DNS panel. It should point to 154.66.198.90 with a maximum TTL of 3600</p>
+                </div>
+
+                <!-- Modal Actions -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{__('No, Go Back')}}</button>
+
+                    <button type="button" class="btn btn-warning" @click="leaveTeam" :disabled="leaveTeamForm.busy">
+                        {{__('Yes, Leave')}}
+                    </button>
                 </div>
             </div>
-
-
-
-</form>
-
-            <script>
-                function outputUpdate(vol) {
-                    document.querySelector('#secondcomm').value = vol;
-                    document.querySelector('#firstcomm').value = 100 - vol;
-                }
-            </script>
-            <hr>
-            <div class="card-body">
-                <a href="/sitebilling/{{App\TeamSite::where('team_id', $team->id)->first()->id}}"><button class="btn btn-success">Get Billing</button></a>
-            </div>
         </div>
-            @endif
     </div>
+
 </spark-team-profile>

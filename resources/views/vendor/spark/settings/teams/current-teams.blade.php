@@ -22,7 +22,9 @@
                             <!-- Team Name -->
                             <td>
                                 <div class="btn-table-align">
+                                    <a :href="'/settings/{{Spark::teamsPrefix()}}/'+team.id">
                                     @{{ team.name }}
+                                    </a>
                                 </div>
                             </td>
 
@@ -41,21 +43,16 @@
 
                             <!-- Edit Button -->
                             <td class="td-fit">
-                                <a :href="'/settings/{{Spark::teamsPrefix()}}/'+team.id">
-                                    <button class="btn btn-outline-primary">
-                                        <i class="fa fa-cog"></i>
-                                    </button>
-                                </a>
 
-                                <button class="btn btn-outline-warning" @click="approveLeavingTeam(team)"
-                                        data-toggle="tooltip" title="{{__('teams.leave_team')}}"
+                                <button class="btn btn-link" @click="approveLeavingTeam(team)"
+                                        data-toggle="tooltip" title="{{__('teams.leave_site')}}"
                                         v-if="user.id !== team.owner_id">
-                                    <i class="fa fa-sign-out"></i>
+                                    <i style="color: black;" class="fa fa-sign-out"></i>
                                 </button>
 
                                 @if (Spark::createsAdditionalTeams())
-                                    <button class="btn btn-outline-danger" @click="approveTeamDelete(team)" v-if="user.id === team.owner_id">
-                                        <i class="fa fa-times"></i>
+                                    <button class="btn btn-link" @click="approveTeamDelete(team)" v-if="user.id === team.owner_id">
+                                        <i style="color: black;" class="fa fa-times"></i>
                                     </button>
                                 @endif
                             </td>

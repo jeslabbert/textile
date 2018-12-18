@@ -55,16 +55,16 @@
 
                             @endif
                             @if (Spark::createsAdditionalTeams())
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="/settings#/{{str_plural(Spark::teamsPrefix())}}">
-                                        <svg class="icon-20 " viewBox="0 0 20 20 " xmlns="http://www.w3.org/2000/svg ">
-                                            <path d="M6 8C4 8 2 6.2 2 4s2-4 4-4c2.3 0 4 1.8 4 4S8.4 8 6 8zm0 1c2.3 0 4.3.4 6.2 1l-1 6H9.8l-1 4H3l-.6-4H1l-1-6c2-.6
-              4-1 6-1zm8.4.2c1.3 0 2.6.4 3.8 1l-1 5.8H16l-1 4h-4l.4-2h1.3l1.6-8.8zM12 0c2.3 0 4 1.8 4 4s-1.7 4-4 4c-.4 0-.8
-              0-1.2-.2.8-1 1.3-2.4 1.3-3.8s0-2.7-1-3.8l1-.2z " />
-                                        </svg>
-                                        {{__('teams.view_all_teams')}}
-                                    </a>
-                                </li>
+                                {{--<li class="nav-item ">--}}
+                                    {{--<a class="nav-link" href="/settings#/{{str_plural(Spark::teamsPrefix())}}">--}}
+                                        {{--<svg class="icon-20 " viewBox="0 0 20 20 " xmlns="http://www.w3.org/2000/svg ">--}}
+                                            {{--<path d="M6 8C4 8 2 6.2 2 4s2-4 4-4c2.3 0 4 1.8 4 4S8.4 8 6 8zm0 1c2.3 0 4.3.4 6.2 1l-1 6H9.8l-1 4H3l-.6-4H1l-1-6c2-.6--}}
+              {{--4-1 6-1zm8.4.2c1.3 0 2.6.4 3.8 1l-1 5.8H16l-1 4h-4l.4-2h1.3l1.6-8.8zM12 0c2.3 0 4 1.8 4 4s-1.7 4-4 4c-.4 0-.8--}}
+              {{--0-1.2-.2.8-1 1.3-2.4 1.3-3.8s0-2.7-1-3.8l1-.2z " />--}}
+                                        {{--</svg>--}}
+                                        {{--{{__('teams.view_all_teams')}}--}}
+                                    {{--</a>--}}
+                                {{--</li>--}}
                             @else
                                 <li class="nav-item ">
                                     <a class="nav-link" href="/settings">
@@ -142,14 +142,93 @@
                         </div>
                     </div>
 
-                            <!-- Membership -->
-                            @if (Auth::user()->ownsTeam($team))
+
                                 <div role="tabcard" class="tab-pane" id="commission">
-                                            <div v-if="team">
-                                                @include('spark::settings.teams.team-membership')
+                                    @if (App\TeamSite::where('team_id', $team->id)->count() > 0)
+                                        <div class="card card-default">
+                                            <div class="card-header">
+                                                Commission Split
                                             </div>
+
+                                            <div class="row text-center">
+                                                <form style="margin:auto;" method="POST" action="/teamcommission">
+                                                    {{ csrf_field() }}
+                                                    <br>
+                                                    <input class="hidden" type="hidden" name="team_id" value="{{$team->id}}">
+                                                    <div class="col-md-12 text-center">
+                                                        <div class="row text-center">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group row">
+                                                                    <label class="col-md-6 col-form-label text-md-right">Support Consultant</label>
+                                                                    <div class="col-md-6">
+                                                                        <select name="first_user_id" class="browser-default custom-select">
+                                                                            @foreach($team->users()->get() as $teamuser)
+                                                                                <option @if(App\TeamCommission::where('team_id', $team->id)->first()->first_user_id == $teamuser->id) selected @endif value="{{$teamuser->id}}">{{$teamuser->name}} {{$teamuser->last_name}}</option>
+                                                                                @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <output for="fader" id="firstcomm">@if(App\TeamCommission::where('team_id', $team->id)->count() > 0) {{App\TeamCommission::where('team_id', $team->id)->first()->first_split}} @else 50 @endif</output>
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                            <input style="    transform: rotate(90deg);height: 150px;width: 150px;" type="range" min="0" max="100" @if(App\TeamCommission::where('team_id', $team->id)->count() > 0) value="{{App\TeamCommission::where('team_id', $team->id)->first()->second_split}}" @else value="50" @endif name="split" id="fader"
+                                                                   step="1" oninput="outputUpdate(value)">
+
+
+
+
+
+
+                                                            {{--<div class="col-xs-3" style="padding: 5px;">@if(App\TeamCommission::where('team_id', $team->id)->count() > 0) - {{App\TeamCommission::where('team_id', $team->id)->first()->second_name}} @else - Support @endif</div>--}}
+
+                                                        <br>
+                                                        <div class="row text-center">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group row">
+                                                                    <div class="col-12">
+                                                                        <output for="fader" id="secondcomm">@if(App\TeamCommission::where('team_id', $team->id)->count() > 0) {{App\TeamCommission::where('team_id', $team->id)->first()->second_split}} @else 50 @endif</output>
+                                                                    </div>
+                                                                    <label class="col-md-6 col-form-label text-md-right">Sales Consultant</label>
+
+                                                                    <div class="col-md-6">
+                                                                        <select name="second_user_id" class="browser-default custom-select">
+                                                                            @foreach($team->users()->get() as $teamuser)
+                                                                                <option @if(App\TeamCommission::where('team_id', $team->id)->first()->second_user_id == $teamuser->id) selected @endif value="{{$teamuser->id}}">{{$teamuser->name}} {{$teamuser->last_name}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12 text-center">
+                                                        <br>
+                                                        <button class="btn btn-success">Update</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+
+
+
+
+                                            <script>
+                                                function outputUpdate(vol) {
+                                                    document.querySelector('#secondcomm').value = vol;
+                                                    document.querySelector('#firstcomm').value = 100 - vol;
+                                                }
+                                            </script>
+
                                         </div>
-                                @endif
+                                    @endif
+
+                                        </div>
+
 
                     <!-- Billing Tab Panes -->
                     @if (Spark::canBillTeams() && Auth::user()->ownsTeam($team))
