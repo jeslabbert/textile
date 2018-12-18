@@ -5,6 +5,7 @@
         <div class="card-body">
             <form role="form" v-if="canCreateMoreTeams">
                 <!-- Name -->
+                {{--TODO Add site commission structure from defaults--}}
                 <div class="form-group row">
                     <label class="col-md-4 col-form-label text-md-right">{{__('teams.team_name')}}</label>
 

@@ -8,7 +8,7 @@
                     <thead>
                         <th class="th-fit"></th>
                         <th>{{__('Name')}}</th>
-                        <th>{{__('Owner')}}</th>
+                        {{--<th>{{__('Owner')}}</th>--}}
                         <th>&nbsp;</th>
                     </thead>
 
@@ -28,18 +28,18 @@
                                 </div>
                             </td>
 
-                            <!-- Owner Name -->
-                            <td>
-                                <div class="btn-table-align">
-                                    <span v-if="user.id == team.owner.id">
-                                        {{__('You')}}
-                                    </span>
+                            {{--<!-- Owner Name -->--}}
+                            {{--<td>--}}
+                                {{--<div class="btn-table-align">--}}
+                                    {{--<span v-if="user.id == team.owner.id">--}}
+                                        {{--{{__('You')}}--}}
+                                    {{--</span>--}}
 
-                                    <span v-else>
-                                        @{{ team.owner.name }}
-                                    </span>
-                                </div>
-                            </td>
+                                    {{--<span v-else>--}}
+                                        {{--@{{ team.owner.name }}--}}
+                                    {{--</span>--}}
+                                {{--</div>--}}
+                            {{--</td>--}}
 
                             <!-- Edit Button -->
                             <td class="td-fit">

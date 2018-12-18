@@ -51,6 +51,12 @@
                                         {{__('teams.commission_split')}}
                                     </a>
                                 </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="#commission" aria-controls="commission" role="tab" data-toggle="tab">
+                                        <i class="icon-20 fa fa-tag"></i>
+                                        {{__('teams.whitelabelling')}}
+                                    </a>
+                                </li>
                             @else
 
                             @endif
@@ -158,10 +164,10 @@
                                                     <div class="col-md-12 text-center">
                                                         <div class="row text-center">
                                                             <div class="col-md-12">
-                                                                <div class="form-group row">
+                                                                <div class="form-group row" style="margin-left: -5px; margin-right: -5px;">
                                                                     <label class="col-md-6 col-form-label text-md-right">Support Consultant</label>
                                                                     <div class="col-md-6">
-                                                                        <select name="first_user_id" class="browser-default custom-select">
+                                                                        <select name="first_user_id" class="browser-default custom-select" style="margin-bottom: 10px;">
                                                                             @forelse($team->users()->get() as $teamuser)
                                                                                 <option @if(App\TeamCommission::where('team_id', $team->id)->count() > 0) @if(App\TeamCommission::where('team_id', $team->id)->first()->first_user_id == $teamuser->id) selected @endif @endif value="{{$teamuser->id}}">{{$teamuser->name}} {{$teamuser->last_name}}</option>
                                                                                 @empty
@@ -190,13 +196,13 @@
                                                         <br>
                                                         <div class="row text-center">
                                                             <div class="col-md-12">
-                                                                <div class="form-group row">
+                                                                <div class="form-group row"  style="margin-left: -5px; margin-right: -5px;">
                                                                     <div class="col-12">
                                                                         <output for="fader" id="secondcomm">@if(App\TeamCommission::where('team_id', $team->id)->count() > 0) {{App\TeamCommission::where('team_id', $team->id)->first()->second_split}} @else 50 @endif</output>
                                                                     </div>
                                                                     <label class="col-md-6 col-form-label text-md-right">Sales Consultant</label>
 
-                                                                    <div class="col-md-6">
+                                                                    <div class="col-md-6" >
                                                                         <select name="second_user_id" class="browser-default custom-select">
                                                                             @forelse($team->users()->get() as $teamuser)
                                                                                 <option @if(App\TeamCommission::where('team_id', $team->id)->count() > 0) @if(App\TeamCommission::where('team_id', $team->id)->first()->second_user_id == $teamuser->id) selected @endif @endif value="{{$teamuser->id}}">{{$teamuser->name}} {{$teamuser->last_name}}</option>
@@ -209,8 +215,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 col-sm-12 text-center">
-                                                        <br>
-                                                        <button class="btn btn-success">Update</button>
+
+                                                        <button class="btn btn-primary" style="margin-bottom: 10px;">Update</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -228,8 +234,18 @@
 
                                         </div>
                                     @endif
+                                        <div class="card card-default">
+                                            <div class="card-header">
+                                                Commission Calculation
+                                            </div>
 
+                                            <div class="row text-center">
+                                                <div class="col-md-12">
+                                                    Plan type, plan price, site consultant commission, PayPal Address Status
+                                                </div>
                                         </div>
+                                        </div>
+                                </div>
 
 
                     <!-- Billing Tab Panes -->

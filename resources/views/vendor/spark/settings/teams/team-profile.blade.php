@@ -10,7 +10,7 @@
         @if (App\TeamSite::where('team_id', $team->id)->count() > 0)
 
             <div class="card card-default"><div class="card-header">
-                    Update Team Site -
+                    Update Team Site
                     {{--<button data-toggle="modal" data-target="#sitedns" class="btn btn-link btn-sm pull-right"><i style="color: black;" class="fa fa-info"></i></button>--}}
                     {{--<a class="btn btn-link btn-sm pull-right" href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}"><i style="color: black;" class="fa fa-info"></i> Visit Site</a>--}}
                 </div>
@@ -23,6 +23,7 @@
                             <div class="col-md-6">
                                 <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
                                 <div class="input-group mb-2 mr-sm-2">
+                                    {{--TODO Fix up sizing of input--}}
                                     <div class="input-group-prepend">
                                         <a href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}"><div class="input-group-text"><i style="color: black;" class="fa fa-link"></i></div></a>
                                     </div>
@@ -31,8 +32,10 @@
                                         An A record for the domain name is needed. It should point to 154.66.198.90
                                     </small>
                                 </div>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </div>
+                        <hr>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">Default Domain Backup</label>
                             <div class="col-md-6">
@@ -42,10 +45,9 @@
                         </div>
 
                         <div class="form-group row mb-0"><div class="offset-md-4 col-md-6">
-                                <a><button class="btn btn-primary">Set to Default</button></a><button type="submit" class="btn btn-primary">
+                                <a><button class="btn btn-primary">Set to Default</button></a>
 
-                                    Update
-                                </button></div></div>
+                            </div></div>
                     </form>
 
                     <h5> </h5>

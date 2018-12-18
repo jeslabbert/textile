@@ -58,6 +58,15 @@
                         </a>
                         </li>
                         @endif
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#commission" aria-controls="commission" role="tab" data-toggle="tab">
+                                <svg class="icon-20 " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 20 20 ">
+                                    <path d="M20 14v4c0 1-1 2-2 2h-4v-2c0-1-1-2-2-2s-2 1-2 2v2H6c-1 0-2-1-2-2v-4H2c-1 0-2-1-2-2s1-2 2-2h2V6c0-1
+                        1-2 2-2h4V2c0-1 1-2 2-2s2 1 2 2v2h4c1 0 2 1 2 2v4h-2c-1 0-2 1-2 2s1 2 2 2h2z "/>
+                                </svg>
+                                {{__('Commission')}}
+                            </a>
+                        </li>
                     </ul>
                 </aside>
             </div>
@@ -83,6 +92,88 @@
                     <!-- API Management -->
                     <div role="tabcard" class="tab-pane" id="api">
                         @include('spark::kiosk.api')
+                    </div>
+
+                    <!-- Commission Management -->
+                    <div role="tabcard" class="tab-pane" id="commission">
+                        @include('spark::kiosk.commission')
+                        <div>
+                            <div class="card card-default">
+                                <div class="card-header">{{__('Commission Sites')}}</div>
+                                {{--TODO Filter Sites--}}
+                                <div class="card-body">
+                                    @forelse(App\Team::all() as $team)
+                                        <div class="row">
+                                            <div class="col-md-4" style="display: flex;
+    justify-content:center;
+    align-content:center;
+    flex-direction:column; ">
+                                                    {{$team->name}}
+
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group row">
+                                                            <small class="form-text text-muted col-md-12" style="padding-right: 5px; padding-left: 5px;">{{__('Consultants')}}</small>
+
+                                                            <div class="col-md-12" style="padding-right: 5px; padding-left: 5px;">
+                                                                <select name="second_user_id" class="browser-default custom-select">
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group row">
+                                                            <small class="form-text text-muted col-md-12" style="padding-right: 5px; padding-left: 5px;">{{__('Marketing')}}</small>
+
+                                                            <div class="col-md-12" style="padding-right: 5px; padding-left: 5px;">
+                                                                <select name="second_user_id" class="browser-default custom-select">
+                                                                    <option value="1">10</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group row">
+                                                            <small class="form-text text-muted col-md-12" style="padding-right: 5px; padding-left: 5px;">{{__('IT Support')}}</small>
+
+                                                            <div class="col-md-12" style="padding-right: 5px; padding-left: 5px;">
+                                                                <select name="second_user_id" class="browser-default custom-select">
+                                                                    <option value="1">100</option>
+                                                                    <option value="2">200</option>
+                                                                    <option value="3">300</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+<div class="col-md-2" style="display: flex;
+    justify-content:center;
+    align-content:center;
+    flex-direction:column; ">
+    <button type="submit" class="btn btn-primary">
+        {{__('Ok')}}
+    </button>
+</div>
+
+
+                                        </div>
+                                        <hr>
+                                    @empty
+                                    @endforelse
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

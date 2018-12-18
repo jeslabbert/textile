@@ -40,6 +40,7 @@ class HomeController extends Controller
 
     public function newsite(Request $request)
     {
+        //TODO Add in Site Name to fieldlist through the api
         $input = $request->all();
 
         $tenantclient = new \GuzzleHttp\Client();
@@ -122,6 +123,8 @@ $teamsite = TeamSite::create([
 
     public function updatesite(Request $request)
     {
+
+        //TODO Add in Site Name to fieldlist through the api
         $tenantclient = new \GuzzleHttp\Client();
 
         $tenanturl = 'http://cloud.taskmule.com/api/v1/sites/update';

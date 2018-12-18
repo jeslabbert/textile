@@ -51,6 +51,44 @@
     </div>
 </spark-update-contact-information>
 
+<div class="card card-default">
+    <div class="card-header">{{__('Payment Information')}}</div>
+
+    <div class="card-body">
+        <!-- Success Message -->
+
+
+        <form>
+
+{{--TODO Create Payment Table and store this info to that table--}}
+            <!-- E-Mail Address -->
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right">{{__('PayPal Address')}}</label>
+
+                <div class="col-md-6">
+                    <div class="input-group mb-2 mr-sm-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">@ <i class="fa fa-paypal"></i> </div>
+                        </div>
+                        <input type="text" class="form-control py-0" id="inlineFormInputGroupUsername2" placeholder="Username">
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Update Button -->
+            <div class="form-group row mb-0">
+                <div class="col-md-6 offset-md-4">
+                    <button type="submit" class="btn btn-primary">
+
+                        {{__('Update')}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <spark-update-password inline-template>
     <div class="card card-default">
         <div class="card-header">{{__('Update Password')}}</div>

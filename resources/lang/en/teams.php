@@ -28,6 +28,7 @@ return [
     "team_profile" => " Site Profile",
     "view_all_teams" => "View All Sites",
     "team_billing" => "Site Billing",
+    "whitelabelling" => "White Labelling",
     "you_have_x_invitations_remaining" => " You currently have :count invitation(s) remaining.",
     "teams" => " Sites",
     "teams_currently_trialing" => "Sites Currently Trialing",
