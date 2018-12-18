@@ -198,10 +198,10 @@
 
                                                                     <div class="col-md-6">
                                                                         <select name="second_user_id" class="browser-default custom-select">
-                                                                            @forelse($team->users()->get() as $teamuser)
-                                                                                <option @if(App\TeamCommission::where('team_id', $team->id)->first()->second_user_id == $teamuser->id) selected @endif value="{{$teamuser->id}}">{{$teamuser->name}} {{$teamuser->last_name}}</option>
-                                                                            @empty
-                                                                            @endforelse
+                                                                            {{--@forelse($team->users()->get() as $teamuser)--}}
+                                                                                {{--<option @if(App\TeamCommission::where('team_id', $team->id)->first()->second_user_id == $teamuser->id) selected @endif value="{{$teamuser->id}}">{{$teamuser->name}} {{$teamuser->last_name}}</option>--}}
+                                                                            {{--@empty--}}
+                                                                            {{--@endforelse--}}
                                                                         </select>
                                                                     </div>
                                                                 </div>
