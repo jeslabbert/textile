@@ -162,9 +162,10 @@
                                                                     <label class="col-md-6 col-form-label text-md-right">Support Consultant</label>
                                                                     <div class="col-md-6">
                                                                         <select name="first_user_id" class="browser-default custom-select">
-                                                                            @foreach($team->users()->get() as $teamuser)
+                                                                            @forelse($team->users()->get() as $teamuser)
                                                                                 <option @if(App\TeamCommission::where('team_id', $team->id)->first()->first_user_id == $teamuser->id) selected @endif value="{{$teamuser->id}}">{{$teamuser->name}} {{$teamuser->last_name}}</option>
-                                                                                @endforeach
+                                                                                @empty
+                                                                                @endforelse
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-12">
@@ -197,9 +198,10 @@
 
                                                                     <div class="col-md-6">
                                                                         <select name="second_user_id" class="browser-default custom-select">
-                                                                            @foreach($team->users()->get() as $teamuser)
+                                                                            @forelse($team->users()->get() as $teamuser)
                                                                                 <option @if(App\TeamCommission::where('team_id', $team->id)->first()->second_user_id == $teamuser->id) selected @endif value="{{$teamuser->id}}">{{$teamuser->name}} {{$teamuser->last_name}}</option>
-                                                                            @endforeach
+                                                                            @empty
+                                                                            @endforelse
                                                                         </select>
                                                                     </div>
                                                                 </div>
