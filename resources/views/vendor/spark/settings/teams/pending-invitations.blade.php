@@ -21,12 +21,12 @@
 
                             <!-- Accept Button -->
                             <td class="td-fit">
-                                <button class="btn btn-outline-success" @click="accept(invitation)">
-                                    <i class="fa fa-check"></i>
+                                <button class="btn-sm btn-success" @click="accept(invitation)">
+                                    <i class="fa fa-thumbs-up"></i>
                                 </button>
 
-                                <button class="btn btn-outline-danger" @click="reject(invitation)">
-                                <i class="fa fa-times"></i>
+                                <button class="btn-sm btn-danger" @click="reject(invitation)">
+                                    <i class="fa fa-thumbs-down"></i>
                                 </button>
                             </td>
                         </tr>

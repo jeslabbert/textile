@@ -7,7 +7,7 @@
                 <table class="table table-valign-middle mb-0">
                     <thead>
                         <th class="th-fit"></th>
-                        <th>{{__('Name')}}</th>
+                        <th class="th-lg">{{__('Name')}}</th>
                         {{--<th>{{__('Owner')}}</th>--}}
                         <th>&nbsp;</th>
                     </thead>
@@ -15,7 +15,7 @@
                     <tbody>
                         <tr  v-for="team in teams">
                             <!-- Photo -->
-                            <td>
+                            <td style="padding:5px;">
                                 <img :src="team.photo_url" class="spark-profile-photo">
                             </td>
 
@@ -42,17 +42,20 @@
                             {{--</td>--}}
 
                             <!-- Edit Button -->
-                            <td class="td-fit">
-
-                                <button class="btn btn-link" @click="approveLeavingTeam(team)"
+                            <td>
+                                <button class="btn-sm btn-primary" @click="visitSite(team)"
+                                        data-toggle="tooltip" title="{{__('teams.visit_site')}}">
+                                    <i class="fa fa-link"></i>
+                                </button>
+                                <button class="btn-sm btn-danger" @click="approveLeavingTeam(team)"
                                         data-toggle="tooltip" title="{{__('teams.leave_site')}}"
                                         v-if="user.id !== team.owner_id">
                                     <i style="color: black;" class="fa fa-sign-out"></i>
                                 </button>
 
                                 @if (Spark::createsAdditionalTeams())
-                                    <button class="btn btn-link" @click="approveTeamDelete(team)" v-if="user.id === team.owner_id">
-                                        <i style="color: black;" class="fa fa-times"></i>
+                                    <button class="btn-sm btn-danger" @click="approveTeamDelete(team)" v-if="user.id === team.owner_id">
+                                        <i class="fa fa-times"></i>
                                     </button>
                                 @endif
                             </td>

@@ -64,16 +64,16 @@
                                 <div class="d-flex align-items-center">
                                     <i class="radio-select mr-2" @click="!isActivePlan(plan) ? confirmPlanUpdate(plan) : 0"
                                     :class="{'radio-select-selected': isActivePlan(plan), invisible: selectingPlan}"></i>
-                                    @{{ plan.name }}
+                                    <a @click="showPlanDetails(plan)">@{{ plan.name }}</a>
                                 </div>
                             </td>
 
                             <!-- Plan Features Button -->
-                            <td>
-                                <button class="btn btn-default" @click="showPlanDetails(plan)">
-                                    <i class="fa fa-btn fa-star-o"></i> {{__('Features')}}
-                                </button>
-                            </td>
+                            {{--<td>--}}
+                                {{--<button class="btn btn-default">--}}
+                                    {{--<i class="fa fa-btn fa-star-o"></i> {{__('Features')}}--}}
+                                {{--</button>--}}
+                            {{--</td>--}}
 
                             <!-- Plan Price -->
                             <td>

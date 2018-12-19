@@ -8,6 +8,7 @@ module.exports = {
     data() {
         return {
             leavingTeam: null,
+            visitingSite: null,
             deletingTeam: null,
 
             leaveTeamForm: new SparkForm({}),
@@ -42,6 +43,11 @@ module.exports = {
             this.leavingTeam = team;
 
             $('#modal-leave-team').modal('show');
+        },
+        visitSite(team) {
+            this.visitingSite = team;
+            console.log(this.visitingSite);
+            $('#modal-delete-team').modal('show');
         },
 
 

@@ -142,5 +142,10 @@
                 </button>
             </div>
         </div>
+        <div class="form-group row mb-0">
+            {{--<div class="col-md-6 offset-md-4">--}}
+                <a class="btn btn-link" href="{{ url('/login') }}">{{__('Already Registered?')}}</a>
+            {{--</div>--}}
+        </div>
     </div>
 </form>

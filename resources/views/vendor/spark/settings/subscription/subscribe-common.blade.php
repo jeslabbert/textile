@@ -42,27 +42,28 @@
         </div>
 
         <table class="table table-responsive-sm table-valign-middle mb-0 ">
-            <thead></thead>
+            <thead>
+            </thead>
             <tbody>
                 <tr v-for="plan in paidPlansForActiveInterval">
                     <!-- Plan Name -->
                     <td>
-                        <div class="d-flex align-items-center">
-                            <i class="radio-select mr-2" @click="selectPlan(plan)"
+                        <div class="d-flex align-items-center" style="min-width: 110px;">
+                            <i class="radio-select mr-2" style="margin-right: 10px;" @click="selectPlan(plan)"
                                :class="{'radio-select-selected': selectedPlan == plan, invisible: form.busy}"></i>
-                            @{{ plan.name }}
+                            <a @click="showPlanDetails(plan)">@{{ plan.name }}</a>
                         </div>
                     </td>
 
                     <!-- Plan Features Button -->
-                    <td>
-                        <button class="btn btn-default" @click="showPlanDetails(plan)">
-                            <i class="fa fa-btn fa-star-o"></i> {{__('Features')}}
-                        </button>
-                    </td>
+                    {{--<td>--}}
+                        {{--<button class="btn btn-default" @click="showPlanDetails(plan)">--}}
+                            {{--<i class="fa fa-btn fa-star-o"></i> {{__('Features')}}--}}
+                        {{--</button>--}}
+                    {{--</td>--}}
 
                     <!-- Plan Price -->
-                    <td>
+                    <td style="padding: 0.75rem 1rem;">
                         <span class="table-plan-text">
                             <strong class="table-plan-price">@{{ plan.price | currency }}</strong>
                             @{{ plan.type == 'user' && spark.chargesUsersPerSeat ? '/ '+ spark.seatName : '' }}
@@ -70,7 +71,7 @@
                             @{{ plan.type == 'team' && spark.chargesTeamsPerSeat ? '/ '+ spark.teamSeatName : '' }}
                             @{{ plan.type == 'team' && spark.chargesTeamsPerMember ? '/ '+ __('teams.member') : '' }}
                             / @{{ __(plan.interval) | capitalize }}
-                        </div>
+                        </span>
                     </td>
 
                     <!-- Trial Days -->
