@@ -241,7 +241,7 @@
 
                                             <div class="row text-center">
                                                 <div class="col-md-12">
-                                                    Plan type, plan price, site consultant commission, PayPal Address Status
+                                                    Plan type, plan price, Global Commission, Site Consultant commission, PayPal Address Status(Default, verified, unverified)
                                                 </div>
                                         </div>
                                         </div>

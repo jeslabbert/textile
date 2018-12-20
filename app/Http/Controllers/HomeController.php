@@ -93,8 +93,8 @@ class HomeController extends Controller
         ]);
 
         $comm1set = Setting::where('setting_type', 'Commission')->where('setting_name', 'Consultant')->first();
-        $comm2set = Setting::where('setting_type', 'Commission')->where('setting_name', 'IT Support')->first();
-        $comm3set = Setting::where('setting_type', 'Commission')->where('setting_name', 'Marketing')->first();
+        $comm2set = Setting::where('setting_type', 'Commission')->where('setting_name', 'Marketing')->first();
+        $comm3set = Setting::where('setting_type', 'Commission')->where('setting_name', 'IT Support')->first();
         $globalset = Setting::where('setting_type', 'Commission')->where('setting_name', 'Global Commission')->first();
 
         $teamglobalcomm = GlobalCommission::create([
