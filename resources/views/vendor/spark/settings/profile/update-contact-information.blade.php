@@ -58,7 +58,9 @@
         <!-- Success Message -->
 
 
-        <form>
+        <form style="margin:auto;" method="POST" action="/profile/payouts/update">
+            {{ csrf_field() }}
+            <input type="text" name="payoutprovider_id" value="1" hidden>
 
 {{--TODO Create Payment Table and store this info to that table--}}
             <!-- E-Mail Address -->
@@ -70,7 +72,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">@ <i class="fa fa-paypal"></i> </div>
                         </div>
-                        <input type="text" class="form-control py-0" id="inlineFormInputGroupUsername2" placeholder="Username">
+                        <input type="text" name="user_details" @if(App\UserPayout::where('user_id', Auth::user()->id)->count() > 0) value="{{App\UserPayout::where('user_id', Auth::user()->id)->first()->provider_user_details}}" @endif class="form-control py-0" id="inlineFormInputGroupUsername2" placeholder="Username">
                     </div>
 
                 </div>

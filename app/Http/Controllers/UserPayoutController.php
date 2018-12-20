@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\UserPayout;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserPayoutController extends Controller
 {
@@ -35,7 +36,21 @@ class UserPayoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $payoutcount = UserPayout::where('user_id', Auth::user()->id)->count();
+        if( $payoutcount > 0) {
+            $payout = UserPayout::where('user_id', Auth::user()->id)->first();
+            $payout->payoutprovider_id = $request->payoutprovider_id;
+            $payout->provider_user_details = $request->user_details;
+            $payout->update();
+        } else {
+            $payout = UserPayout::create([
+                'user_id' => Auth::user()->id,
+                'payoutprovider_id' => $request->payoutprovider_id,
+                'provider_user_details' => $request->user_details
+            ]);
+        }
+
+return redirect('/settings#/profile');
     }
 
     /**

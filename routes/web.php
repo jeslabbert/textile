@@ -25,3 +25,5 @@ Route::get('/sitebilling', 'TeamSiteController@sitebilling');
 
 Route::post('/commission/defaults', 'SettingController@updateCommission');
 Route::post('/commission/update', 'SettingController@updateTeamCommission');
+
+Route::post('/profile/payouts/update', 'UserPayoutController@store');
