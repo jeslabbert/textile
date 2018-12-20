@@ -22,3 +22,6 @@ Route::post('/updatesite', 'HomeController@updatesite');
 Route::post('/teamcommission', 'TeamCommissionController@store');
 
 Route::get('/sitebilling', 'TeamSiteController@sitebilling');
+
+Route::post('/commission/defaults', 'SettingController@updateCommission');
+Route::post('/commission/update', 'SettingController@updateTeamCommission');

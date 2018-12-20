@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGlobalCommisionsTable extends Migration
+class CreateGlobalCommissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateGlobalCommisionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('global_commisions', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('global_commissions', function (Blueprint $table) {
+            $table->increments('globalcomm_id');
             $table->integer('team_id')->nullable();
-            $table->integer('role_id')->nullable();
-            $table->integer('global_commission')->default(30);
+            $table->float('comm1')->nullable();
+            $table->float('comm2')->nullable();
+            $table->float('comm3')->nullable();
+            $table->float('global_commission')->default(95);
 
             $table->timestamps();
         });
@@ -30,6 +32,6 @@ class CreateGlobalCommisionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('global_commisions');
+        Schema::dropIfExists('global_commissions');
     }
 }

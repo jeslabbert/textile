@@ -103,55 +103,45 @@
                                 {{--TODO Filter Sites--}}
                                 <div class="card-body">
                                     @forelse(App\Team::all() as $team)
+                                        <form style="margin:auto;" method="POST" action="/commission/update">
+                                            {{ csrf_field() }}
                                         <div class="row">
                                             <div class="col-md-4" style="display: flex;
     justify-content:center;
     align-content:center;
     flex-direction:column; ">
                                                     {{$team->name}}
-
-
+                                                <input name="team_id" value="{{$team->id}}" hidden>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <div class="form-group row">
-                                                            <small class="form-text text-muted col-md-12" style="padding-right: 5px; padding-left: 5px;">{{__('Consultants')}}</small>
+                                                            <small class="form-text text-muted col-md-12" style="padding-right: 15px; padding-left: 15px;">{{__('Consultants')}}</small>
 
-                                                            <div class="col-md-12" style="padding-right: 5px; padding-left: 5px;">
-                                                                <select name="second_user_id" class="browser-default custom-select">
-                                                                    <option value="1">1</option>
-                                                                    <option value="2">2</option>
-                                                                    <option value="3">3</option>
-                                                                </select>
+                                                            <div class="col-md-12">
+                                                                <input class="form-control" type="number" name="comm1_value" @if(App\GlobalCommission::where('team_id', $team->id)->count() != null) value="{{App\GlobalCommission::where('team_id', $team->id)->first()->comm1}}" @endif min="0" max="100">
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-4">
                                                         <div class="form-group row">
-                                                            <small class="form-text text-muted col-md-12" style="padding-right: 5px; padding-left: 5px;">{{__('Marketing')}}</small>
+                                                            <small class="form-text text-muted col-md-12" style="padding-right: 15px; padding-left: 15px;">{{__('Marketing')}}</small>
 
-                                                            <div class="col-md-12" style="padding-right: 5px; padding-left: 5px;">
-                                                                <select name="second_user_id" class="browser-default custom-select">
-                                                                    <option value="1">10</option>
-                                                                    <option value="2">2</option>
-                                                                    <option value="3">3</option>
-                                                                </select>
+                                                            <div class="col-md-12">
+                                                                <input class="form-control" type="number" name="comm2_value" @if(App\GlobalCommission::where('team_id', $team->id)->count() != null) value="{{App\GlobalCommission::where('team_id', $team->id)->first()->comm2}}" @endif min="0" max="100">
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-4">
                                                         <div class="form-group row">
-                                                            <small class="form-text text-muted col-md-12" style="padding-right: 5px; padding-left: 5px;">{{__('IT Support')}}</small>
+                                                            <small class="form-text text-muted col-md-12" style="padding-right: 15px; padding-left: 15px;">{{__('IT Support')}}</small>
 
-                                                            <div class="col-md-12" style="padding-right: 5px; padding-left: 5px;">
-                                                                <select name="second_user_id" class="browser-default custom-select">
-                                                                    <option value="1">100</option>
-                                                                    <option value="2">200</option>
-                                                                    <option value="3">300</option>
-                                                                </select>
+
+                                                            <div class="col-md-12">
+                                                                <input class="form-control" type="number" name="comm3_value" @if(App\GlobalCommission::where('team_id', $team->id)->count() != null) value="{{App\GlobalCommission::where('team_id', $team->id)->first()->comm3}}" @endif min="0" max="100">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -168,6 +158,7 @@
 
 
                                         </div>
+                                        </form>
                                         <hr>
                                     @empty
                                     @endforelse

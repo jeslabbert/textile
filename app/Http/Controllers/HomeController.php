@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\GlobalCommission;
+use App\Setting;
 use App\TeamSite;
 use Illuminate\Http\Request;
 use GuzzleHttp\Exception\GuzzleException;
@@ -81,14 +83,28 @@ class HomeController extends Controller
 
         $tenantdetails = \GuzzleHttp\json_decode($tenantresult);
 
-$teamsite = TeamSite::create([
-    'fqdn' => $tenantdetails->fqdn,
-    'historical_fqdn' => $tenantdetails->fqdn,
-    'website_id' => $tenantdetails->website_id,
-    'creator' => 'System',
-    'creator_email' => 'info@taskmule.com',
-    'team_id' => $request->team_id
-]);
+        $teamsite = TeamSite::create([
+            'fqdn' => $tenantdetails->fqdn,
+            'historical_fqdn' => $tenantdetails->fqdn,
+            'website_id' => $tenantdetails->website_id,
+            'creator' => 'System',
+            'creator_email' => 'info@taskmule.com',
+            'team_id' => $request->team_id
+        ]);
+
+        $comm1set = Setting::where('setting_type', 'Commission')->where('setting_name', 'Consultant')->first();
+        $comm2set = Setting::where('setting_type', 'Commission')->where('setting_name', 'IT Support')->first();
+        $comm3set = Setting::where('setting_type', 'Commission')->where('setting_name', 'Marketing')->first();
+        $globalset = Setting::where('setting_type', 'Commission')->where('setting_name', 'Global Commission')->first();
+
+        $teamglobalcomm = GlobalCommission::create([
+            'team_id' => $request->team_id,
+            'comm1' => $comm1set->setting_value,
+            'comm2' => $comm2set->setting_value,
+            'comm3' => $comm3set->setting_value,
+            'global_commission' => $globalset->setting_value
+        ]);
+
         $countryurl = $teamsite->fqdn . '/api/v1/countrysetup';
         $languageurl = $teamsite->fqdn . '/api/v1/languagesetup';
         $setupurl = $teamsite->fqdn . '/api/v1/setup';
