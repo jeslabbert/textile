@@ -15,6 +15,7 @@ Route::get('/', 'WelcomeController@show');
 
 Route::get('/home', 'HomeController@show');
 Route::get('/sites', 'HomeController@sites');
+Route::get('/test', 'CommissionCalculationController@calculate');
 
 Route::post('/newsite', 'HomeController@newsite');
 Route::post('/updatesite', 'HomeController@updatesite');

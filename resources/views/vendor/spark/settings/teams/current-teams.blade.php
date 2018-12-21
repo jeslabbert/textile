@@ -47,10 +47,10 @@
                                         data-toggle="tooltip" title="{{__('teams.visit_site')}}">
                                     <i class="fa fa-link"></i>
                                 </button>
-                                <button class="btn-sm btn-danger" @click="approveLeavingTeam(team)"
+                                <button class="btn-sm btn-warning" @click="approveLeavingTeam(team)"
                                         data-toggle="tooltip" title="{{__('teams.leave_site')}}"
                                         v-if="user.id !== team.owner_id">
-                                    <i style="color: black;" class="fa fa-sign-out"></i>
+                                    <i class="fa fa-sign-out"></i>
                                 </button>
 
                                 @if (Spark::createsAdditionalTeams())

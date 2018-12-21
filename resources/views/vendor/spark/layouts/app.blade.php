@@ -133,6 +133,30 @@
         <!-- Main Content -->
         <main class="py-4">
             @yield('content')
+            {{--TODO Make sure it updates to current team correctly and has a pull out function to display name --}}
+            {{--TODO Should only be on team specific pages--}}
+            @if(Auth::User())
+            <div class="sticky" style="position: fixed;
+    top: 300px;
+    right: 0;
+    width: 50px;
+    background: #fff;
+    -webkit-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+"><div class="row">
+                    <div style="padding-top: 2px; width: 19%;">
+                        <img src="{{Auth::User()->currentTeam->photo_url}}" class="spark-profile-photo">
+                    </div>
+                    {{--<div style="display: inline-block; padding-top: 5px;width: 80%;">--}}
+                        {{--<small class="form-text text-muted col-md-12">{{Auth::User()->currentTeam->name}}</small>--}}
+
+                    {{--</div>--}}
+                </div>
+
+            </div>
+                @endif
         </main>
 
         <!-- Application Level Modals -->

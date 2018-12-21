@@ -20,6 +20,7 @@ class CreateUserPayoutsTable extends Migration
             $table->integer('user_id')->nullable();
             $table->string('provider_user_details')->nullable();
             //Paypal address etc
+            $table->boolean('verified')->default(false);
             $table->timestamps();
         });
     }

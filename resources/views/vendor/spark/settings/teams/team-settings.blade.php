@@ -85,7 +85,8 @@
                     </ul>
                 </aside>
 
-                @if (Spark::canBillTeams() && Auth::user()->ownsTeam($team))
+                @if (Spark::canBillTeams() )
+                    {{--@if (Spark::canBillTeams() && Auth::user()->ownsTeam($team))--}}
                     <aside>
                         <h3 class="nav-heading ">
                             {{__('teams.team_billing')}}
@@ -131,18 +132,18 @@
             <div class="col-md-9">
                 <div class="tab-content">
                     <!-- Owner Information -->
-                    @if (Auth::user()->ownsTeam($team))
+                    {{--@if (Auth::user()->ownsTeam($team))--}}
                         <div role="tabcard" class="tab-pane active" id="owner">
                             @include('spark::settings.teams.team-profile')
                         </div>
-                    @endif
+                    {{--@endif--}}
 
                     <!-- Membership -->
-                    @if (Auth::user()->ownsTeam($team))
+                    {{--@if (Auth::user()->ownsTeam($team))--}}
                     <div role="tabcard" class="tab-pane" id="membership">
-                    @else
-                    <div role="tabcard" class="tab-pane active" id="membership">
-                    @endif
+                    {{--@else--}}
+                    {{--<div role="tabcard" class="tab-pane active" id="membership">--}}
+                    {{--@endif--}}
                         <div v-if="team">
                             @include('spark::settings.teams.team-membership')
                         </div>
@@ -241,7 +242,9 @@
 
                                             <div class="row text-center">
                                                 <div class="col-md-12">
-                                                    Plan type, plan price, Global Commission, Site Consultant commission, PayPal Address Status(Default, verified, unverified)
+                                                    @if(App\GlobalCommission::where('team_id', $team->id)->count() > 0)
+                                                    {!! \App\Http\Controllers\CommissionSplitController::commshow($team->id) !!}
+                                                        @endif
                                                 </div>
                                         </div>
                                         </div>

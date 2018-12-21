@@ -10,7 +10,9 @@
                     <thead>
                         <th class="th-fit"></th>
                         <th>{{__('Name')}}</th>
+
                         <th v-if="roles.length > 1">{{__('Role')}}</th>
+                        <th></th>
                         <th>&nbsp;</th>
                     </thead>
 
@@ -20,6 +22,7 @@
                             <td>
                                 <img :src="member.photo_url" class="spark-profile-photo">
                             </td>
+
 
                             <!-- Name -->
                             <td>
@@ -31,18 +34,39 @@
                                     @{{ member.name }}
                                 </span>
                             </td>
-
+{{--TODO Per team member, store the below items and show table structure based off of this--}}
                             <!-- Role -->
                             <td v-if="roles.length > 0">
                                 @{{ teamMemberRole(member) }}
                             </td>
+                            <td v-if="member.id !== user.id">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="subscription">
+                                    <label class="custom-control-label" for="defaultUnchecked">Subscription</label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="paymentmethod">
+                                    <label class="custom-control-label" for="defaultUnchecked">Payment</label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="invoices">
+                                    <label class="custom-control-label" for="defaultUnchecked">Invoices</label>
+                                </div>
+                            </td>
+                            <td v-if="member.id === user.id"></td>
 
                             <td class="td-fit">
-                                <button class="btn btn-outline-primary" @click="editTeamMember(member)" v-if="roles.length > 1 && canEditTeamMember(member)">
+                                {{--<button class="btn btn-outline-primary">--}}
+                                    {{--<i class="fa fa-ticket"></i>--}}
+                                {{--</button>--}}
+                                {{--<button class="btn-sm btn-primary">--}}
+                                    {{--<i class="fa fa-cog"></i>--}}
+                                {{--</button>--}}
+                                <button class="btn-sm btn-primary" @click="editTeamMember(member)" v-if="roles.length > 1 && canEditTeamMember(member)">
                                     <i class="fa fa-cog"></i>
                                 </button>
 
-                                <button class="btn btn-outline-danger" @click="approveTeamMemberDelete(member)" v-if="canDeleteTeamMember(member)">
+                                <button class="btn-sm btn-danger" @click="approveTeamMemberDelete(member)" v-if="canDeleteTeamMember(member)">
                                 <i class="fa fa-remove"></i>
                                 </button>
                             </td>

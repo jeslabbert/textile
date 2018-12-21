@@ -12,7 +12,8 @@ class UserPayout extends Model
     protected $fillable = [
         'payoutprovider_id',
         'user_id',
-        'provider_user_details'
+        'provider_user_details',
+        'verified'
     ];
 
 }
