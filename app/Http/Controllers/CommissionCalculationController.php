@@ -106,6 +106,12 @@ foreach($invoices as $invoice) {
         $commtest = 100 - $globalcomm->global_commission;
         $commvalue = $amount * ((100 - $commtest) / 100);
 
+        $comm2test = 100 - $globalcomm->comm2;
+        $comm3test = 100 - $globalcomm->comm3;
+
+        $comm2value = $commvalue * ((100 - $comm2test) / 100);
+        $comm3value = $commvalue * ((100 - $comm3test) / 100);
+
         $constest = 100 - $conscomm;
         $consvalue = $commvalue * ((100 - $constest) / 100);
         if ($invoice->status === 'settled') {
@@ -148,6 +154,28 @@ foreach($invoices as $invoice) {
                 'comm_type' => 1,
                 'comm_value' => $secondvalue,
                 'user_id' => $seconduser->id,
+                'status' => $status,
+            ]);
+            $comm2calc = CommissionCalculation::create([
+                'invoice_id' => $invoice->id,
+                'invoice_value' => $invoice->amount,
+                'billing_period' => $bpdate,
+                'team_id' => $team->id,
+                'global_percentage' => $globalcomm->global_commission,
+                'comm_percentage' => $globalcomm->comm2,
+                'comm_type' => 2,
+                'comm_value' => $comm2value,
+                'status' => $status,
+            ]);
+            $comm3calc = CommissionCalculation::create([
+                'invoice_id' => $invoice->id,
+                'invoice_value' => $invoice->amount,
+                'billing_period' => $bpdate,
+                'team_id' => $team->id,
+                'global_percentage' => $globalcomm->global_commission,
+                'comm_percentage' => $globalcomm->comm3,
+                'comm_type' => 3,
+                'comm_value' => $comm3value,
                 'status' => $status,
             ]);
         }
