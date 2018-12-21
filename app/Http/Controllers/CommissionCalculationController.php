@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CommissionCalculation;
 use App\GlobalCommission;
+use App\Setting;
 use App\Team;
 use App\TeamCommission;
 use App\User;
@@ -34,6 +35,40 @@ class CommissionCalculationController extends Controller
 
     }
 
+    public function setGlobalComms() {
+        $comm1 = Setting::where('setting_type', 'Commission')->where('setting_name', 'Consultant')->first()->setting_value;
+        $comm2 = Setting::where('setting_type', 'Commission')->where('setting_name', 'Marketing')->first()->setting_value;
+        $comm3 = Setting::where('setting_type', 'Commission')->where('setting_name', 'IT Support')->first()->setting_value;
+        $globcomm = Setting::where('setting_type', 'Commission')->where('setting_name', 'Global Commission')->first()->setting_value;
+        $teams = Team::all();
+        $settings = Setting::where('setting_type', 'Commission')->get();
+//        foreach($settings as $setting) {
+//            if($setting->name == ) {
+//                $comm1 = $setting->setting_value;
+//            } elseif($setting->name == 'Marketing') {
+//                $comm2 = $setting->setting_value;
+//            } elseif($setting->name == 'IT Support') {
+//                $comm3 = $setting->setting_value;
+//            } elseif($setting->name, 'Global Commission') {
+//                dd($setting->setting_value);
+//                $globcomm = $setting->setting_value;
+//            }
+//        }
+        foreach($teams as $team) {
+            if(GlobalCommission::where('team_id', $team->id)->count() > 0) {
+
+            } else {
+                GlobalCommission::create([
+                    'team_id'=>$team->id,
+                    'comm1'=>$comm1,
+                    'comm2'=>$comm2,
+                    'comm3'=>$comm3,
+                    'global_commission'=>$globcomm
+                ]);
+            }
+
+        }
+    }
     public function calculate()
     {
         $teams = Team::where('braintree_id', '!=', null)->get();
