@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\GlobalCommission;
 use App\Setting;
+use App\Team;
+use App\TeamCommission;
 use App\TeamSite;
 use Illuminate\Http\Request;
 use GuzzleHttp\Exception\GuzzleException;
@@ -103,6 +105,16 @@ class HomeController extends Controller
             'comm2' => $comm2set->setting_value,
             'comm3' => $comm3set->setting_value,
             'global_commission' => $globalset->setting_value
+        ]);
+        $team = Team::where('id', $request->team_id)->first();
+        TeamCommission::create([
+            'team_id'=>$request->team_id,
+            'first_name'=>'Support',
+            'first_user_id'=>$team->owner_id,
+            'first_split'=>50,
+            'second_name'=>'Sales',
+            'second_split'=>50,
+            'second_user_id'=>$team->owner_id,
         ]);
 
         $countryurl = $teamsite->fqdn . '/api/v1/countrysetup';

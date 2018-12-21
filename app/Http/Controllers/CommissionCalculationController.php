@@ -55,6 +55,19 @@ class CommissionCalculationController extends Controller
 //            }
 //        }
         foreach($teams as $team) {
+            if(TeamCommission::where('team_id', $team->id)->count() > 0) {
+
+            } else {
+                TeamCommission::create([
+                    'team_id'=>$team->id,
+                    'first_name'=>'Support',
+                    'first_user_id'=>$team->owner_id,
+                    'first_split'=>50,
+                    'second_name'=>'Sales',
+                    'second_split'=>50,
+                    'second_user_id'=>$team->owner_id,
+                ]);
+            }
             if(GlobalCommission::where('team_id', $team->id)->count() > 0) {
 
             } else {
