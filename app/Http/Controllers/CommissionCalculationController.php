@@ -36,7 +36,7 @@ class CommissionCalculationController extends Controller
 
     public function calculate()
     {
-        $teams = Team::where('current_billing_plan', '!=', null)->get();
+        $teams = Team::where('braintree_id', '!=', null)->get();
         foreach($teams as $team) {
 
 $invoices = $team->invoices();
