@@ -39,7 +39,7 @@
                             <td v-if="roles.length > 0">
                                 @{{ teamMemberRole(member) }}
                             </td>
-                            <td v-if="member.id !== user.id">
+                            <td v-if="user.id === team.owner_id & member.id !== user.id">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="subscription">
                                     <label class="custom-control-label" for="defaultUnchecked">Subscription</label>
