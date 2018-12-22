@@ -88,8 +88,10 @@
                         position: "left",
                         id: "y-axis-0",
                     }, {
+
                         scaleBeginAtZero : true,
                         ticks: {
+                            suggestedMax: 10,
                             beginAtZero: true
                         },
                         stacked: false,
