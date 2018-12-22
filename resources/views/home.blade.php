@@ -75,6 +75,8 @@
                 },
                 responsive: true,
                 scales: {
+                    scaleBeginAtZero : true,
+
                     xAxes: [{
                         stacked: true
                     }],
@@ -86,7 +88,9 @@
                         stacked: false,
                         position: "right",
                         id: "y-axis-1",
-                    }]
+                    },
+
+                    ]
                 }
             }
         });
