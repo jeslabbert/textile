@@ -143,7 +143,7 @@
             {{--TODO Should only be on team specific pages--}}
             @if(Auth::User())
             <div class="sticky" style="position: fixed;
-    top: 62px;
+    top: 85px;
     right: 0;
     width: 50px;
     background: #fff;
