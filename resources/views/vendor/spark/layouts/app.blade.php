@@ -14,7 +14,12 @@
 
     <!-- CSS -->
     <link href="{{ mix(Spark::usesRightToLeftTheme() ? 'css/app-rtl.css' : 'css/app.css') }}" rel="stylesheet">
-
+<style>
+    .commChartDiv {
+        max-width: 600px;
+        max-height: 400px;
+    }
+</style>
     <!-- Scripts -->
     @yield('scripts', '')
 
@@ -24,6 +29,7 @@
             Spark::scriptVariables(), []
         )); ?>;
     </script>
+
 </head>
 <body>
     <div id="spark-app" v-cloak>
@@ -170,5 +176,6 @@
     <!-- JavaScript -->
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="/js/sweetalert.min.js"></script>
+@yield('addscripts')
 </body>
 </html>

@@ -11,10 +11,82 @@
 
                     <div class="card-body">
                         {{__('Your application\'s dashboard.')}}
+                        <div class="commChartDiv">
+                            <canvas id="commChart" width="600" height="400"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </home>
+
 @endsection
+@section('addscripts')
+
+    <script src="https://npmcdn.com/chart.js@latest/dist/Chart.bundle.min.js"></script>
+    <script>
+
+        // set default to straight lines - no curves
+        // Chart.defaults.global.elements.line.tension = 0;
+        // set default no fill beneath the line
+        Chart.defaults.global.elements.line.fill = false;
+
+        // stacked bar with 2 unstacked lines - nope
+        var barChartData = {
+            labels: {!! $billingPeriods !!},
+            datasets: [{
+                type: 'bar',
+                label: 'Settled',
+                id: "y-axis-0",
+                backgroundColor: "rgba(217,83,79,0.75)",
+                data: {!! $settledComm !!}
+            }, {
+                type: 'bar',
+                label: 'Pending',
+                id: "y-axis-0",
+                backgroundColor: "rgba(92,184,92,0.75)",
+                data: {!! $unsettledComm !!}
+            }, {
+                type: 'line',
+                label: 'Sites',
+                id: "y-axis-1",
+                backgroundColor: "rgba(151,187,205,0.5)",
+                data: {!! $teamPeriods !!}
+            }]
+        };
+
+
+        var ctx = document.getElementById("commChart");
+        // allocate and initialize a chart
+        var ch = new Chart(ctx, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                title: {
+                    display: true,
+                    text: "Commissions"
+                },
+                tooltips: {
+                    mode: 'label'
+                },
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true,
+                        position: "left",
+                        id: "y-axis-0",
+                    }, {
+                        stacked: false,
+                        position: "right",
+                        id: "y-axis-1",
+                    }]
+                }
+            }
+        });
+    </script>
+
+    @endsection
