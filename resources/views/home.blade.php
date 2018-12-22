@@ -37,17 +37,19 @@
             labels: {!! $billingPeriods !!},
             datasets: [{
                 type: 'bar',
-                label: 'Settled',
+                label: 'Commission',
                 yAxisID: "y-axis-0",
                 backgroundColor: "rgba(217,83,79,0.75)",
                 data: {!! $settledComm !!}
-            }, {
-                type: 'bar',
-                label: 'Pending',
-                yAxisID: "y-axis-0",
-                backgroundColor: "rgba(92,184,92,0.75)",
-                data: {!! $unsettledComm !!}
-            }, {
+            },
+                {{--{--}}
+                {{--type: 'bar',--}}
+                {{--label: 'Pending',--}}
+                {{--yAxisID: "y-axis-0",--}}
+                {{--backgroundColor: "rgba(92,184,92,0.75)",--}}
+                {{--data: {!! $unsettledComm !!}--}}
+            {{--},--}}
+                {
                 type: 'line',
                 label: 'Sites',
                 yAxisID: "y-axis-1",
@@ -66,7 +68,7 @@
             options: {
                 title: {
                     display: true,
-                    text: "Commissions"
+                    text: "Monthly Earnings"
                 },
                 tooltips: {
                     mode: 'label'
