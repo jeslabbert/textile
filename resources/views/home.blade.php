@@ -38,20 +38,21 @@
             datasets: [{
                 type: 'bar',
                 label: 'Settled',
-                id: "y-axis-0",
+                yAxisID: "y-axis-0",
                 backgroundColor: "rgba(217,83,79,0.75)",
                 data: {!! $settledComm !!}
             }, {
                 type: 'bar',
                 label: 'Pending',
-                id: "y-axis-0",
+                yAxisID: "y-axis-0",
                 backgroundColor: "rgba(92,184,92,0.75)",
                 data: {!! $unsettledComm !!}
             }, {
                 type: 'line',
                 label: 'Sites',
-                id: "y-axis-1",
-                backgroundColor: "rgba(151,187,205,0.5)",
+                yAxisID: "y-axis-1",
+                borderColor:"rgba(0, 156, 234,1)",
+                backgroundColor: "rgba(0, 156, 234,1)",
                 data: {!! $teamPeriods !!}
             }]
         };
