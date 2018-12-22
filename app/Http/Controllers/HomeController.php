@@ -41,6 +41,8 @@ class HomeController extends Controller
         $teamChecks = collect();
         $teamCount = 0;
         $teamPeriods = collect();
+        $setInvoiceValues = collect();
+        $unsetInvoiceValues = collect();
         $unsettledComm = collect();
         $settledComm = collect();
         $commissions = CommissionCalculation::where('user_id', Auth::user()->id)->orderBy('comcalc_id','desc')->get();
@@ -53,11 +55,15 @@ class HomeController extends Controller
                 $commissionChecks = CommissionCalculation::where('user_id', Auth::user()->id)->where('billing_period', $commission->billing_period)->orderBy('comcalc_id','desc')->get();
                 $unsetcommvalue = 0;
                 $setcommvalue = 0;
+                $setinvoiceval = 0;
+                $unsetinvoiceval = 0;
                 foreach($commissionChecks as $commissionCheck) {
                     if($commissionCheck->status === 0) {
+                        $unsetinvoiceval = $unsetinvoiceval + $commissionCheck->invoice_value;
                         $unsetcommvalue = $unsetcommvalue + $commissionCheck->comm_value;
                     } elseif($commissionCheck->status === 1) {
                         $setcommvalue = $setcommvalue + $commissionCheck->comm_value;
+                        $setinvoiceval = $setinvoiceval + $commissionCheck->invoice_value;
                     }
                     if($teamChecks->contains($commissionCheck->team_id)) {
 
@@ -67,6 +73,8 @@ class HomeController extends Controller
                     }
 
                 }
+                $setInvoiceValues = $setInvoiceValues->push($setinvoiceval);
+                $unsetInvoiceValues = $unsetInvoiceValues->push($unsetinvoiceval);
                 $unsettledComm = $unsettledComm->push($unsetcommvalue);
                 $settledComm = $settledComm->push($setcommvalue);
                 $teamPeriods = $teamPeriods->push($teamCount);
@@ -77,7 +85,7 @@ class HomeController extends Controller
 
         }
 //        dd($billingPeriods, $teamPeriods, $unsettledComm, $settledComm);
-        return view('home', ['billingPeriods'=>$billingPeriods, 'teamPeriods'=>$teamPeriods, 'unsettledComm'=>$unsettledComm, 'settledComm'=>$settledComm]);
+        return view('home', ['unsetInvoiceValues'=>$unsetInvoiceValues,'setInvoiceValues'=>$setInvoiceValues,'billingPeriods'=>$billingPeriods, 'teamPeriods'=>$teamPeriods, 'unsettledComm'=>$unsettledComm, 'settledComm'=>$settledComm]);
     }
 
     public function sites()
