@@ -75,16 +75,17 @@
                 },
                 responsive: true,
                 scales: {
-                    scaleBeginAtZero : true,
 
                     xAxes: [{
                         stacked: true
                     }],
                     yAxes: [{
+                        scaleBeginAtZero : true,
                         stacked: true,
                         position: "left",
                         id: "y-axis-0",
                     }, {
+                        scaleBeginAtZero : true,
                         stacked: false,
                         position: "right",
                         id: "y-axis-1",
