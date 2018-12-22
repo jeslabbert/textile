@@ -81,11 +81,17 @@
                     }],
                     yAxes: [{
                         scaleBeginAtZero : true,
+                        ticks: {
+                            beginAtZero: true
+                        },
                         stacked: true,
                         position: "left",
                         id: "y-axis-0",
                     }, {
                         scaleBeginAtZero : true,
+                        ticks: {
+                            beginAtZero: true
+                        },
                         stacked: false,
                         position: "right",
                         id: "y-axis-1",
