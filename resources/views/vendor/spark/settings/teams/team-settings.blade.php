@@ -18,6 +18,9 @@
                     <h3 class="nav-heading ">
                         {{__('teams.team_settings')}}
                     </h3>
+@php
+(Auth::user()->switchToTeam($team))
+    @endphp
                     <ul class="nav flex-column mb-4 ">
                         @if (Auth::user()->ownsTeam($team))
                             <li class="nav-item ">

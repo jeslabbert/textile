@@ -52,6 +52,7 @@
                                         v-if="user.id !== team.owner_id">
                                     <i class="fa fa-sign-out"></i>
                                 </button>
+                                <button class="btn-sm btn-default" href="'/settings/{{ Spark::teamsPrefix() }}/'+ team.id +'/switch'">Switch</button>
 
                                 @if (Spark::createsAdditionalTeams())
                                     <button class="btn-sm btn-danger" @click="approveTeamDelete(team)" v-if="user.id === team.owner_id">
