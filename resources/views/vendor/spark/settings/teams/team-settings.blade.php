@@ -252,16 +252,15 @@
 
 
                     <!-- Billing Tab Panes -->
-
-
+                    @if (Spark::canBillTeams())
+                        @if (Spark::hasPaidTeamPlans())
                             <!-- Subscription -->
                             <div role="tabcard" class="tab-pane" id="subscription">
-                                test
-                                <div v-if="user && team">
+                                <div >
                                     @include('spark::settings.subscription')
                                 </div>
                             </div>
-
+                        @endif
 
                         <!-- Payment Method -->
                         <div role="tabcard" class="tab-pane" id="payment-method">
@@ -276,7 +275,7 @@
                                 @include('spark::settings.invoices')
                             </div>
                         </div>
-
+                    @endif
                 </div>
             </div>
         </div>
