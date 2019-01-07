@@ -28,7 +28,7 @@
 
             <!-- Avatar -->
             <div class="avatar mx-auto white">
-                <img src="{{$firstuser->photo_url}}" class="rounded-circle" alt="woman avatar">
+                <img src="{{$firstuser->photo_url}}" style="max-width: 200px;" class="rounded-circle" alt="woman avatar">
             </div>
 
             <!-- Content -->
@@ -70,7 +70,7 @@
 
                 <!-- Avatar -->
                 <div class="avatar mx-auto white">
-                    <img src="{{$seconduser->photo_url}}" class="rounded-circle" alt="woman avatar">
+                    <img src="{{$seconduser->photo_url}}" class="rounded-circle" style="max-width: 200px;" alt="woman avatar">
                 </div>
 
                 <!-- Content -->
