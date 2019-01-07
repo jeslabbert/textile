@@ -256,6 +256,7 @@
 
                             <!-- Subscription -->
                             <div role="tabcard" class="tab-pane" id="subscription">
+                                test
                                 <div v-if="user && team">
                                     @include('spark::settings.subscription')
                                 </div>
