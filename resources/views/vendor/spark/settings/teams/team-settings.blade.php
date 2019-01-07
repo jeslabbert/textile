@@ -85,7 +85,7 @@
                     </ul>
                 </aside>
 
-                @if (Spark::canBillTeams() )
+                @if (Spark::canBillTeams() && Auth::user()->ownsTeam($team))
                     {{--@if (Spark::canBillTeams() && Auth::user()->ownsTeam($team))--}}
                     <aside>
                         <h3 class="nav-heading ">
@@ -252,11 +252,11 @@
 
 
                     <!-- Billing Tab Panes -->
-                    @if (Spark::canBillTeams())
+                    @if (Spark::canBillTeams() && Auth::user()->ownsTeam($team))
                         @if (Spark::hasPaidTeamPlans())
                             <!-- Subscription -->
                             <div role="tabcard" class="tab-pane" id="subscription">
-                                <div >
+                                <div v-if="user && team">
                                     @include('spark::settings.subscription')
                                 </div>
                             </div>
