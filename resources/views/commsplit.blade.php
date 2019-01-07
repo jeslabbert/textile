@@ -27,7 +27,7 @@
             <div class="card-up indigo lighten-1"></div>
 
             <!-- Avatar -->
-            <div class="avatar mx-auto white" style="    background-color: none;">
+            <div class="avatar mx-auto">
                 <img src="{{$firstuser->photo_url}}" style="margin-top: 5px; max-width: 200px;" class="rounded-circle" alt="woman avatar">
             </div>
 
@@ -69,7 +69,7 @@
                 <div class="card-up indigo lighten-1"></div>
 
                 <!-- Avatar -->
-                <div class="avatar mx-auto white" style="    background-color: none;">
+                <div class="avatar mx-auto">
                     <img src="{{$seconduser->photo_url}}" class="rounded-circle" style=" margin-top: 5px; max-width: 200px;" alt="woman avatar">
                 </div>
 
