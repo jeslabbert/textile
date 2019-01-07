@@ -13,7 +13,7 @@ class CreateCommissionSplitsTable extends Migration
      */
     public function up()
     {
-//        TODO Check if this is Spark or us that made it
+
         Schema::create('commission_splits', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('team_id')->nullable();

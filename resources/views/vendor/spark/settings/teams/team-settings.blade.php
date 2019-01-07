@@ -252,7 +252,7 @@
 
 
                     <!-- Billing Tab Panes -->
-                    @if (Spark::canBillTeams() && Auth::user()->ownsTeam($team))
+                    @if (Spark::canBillTeams())
                         @if (Spark::hasPaidTeamPlans())
                             <!-- Subscription -->
                             <div role="tabcard" class="tab-pane" id="subscription">
