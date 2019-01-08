@@ -22,10 +22,11 @@
                             <label class="col-md-4 col-form-label text-md-right">Domain Name</label>
                             <div class="col-md-6">
                                 <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+
                                 <div class="input-group mb-2 mr-sm-2">
                                     {{--TODO Fix up sizing of input--}}
                                     <div class="input-group-prepend">
-                                        <a href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}"><div class="input-group-text"><i style="color: black;" class="fa fa-link"></i></div></a>
+                                        <div class="input-group-text" style="min-height: 38px;"><a href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}"><i style="color: black;" class="fa fa-link"></i></a></div>
                                     </div>
                                     <input name="domainname" type="text" class="form-control py-0" id="inlineFormInputGroupUsername2" aria-describedby="dnsHelpBlock" placeholder="URL">
                                     <small id="dnsHelpBlock" class="form-text text-muted">

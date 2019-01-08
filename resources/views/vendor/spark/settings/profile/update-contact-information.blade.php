@@ -70,7 +70,7 @@
                 <div class="col-md-6">
                     <div class="input-group mb-2 mr-sm-2">
                         <div class="input-group-prepend">
-                            <div class="input-group-text">@ <i class="fa fa-paypal"></i> </div>
+                            <div class="input-group-text" style="    min-height: 38px;"><i class="fa fa-paypal"></i> </div>
                         </div>
                         <input type="text" name="user_details" @if(App\UserPayout::where('user_id', Auth::user()->id)->count() > 0) value="{{App\UserPayout::where('user_id', Auth::user()->id)->first()->provider_user_details}}" @endif class="form-control py-0" id="inlineFormInputGroupUsername2" placeholder="Username">
                     </div>
