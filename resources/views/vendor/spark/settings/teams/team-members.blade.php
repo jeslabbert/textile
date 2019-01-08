@@ -41,15 +41,15 @@
                             </td>
                             <td v-if="user.id === team.owner_id & member.id !== user.id">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="subscription">
+                                    <input type="checkbox" class="custom-control-input" id="rolesubscription">
                                     <label class="custom-control-label" for="defaultUnchecked">Subscription</label>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="paymentmethod">
+                                    <input type="checkbox" class="custom-control-input" id="rolepaymentmethod">
                                     <label class="custom-control-label" for="defaultUnchecked">Payment</label>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="invoices">
+                                    <input type="checkbox" class="custom-control-input" id="roleinvoices">
                                     <label class="custom-control-label" for="defaultUnchecked">Invoices</label>
                                 </div>
                             </td>
