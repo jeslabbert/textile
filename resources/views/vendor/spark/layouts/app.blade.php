@@ -148,8 +148,10 @@
     width: 25px;
 "><div class="row">
                     <div style="padding-top: 2px; width: 30%;">
+                        <a href="/settings/teams/{{Auth::User()->currentTeam->id}}">
                         <img src="{{Auth::User()->currentTeam->photo_url}}" style="
     -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);" class="spark-profile-photo">
+                        </a>
                     </div>
                     {{--<div style="display: inline-block; padding-top: 5px;width: 80%;">--}}
                         {{--<small class="form-text text-muted col-md-12">{{Auth::User()->currentTeam->name}}</small>--}}
