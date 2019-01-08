@@ -44,11 +44,7 @@ module.exports = {
 
             $('#modal-leave-team').modal('show');
         },
-        visitSite(team) {
-            this.visitingSite = team;
-            console.log(this.visitingSite);
-            $('#modal-delete-team').modal('show');
-        },
+
 
 
         /**

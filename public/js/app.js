@@ -68072,7 +68072,21 @@ Vue.component('spark-create-team', {
 var base = __webpack_require__("./vendor/laravel/spark-aurelius/resources/assets/js/settings/teams/current-teams.js");
 
 Vue.component('spark-current-teams', {
-    mixins: [base]
+    mixins: [base],
+    methods: {
+        visitSite: function visitSite(team) {
+            var _this = this;
+
+            axios.get('/get_team/' + team.id).then(function (response) {
+
+                _this.visitTeam = response.data;
+                window.open('http://' + _this.visitTeam, '_blank');
+            }).catch(function (response) {
+                //
+            });
+        }
+    }
+
 });
 
 /***/ }),

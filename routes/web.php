@@ -29,3 +29,9 @@ Route::post('/commission/defaults', 'SettingController@updateCommission');
 Route::post('/commission/update', 'SettingController@updateTeamCommission');
 
 Route::post('/profile/payouts/update', 'UserPayoutController@store');
+
+Route::get('/get_team/{team}', function($team)
+{
+    return App\TeamSite::where('team_id', $team->id)
+        ->first()->fqdn;
+});
