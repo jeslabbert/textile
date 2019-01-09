@@ -16,5 +16,9 @@
         <div v-if="user && team">
             @include('spark::settings.teams.team-members')
         </div>
+            <!-- Team Members -->
+            <div v-if="user && team">
+                @include('spark::settings.teams.team-owner')
+            </div>
     </div>
 </spark-team-membership>

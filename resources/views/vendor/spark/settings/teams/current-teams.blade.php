@@ -73,6 +73,7 @@
                                             v-if="user.id !== team.owner_id">
                                         <i class="fa fa-sign-out" style="min-width:13px !important;"></i>
                                     </button>
+                                    {{--TODO Check if team site exists--}}
                                 <button style="float: right;margin-left:5px; " class="btn-sm btn-primary" @click="visitSite(team)"
                                         data-toggle="tooltip" title="{{__('teams.visit_site')}}">
                                     <i class="fa fa-link" style="min-width:13px !important;"></i>
