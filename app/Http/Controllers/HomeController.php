@@ -247,7 +247,7 @@ class HomeController extends Controller
             'tenant_sitename' => $tenantdetails
         ]);
 
-        return redirect($tenanturl .'/whitelabelling');
+        return redirect($request->website .'/whitelabelling');
     }
 
 }
