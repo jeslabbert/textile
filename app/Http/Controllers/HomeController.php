@@ -242,7 +242,7 @@ class HomeController extends Controller
         $tenantresult = $tenantresponse->getBody()->getContents();
 
         $tenantdetails = \GuzzleHttp\json_decode($tenantresult);
-
+dd(TeamSite::where('website_id', $request->website_id)->first());
         $teamsite = TeamSite::where('website_id', $request->website_id)->first()->update([
             'tenant_sitename' => $request->websitename
         ]);
