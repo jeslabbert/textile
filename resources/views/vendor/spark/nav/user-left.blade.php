@@ -6,14 +6,14 @@
 </li>
 -->
 
-<li class="sparknavli">
+<li class="sparknavli" style="min-width: 50px;">
     @include('spark::nav.brand')
 </li>
 
 <li class="sparknavli">
     <a class="nav-link" href="/sites">Sites</a>
 </li>
-<li class="sparknavli">
+<li class="sparknavli" style="display: contents;">
     <a @click="showNotifications" class="notification-pill mx-auto mb-3 mb-md-0 mr-md-0 ml-md-auto" style="margin-bottom: 0px !important;">
         <svg class="mr-2" width="18px" height="20px" viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <defs>

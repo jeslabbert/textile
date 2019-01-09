@@ -1,10 +1,24 @@
 <spark-current-teams :user="user" :teams="teams" inline-template>
     <div>
         <div class="card card-default">
-            <div class="card-header">{{__('teams.current_teams')}}</div>
+            <div class="card-header">
+                <div class="row">
+
+
+                <div class="col-md-9 col-sm-6 col-xs-6">
+                    {{__('teams.current_teams')}}
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-6" style="padding-right: 20px;">
+                    <div class="input-group input-group-sm" style="width: 100%;">
+                        <input style="height: 35px;" type="text" name="table_search" id="myInput" onkeyup="myFunction()" class="form-control pull-left" placeholder="@lang('phrases.filter')">
+                    </div>
+                </div>
+                </div>
+            </div>
 
             <div class="table-responsive">
-                <table class="table table-valign-middle mb-0">
+                <table id="myTable" class="table table-valign-middle mb-0">
                     <thead>
                         <th class="th-fit"></th>
                         <th class="th-lg">{{__('Name')}}</th>
@@ -63,6 +77,28 @@
                     </tbody>
                 </table>
             </div>
+            <script>
+                function myFunction() {
+                    // Declare variables
+                    var input, filter, table, tr, td, i;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+
+                    // Loop through all table rows, and hide those who don't match the search query
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[1];
+                        if (td) {
+                            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+            </script>
         </div>
 
         <!-- Leave Team Modal -->

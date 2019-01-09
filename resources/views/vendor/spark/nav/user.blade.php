@@ -14,10 +14,6 @@
 
         <!-- Branding Image -->
 
-
-
-
-
         </div>
     </nav>
 
