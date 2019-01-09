@@ -202,8 +202,6 @@ class HomeController extends Controller
 
     public function updatesite(Request $request)
     {
-
-        //TODO Add in Site Name to fieldlist through the api
         $tenantclient = new \GuzzleHttp\Client();
 
         $tenanturl = 'http://cloud.taskmule.com/api/v1/sites/update';
@@ -211,6 +209,7 @@ class HomeController extends Controller
         $body['_token'] = $request->_token;
         $body['domainname'] = $request->domainname;
         $body['site_id'] = $request->website_id;
+        $body['sitename'] = $request->websitename;
 
         $tenantresponse = $tenantclient->post($tenanturl, ['form_params' => $body ]);
 
@@ -226,5 +225,29 @@ class HomeController extends Controller
         return redirect;
     }
 
+    public function updatesitename(Request $request)
+    {
+
+        //TODO Add in Site Name to fieldlist through the api
+        $tenantclient = new \GuzzleHttp\Client();
+
+        $tenanturl = $request->website . 'v1/name/update';
+
+        $body['sitename'] = $request->websitename;
+
+
+        $tenantresponse = $tenantclient->post($tenanturl, ['form_params' => $body ]);
+
+        $tenantcode = $tenantresponse->getStatusCode();
+        $tenantresult = $tenantresponse->getBody()->getContents();
+
+        $tenantdetails = \GuzzleHttp\json_decode($tenantresult);
+
+        $teamsite = TeamSite::where('website_id', $request->website_id)->update([
+            'tenant_sitename' => $tenantdetails
+        ]);
+
+        return back();
+    }
 
 }

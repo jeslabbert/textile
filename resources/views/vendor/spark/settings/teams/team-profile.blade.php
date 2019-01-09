@@ -9,16 +9,50 @@
         </div>
         @if (App\TeamSite::where('team_id', $team->id)->count() > 0)
 
+
             <div class="card card-default"><div class="card-header">
-                    Update Team Site
+                    Update Site Details
+                    {{--<button data-toggle="modal" data-target="#sitedns" class="btn btn-link btn-sm pull-right"><i style="color: black;" class="fa fa-info"></i></button>--}}
+                    {{--<a class="btn btn-link btn-sm pull-right" href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}"><i style="color: black;" class="fa fa-info"></i> Visit Site</a>--}}
+                </div>
+                <div class="card-body">
+                    <form class="form-horizontal" method="POST" action="/updatesitename">
+                        {{ csrf_field() }}
+                        <input id="siteid" type="hidden" class="form-control" name="website_id" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>
+                        <input id="sitename" type="hidden" class="form-control" name="website" value="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" required>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">Site Title</label>
+                            <div class="col-md-6">
+                                <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+
+                                <div class="input-group mb-2 mr-sm-2">
+                                    {{--TODO Fix up sizing of input--}}
+
+                                    <input name="websitename" type="text" class="form-control" id="inlineFormInputGroupUsername2" aria-describedby="dnsHelpBlock" placeholder="Title">
+
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <h5> </h5>
+
+                </div>
+            </div>
+
+            <div class="card card-default"><div class="card-header">
+                    Update Domain Details
                     {{--<button data-toggle="modal" data-target="#sitedns" class="btn btn-link btn-sm pull-right"><i style="color: black;" class="fa fa-info"></i></button>--}}
                     {{--<a class="btn btn-link btn-sm pull-right" href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}"><i style="color: black;" class="fa fa-info"></i> Visit Site</a>--}}
                 </div>
                 <div class="card-body">
                     <form class="form-horizontal" method="POST" action="/updatesite">
                         {{ csrf_field() }}
-                        <input id="sitename" type="hidden" class="form-control" name="website_id" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>
-                         <div class="form-group row">
+                        <input id="siteid" type="hidden" class="form-control" name="website_id" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>
+                        <input id="sitename" type="hidden" class="form-control" name="websitename" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>
+                        <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">Domain Name</label>
                             <div class="col-md-6">
                                 <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
