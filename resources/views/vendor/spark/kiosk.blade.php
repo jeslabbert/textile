@@ -99,21 +99,42 @@
                         @include('spark::kiosk.commission')
                         <div>
                             <div class="card card-default">
-                                <div class="card-header">{{__('Commission Sites')}}</div>
+                                <div class="card-header">
+                                    <div class="row">
+
+
+                                    <div class="col-md-9 col-sm-6" style="    margin-top: 3px;"> {{__('Commission Sites')}}</div>
+                                <div class="col-md-3 col-sm-6 col-xs-6" style="padding-right: 20px;">
+                                    <div class="input-group input-group-sm mb-3" style="margin-bottom: 0rem !important;">
+
+                                        <input type="text" class="form-control" id="myInput" onkeyup="myFunction()"  placeholder="Search" aria-describedby="inputGroup-sizing-sm">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa fa-search"></i></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                    </div>
+                                </div>
                                 {{--TODO Filter Sites--}}
-                                <div class="card-body">
+                                <div class="card-body" >
+                                    <ul id="myUL" style="list-style: none;">
+
+
                                     @forelse(App\Team::all() as $team)
-                                        <form style="margin:auto;" method="POST" action="/commission/update">
-                                            {{ csrf_field() }}
+<li><form id="sortForm"  method="POST" action="/commission/update">
+        {{ csrf_field() }}
                                         <div class="row">
-                                            <div class="col-md-4" style="display: flex;
+                                            <div id="team_name" class="col-sm-4" style="display: flex;
     justify-content:center;
     align-content:center;
     flex-direction:column; ">
-                                                    {{$team->name}}
+                                                    <a>{{$team->name}}</a>
                                                 <input name="team_id" value="{{$team->id}}" hidden>
                                             </div>
-                                            <div class="col-md-6">
+
+                                            <div class="col-sm-6">
+
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <div class="form-group row">
@@ -158,10 +179,12 @@
 
 
                                         </div>
-                                        </form>
+    </form>
                                         <hr>
+</li>
                                     @empty
                                     @endforelse
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -170,5 +193,25 @@
             </div>
         </div>
     </div>
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, ul, li, a, i;
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName('li');
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 </spark-kiosk>
 @endsection

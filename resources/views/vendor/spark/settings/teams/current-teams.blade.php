@@ -5,14 +5,20 @@
                 <div class="row">
 
 
-                <div class="col-md-9 col-sm-6 col-xs-6">
+                <div class="col-md-9 col-sm-6 col-xs-6" style="    margin-top: 3px;">
                     {{__('teams.current_teams')}}
+
                 </div>
 
                 <div class="col-md-3 col-sm-6 col-xs-6" style="padding-right: 20px;">
-                    <div class="input-group input-group-sm" style="width: 100%;">
-                        <input style="height: 35px;" type="text" name="table_search" id="myInput" onkeyup="myFunction()" class="form-control pull-left" placeholder="@lang('phrases.filter')">
+                    <div class="input-group input-group-sm mb-3" style="margin-bottom: 0rem !important;">
+
+                        <input type="text" class="form-control" id="myInput" onkeyup="myFunction()"  placeholder="Search" aria-describedby="inputGroup-sizing-sm">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa fa-search"></i></span>
+                        </div>
                     </div>
+
                 </div>
                 </div>
             </div>
@@ -56,22 +62,24 @@
                             {{--</td>--}}
 
                             <!-- Edit Button -->
-                            <td>
-                                <button class="btn-sm btn-primary" @click="visitSite(team)"
-                                        data-toggle="tooltip" title="{{__('teams.visit_site')}}">
-                                    <i class="fa fa-link"></i>
-                                </button>
-                                <button class="btn-sm btn-warning" @click="approveLeavingTeam(team)"
-                                        data-toggle="tooltip" title="{{__('teams.leave_site')}}"
-                                        v-if="user.id !== team.owner_id">
-                                    <i class="fa fa-sign-out"></i>
-                                </button>
-
+                            <td >
                                 @if (Spark::createsAdditionalTeams())
-                                    <button class="btn-sm btn-danger" @click="approveTeamDelete(team)" v-if="user.id === team.owner_id">
-                                        <i class="fa fa-times"></i>
+                                    <button style="float: right; margin-left:5px; min-width:13px !important;" class="btn-sm btn-danger" @click="approveTeamDelete(team)" v-if="user.id === team.owner_id">
+                                        <i class="fa fa-times" style="min-width:13px !important;"></i>
                                     </button>
                                 @endif
+                                    <button style="float: right; margin-left:5px; min-width:13px !important;" class="btn-sm btn-warning" @click="approveLeavingTeam(team)"
+                                            data-toggle="tooltip" title="{{__('teams.leave_site')}}"
+                                            v-if="user.id !== team.owner_id">
+                                        <i class="fa fa-sign-out" style="min-width:13px !important;"></i>
+                                    </button>
+                                <button style="float: right;margin-left:5px; " class="btn-sm btn-primary" @click="visitSite(team)"
+                                        data-toggle="tooltip" title="{{__('teams.visit_site')}}">
+                                    <i class="fa fa-link" style="min-width:13px !important;"></i>
+                                </button>
+
+
+
                             </td>
                         </tr>
                     </tbody>

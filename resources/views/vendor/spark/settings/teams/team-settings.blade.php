@@ -54,12 +54,12 @@
                                         {{__('teams.commission_split')}}
                                     </a>
                                 </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="#commission" aria-controls="commission" role="tab" data-toggle="tab">
-                                        <i class="icon-20 fa fa-tag"></i>
-                                        {{__('teams.whitelabelling')}}
-                                    </a>
-                                </li>
+                                {{--<li class="nav-item ">--}}
+                                    {{--<a class="nav-link" href="#commission" aria-controls="commission" role="tab" data-toggle="tab">--}}
+                                        {{--<i class="icon-20 fa fa-tag"></i>--}}
+                                        {{--{{__('teams.whitelabelling')}}--}}
+                                    {{--</a>--}}
+                                {{--</li>--}}
                             @else
 
                             @endif
