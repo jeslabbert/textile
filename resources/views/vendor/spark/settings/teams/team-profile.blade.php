@@ -28,7 +28,7 @@
                                 <div class="input-group mb-2 mr-sm-2">
                                     {{--TODO Fix up sizing of input--}}
 
-                                    <input name="websitename" type="text" class="form-control" id="inlineFormInputGroupUsername2" aria-describedby="dnsHelpBlock" placeholder="Title">
+                                    <input name="websitename" @if(App\TeamSite::where('team_id', $team->id)->first()->tenant_sitename != null) value="{{App\TeamSite::where('team_id', $team->id)->first()->tenant_sitename}}" @endif type="text" class="form-control" id="inlineFormInputGroupUsername2" aria-describedby="dnsHelpBlock" placeholder="Title">
 
                                 </div>
                                 <button type="submit" class="btn btn-primary">Update</button>
