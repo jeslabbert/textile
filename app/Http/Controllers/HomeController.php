@@ -228,7 +228,7 @@ class HomeController extends Controller
     public function updatesitename(Request $request)
     {
 
-        //TODO Add in Site Name to fieldlist through the api
+
         $tenantclient = new \GuzzleHttp\Client();
 
         $tenanturl = $request->website . '/api/v1/name/update';
@@ -242,7 +242,7 @@ class HomeController extends Controller
         $tenantresult = $tenantresponse->getBody()->getContents();
 
         $tenantdetails = \GuzzleHttp\json_decode($tenantresult);
-dd(TeamSite::where('website_id', $request->website_id)->first());
+
         $teamsite = TeamSite::where('website_id', $request->website_id)->first()->update([
             'tenant_sitename' => $request->websitename
         ]);
