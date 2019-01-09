@@ -20,6 +20,12 @@
         max-height: 400px;
     }
 </style>
+    <style>
+        .sparknavli {
+            max-height: 40px;
+            list-style: none;
+        }
+    </style>
     <!-- Scripts -->
     @yield('scripts', '')
 

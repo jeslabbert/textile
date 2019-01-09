@@ -1,4 +1,4 @@
-<a class="navbar-brand" href="/home">
+<a class="navbar-brand" href="/home" style="margin-right:0px;">
    <img src="/favicon.png">
     {{--<svg class="h-37 w-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 43" xmlns:xlink="http://www.w3.org/1999/xlink">--}}
         {{--<defs>--}}
