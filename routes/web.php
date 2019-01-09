@@ -20,7 +20,7 @@ Route::get('/setglobals', 'CommissionCalculationController@setGlobalComms');
 
 Route::post('/newsite', 'HomeController@newsite');
 Route::post('/updatesite', 'HomeController@updatesite');
-Route::post('/updatesitename', 'HomeController@updatesite');
+Route::post('/updatesitename', 'HomeController@updatesitename');
 
 Route::post('/teamcommission', 'TeamCommissionController@store');
 
