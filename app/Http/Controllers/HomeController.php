@@ -231,7 +231,7 @@ class HomeController extends Controller
         //TODO Add in Site Name to fieldlist through the api
         $tenantclient = new \GuzzleHttp\Client();
 
-        $tenanturl = $request->website . 'v1/name/update';
+        $tenanturl = $request->website . '/v1/name/update';
 
         $body['sitename'] = $request->websitename;
 
@@ -247,7 +247,7 @@ class HomeController extends Controller
             'tenant_sitename' => $tenantdetails
         ]);
 
-        return back();
+        return redirect($tenanturl .'/whitelabelling');
     }
 
 }
