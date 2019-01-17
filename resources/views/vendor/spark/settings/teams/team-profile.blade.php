@@ -63,6 +63,7 @@
                                         <div class="input-group-text" style="min-height: 38px;"><a href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}"><i style="color: black;" class="fa fa-link"></i></a></div>
                                     </div>
                                     <input name="domainname" type="text" class="form-control py-0" id="inlineFormInputGroupUsername2" aria-describedby="dnsHelpBlock" placeholder="URL">
+                                    <br>
                                     <small id="dnsHelpBlock" class="form-text text-muted">
                                         An A record for the domain name is needed. It should point to 154.66.198.90
                                     </small>
