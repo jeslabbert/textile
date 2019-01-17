@@ -61,8 +61,8 @@
     .openbtn {
         font-size: 20px;
         cursor: pointer;
-        background-color: #111;
-        color: white;
+        background-color: white;
+        color: #111;
         padding: 10px 15px;
         border: none;
     }
