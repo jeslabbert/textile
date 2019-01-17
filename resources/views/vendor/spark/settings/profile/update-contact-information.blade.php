@@ -51,7 +51,6 @@
             {{ csrf_field() }}
             <input type="text" name="payoutprovider_id" value="1" hidden>
 
-{{--TODO Create Payment Table and store this info to that table--}}
             <!-- E-Mail Address -->
             <div class="form-group row">
                 <label class="col-md-4 col-form-label text-md-right">{{__('PayPal Address')}}</label>
@@ -61,7 +60,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text" style="    min-height: 38px;"><i class="fa fa-paypal"></i> </div>
                         </div>
-                        <input type="text" name="user_details" @if(App\UserPayout::where('user_id', Auth::user()->id)->count() > 0) value="{{App\UserPayout::where('user_id', Auth::user()->id)->first()->provider_user_details}}" @endif class="form-control py-0" id="inlineFormInputGroupUsername2" placeholder="Username">
+                        <input type="email" name="user_details" @if(App\UserPayout::where('user_id', Auth::user()->id)->count() > 0) value="{{App\UserPayout::where('user_id', Auth::user()->id)->first()->provider_user_details}}" @endif class="form-control py-0" id="inlineFormInputGroupUsername2" placeholder="Username">
                     </div>
 
                 </div>
