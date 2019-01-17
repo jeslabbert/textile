@@ -7,7 +7,8 @@
     <form class="form-horizontal" method="POST" action="/updatesiteowner">
         {{ csrf_field() }}
         <input name="team_id" type="hidden" value="{{$team->id}}">
-                <div class="form-group row">
+                <div class="form-group row" style="margin-left: 0px;
+    margin-right: 0px;">
                     <label class="col-md-4 col-form-label text-md-right">Owner</label>
 
                     <div class="col-md-6">
@@ -19,7 +20,8 @@
                         </select>
                     </div>
                 </div>
-    <div class="form-group row mb-0">
+    <div class="form-group row mb-0" style="margin-left: 0px;
+    margin-right: 0px;">
         <div class="offset-md-4 col-md-6">
             <button type="submit" class="btn btn-primary">
 

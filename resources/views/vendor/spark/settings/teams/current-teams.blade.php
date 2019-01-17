@@ -35,7 +35,7 @@
                     <tbody>
                         <tr  v-for="team in teams">
                             <!-- Photo -->
-                            <td style="padding:5px;">
+                            <td style="padding:5px; padding-left: 20px;">
                                 <img :src="team.photo_url" class="spark-profile-photo">
                             </td>
 

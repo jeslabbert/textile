@@ -62,7 +62,7 @@
                             <!-- Plan Name -->
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <i class="radio-select mr-2" @click="!isActivePlan(plan) ? confirmPlanUpdate(plan) : 0"
+                                    <i class="radio-select mr-2" style="min-width: 30px;" @click="!isActivePlan(plan) ? confirmPlanUpdate(plan) : 0"
                                     :class="{'radio-select-selected': isActivePlan(plan), invisible: selectingPlan}"></i>
                                     <a @click="showPlanDetails(plan)">@{{ plan.name }}</a>
                                 </div>
