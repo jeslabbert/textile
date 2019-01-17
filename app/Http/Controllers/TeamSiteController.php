@@ -56,7 +56,7 @@ class TeamSiteController extends Controller
     public function sitebilling()
     {
 
-        $teamsites = TeamSite::where('website_id', '>', 27)->get();
+        $teamsites = TeamSite::where('website_id', '>', 59)->get();
         foreach($teamsites as $teamSite){
 
 
