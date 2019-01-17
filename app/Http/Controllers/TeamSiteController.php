@@ -112,7 +112,7 @@ class TeamSiteController extends Controller
             }
             }
             $team = Team::where('id', $teamSite->team_id)->first();
-
+if($team->current_billing_plan != null){
             $invoiceinfo = $team->invoiceFor('Newsies Fee', 200);
             $invoice = MeteredInvoice::create([
                 'team_id' =>$team->id,
@@ -121,6 +121,7 @@ class TeamSiteController extends Controller
                 'total'=>200
             ]);
 //            $team->charge(340);
+}
         }
         $sitetotals = SiteTotal::all();
 
