@@ -145,14 +145,14 @@
                 <div class="tab-content">
                     <!-- Owner Information -->
                     {{--@if (Auth::user()->ownsTeam($team))--}}
-                        <div role="tabcard" class="tab-pane active" id="owner">
+                        <div role="tabcard" class="tab-pane @if (Auth::user()->ownsTeam($team)) active @endif" id="owner">
                             @include('spark::settings.teams.team-profile')
                         </div>
                     {{--@endif--}}
 
                     <!-- Membership -->
                     {{--@if (Auth::user()->ownsTeam($team))--}}
-                    <div role="tabcard" class="tab-pane" id="membership">
+                    <div role="tabcard" class="tab-pane @if (Auth::user()->ownsTeam($team)) @else active @endif" id="membership">
                     {{--@else--}}
                     {{--<div role="tabcard" class="tab-pane active" id="membership">--}}
                     {{--@endif--}}
