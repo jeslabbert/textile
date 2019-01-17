@@ -17,7 +17,7 @@
                                     <div class="col-md-12">
                                         <div class="input-group mb-2 mr-sm-2">
                                             <div class="input-group-prepend">
-                                                <div class="input-group-text">@ <i class="fa fa-paypal"></i> </div>
+                                                <div class="input-group-text" style="min-height: 38px;"><i class="fa fa-paypal"></i> </div>
                                             </div>
                                             <input value="{{App\Setting::where('setting_type', 'Commission')->where('setting_name', 'PayPal')->first()->setting_string}}" name="paypal_value" type="text" class="form-control py-0" id="inlineFormInputGroupUsername2" placeholder="Username">
                                         </div>

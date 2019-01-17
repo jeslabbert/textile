@@ -26,10 +26,13 @@ Route::post('/teamcommission', 'TeamCommissionController@store');
 
 Route::get('/sitebilling', 'TeamSiteController@sitebilling');
 
+Route::post('/updatesiteowner', 'TeamSiteController@ownerswitch');
+
 Route::post('/commission/defaults', 'SettingController@updateCommission');
 Route::post('/commission/update', 'SettingController@updateTeamCommission');
 
 Route::post('/profile/payouts/update', 'UserPayoutController@store');
+Route::put('/settings/profile/details', 'ProfileDetailsController@update');
 
 Route::get('/get_team/{team}', function($team)
 {

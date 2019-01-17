@@ -6,8 +6,18 @@
     @else
         <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
     @endif
+
 @endsection
 
+@section('sidebar')
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+    </div>
+    @endsection
 @section('content')
     <spark-settings :user="user" :teams="teams" inline-template>
         <div class="spark-screen container">
@@ -57,6 +67,7 @@
                     <!-- Billing Tabs -->
                     @if (Spark::canBillCustomers())
                         <aside>
+
                             <h3 class="nav-heading ">
                                 {{__('Billing')}}
                             </h3>

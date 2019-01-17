@@ -67534,6 +67534,8 @@ var app = new Vue({
 __webpack_require__("./resources/assets/js/spark-components/bootstrap.js");
 
 __webpack_require__("./resources/assets/js/components/home.js");
+// Load the new Vue component...
+__webpack_require__("./resources/assets/js/components/settings/profile/update-profile-details.js");
 
 /***/ }),
 
@@ -67545,6 +67547,39 @@ Vue.component('home', {
 
     mounted: function mounted() {
         //
+    }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/settings/profile/update-profile-details.js":
+/***/ (function(module, exports) {
+
+Vue.component('update-profile-details', {
+    props: ['user'],
+
+    data: function data() {
+        return {
+            form: new SparkForm({
+                username: '',
+                name: '',
+                last_name: ''
+            })
+        };
+    },
+    mounted: function mounted() {
+        this.form.username = this.user.username;
+        this.form.name = this.user.name;
+        this.form.last_name = this.user.last_name;
+    },
+
+
+    methods: {
+        update: function update() {
+            Spark.put('/settings/profile/details', this.form).then(function (response) {
+                Bus.$emit('updateUser');
+            });
+        }
     }
 });
 
@@ -67907,7 +67942,40 @@ Vue.component('spark-profile', {
 var base = __webpack_require__("./vendor/laravel/spark-aurelius/resources/assets/js/settings/profile/update-contact-information.js");
 
 Vue.component('spark-update-contact-information', {
-    mixins: [base]
+    mixins: [base],
+
+    data: function data() {
+        return {
+            form: $.extend(true, new SparkForm({
+                name: '',
+                last_name: '',
+                email: ''
+            }), Spark.forms.updateContactInformation)
+        };
+    },
+
+
+    /**
+     * Bootstrap the component.
+     */
+    mounted: function mounted() {
+        this.form.username = this.user.username;
+        this.form.name = this.user.name;
+        this.form.last_name = this.user.last_name;
+        this.form.email = this.user.email;
+    },
+
+
+    methods: {
+        /**
+         * Update the user's contact information.
+         */
+        update: function update() {
+            Spark.put('/settings/contact', this.form).then(function () {
+                Bus.$emit('updateUser');
+            });
+        }
+    }
 });
 
 /***/ }),

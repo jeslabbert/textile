@@ -11,20 +11,20 @@
                 <tbody>
                 <tr v-for="invoice in invoices">
                     <!-- Invoice Date -->
-                    <td>
+                    <td style="vertical-align: middle;">
                         <strong>@{{ invoice.created_at | date }}</strong>
                     </td>
 
                     <!-- Invoice Total -->
-                    <td>
+                    <td style="vertical-align: middle;">
                         @{{ invoice.total | currency }}
                     </td>
 
                     <!-- Invoice Download Button -->
                     <td class="text-right">
                         <a :href="downloadUrlFor(invoice)">
-                            <button class="btn btn-default">
-                                <i class="fa fa-btn fa-file-pdf-o"></i> {{__('Download PDF')}}
+                            <button class="btn-sm btn-default">
+                                <i class="fa fa-btn fa-file-pdf-o"></i>
                             </button>
                         </a>
                     </td>

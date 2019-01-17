@@ -5,7 +5,7 @@
     <a class="nav-link" href="#">Your Link</a>
 </li>
 -->
-
+@yield('navextra')
 <li class="sparknavli" style="min-width: 50px;">
     @include('spark::nav.brand')
 </li>

@@ -4,13 +4,16 @@
     </div>
 
 <br>
+    <form class="form-horizontal" method="POST" action="/updatesiteowner">
+        {{ csrf_field() }}
+        <input name="team_id" type="hidden" value="{{$team->id}}">
                 <div class="form-group row">
                     <label class="col-md-4 col-form-label text-md-right">Owner</label>
 
                     <div class="col-md-6">
-                        <select name="first_user_id" class="browser-default custom-select" style="margin-bottom: 10px;">
+                        <select name="owner" class="browser-default custom-select" style="margin-bottom: 10px;">
                             @forelse($team->users()->get() as $teamuser)
-                                <option @if(App\TeamCommission::where('team_id', $team->id)->count() > 0) @if(App\TeamCommission::where('team_id', $team->id)->first()->first_user_id == $teamuser->id) selected @endif @endif value="{{$teamuser->id}}">{{$teamuser->name}} {{$teamuser->last_name}}</option>
+                                <option  @if(App\Team::where('id', $team->id)->first()->owner_id == $teamuser->id) selected @endif value="{{$teamuser->id}}">{{$teamuser->name}} {{$teamuser->last_name}}</option>
                             @empty
                             @endforelse
                         </select>
@@ -25,5 +28,6 @@
             </button>
         </div>
     </div>
+    </form>
 <br>
 </div>

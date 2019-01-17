@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\MeteredInvoice;
 use App\SiteTotal;
 use App\TeamSite;
+use App\TeamUser;
 use Illuminate\Http\Request;
 use Laravel\Cashier\Invoice;
 use Laravel\Spark\Team;
@@ -129,6 +130,18 @@ class TeamSiteController extends Controller
 //        ]);
 
 //        return redirect;
+    }
+
+    public function ownerswitch(Request $request)
+    {
+        $team = Team::where('id', $request->team_id)->first();
+        $team->owner_id = $request->owner;
+        $team->update();
+        $teamuserold = TeamUser::where('team_id', $request->team_id)->where('role', 'owner')->update(['role'=>'member']);
+        $teamusernew = TeamUser::where('team_id', $request->team_id)->where('user_id', $request->owner)->update(['role'=>'owner']);
+
+        return back();
+
     }
     /**
      * Show the form for editing the specified resource.

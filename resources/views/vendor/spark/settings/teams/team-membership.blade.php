@@ -17,8 +17,12 @@
             @include('spark::settings.teams.team-members')
         </div>
             <!-- Team Members -->
-            <div v-if="user && team">
+            @if (Spark::developer(Auth::user()->email))
+                @include('spark::settings.teams.team-owner')
+                @else
+            <div v-if="user.id === team.owner_id">
                 @include('spark::settings.teams.team-owner')
             </div>
+                @endif
     </div>
 </spark-team-membership>

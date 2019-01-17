@@ -8,6 +8,7 @@ module.exports = {
         return {
             form: $.extend(true, new SparkForm({
                 name: '',
+                last_name: '',
                 email: ''
             }), Spark.forms.updateContactInformation)
         };
@@ -19,6 +20,7 @@ module.exports = {
      */
     mounted() {
         this.form.name = this.user.name;
+        this.form.last_name = this.user.last_name;
         this.form.email = this.user.email;
     },
 

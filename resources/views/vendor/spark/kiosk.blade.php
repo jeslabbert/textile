@@ -118,7 +118,7 @@
                                 </div>
                                 {{--TODO Filter Sites--}}
                                 <div class="card-body" >
-                                    <ul id="myUL" style="list-style: none;">
+                                    <ul id="myUL" style="list-style: none; padding-left: 0px;">
 
 
                                     @forelse(App\Team::all() as $team)

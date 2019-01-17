@@ -14,13 +14,13 @@
                         {{ csrf_field() }}
 
                         <!-- E-Mail Address -->
-                        <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{__('E-Mail')}}</label>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label text-md-right">{{__('E-Mail')}}</label>
 
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}" autofocus>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" autofocus>
+                                </div>
                             </div>
-                        </div>
 
                         <!-- Password -->
                         <div class="form-group row">

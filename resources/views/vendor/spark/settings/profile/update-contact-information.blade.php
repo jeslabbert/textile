@@ -9,18 +9,7 @@
             </div>
 
             <form role="form">
-                <!-- Name -->
-                <div class="form-group row">
-                    <label class="col-md-4 col-form-label text-md-right">{{__('Name')}}</label>
 
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" name="name" v-model="form.name" :class="{'is-invalid': form.errors.has('name')}">
-
-                        <span class="invalid-feedback" v-show="form.errors.has('name')">
-                            @{{ form.errors.get('name') }}
-                        </span>
-                    </div>
-                </div>
 
                 <!-- E-Mail Address -->
                 <div class="form-group row">
