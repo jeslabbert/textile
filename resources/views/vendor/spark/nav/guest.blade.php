@@ -27,6 +27,10 @@
                 {{--</g>--}}
             {{--</svg>--}}
         </a>
+
+        <li class="sparknavli">
+            <a class="nav-link" href="/">@yield('title', config('app.name'))</a>
+        </li>
         {{--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"--}}
                 {{--aria-expanded="false" aria-label="Toggle navigation">--}}
             {{--<span class="navbar-toggler-icon"></span>--}}
