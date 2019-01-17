@@ -67,9 +67,7 @@
         border: none;
     }
 
-    .openbtn:hover {
-        background-color: #444;
-    }
+
 
     /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
     #main {
