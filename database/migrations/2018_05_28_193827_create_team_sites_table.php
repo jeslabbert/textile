@@ -15,6 +15,7 @@ class CreateTeamSitesTable extends Migration
     {
         Schema::create('team_sites', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('team_id')->nullable();
             $table->string('fqdn');
             $table->integer('website_id');
             $table->string('creator');
