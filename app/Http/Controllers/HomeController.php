@@ -170,7 +170,7 @@ class HomeController extends Controller
 //        $countryurl = $teamsite->fqdn . '/api/v1/countrysetup';
 //        $languageurl = $teamsite->fqdn . '/api/v1/languagesetup';
 //        $setupurl = $teamsite->fqdn . '/api/v1/setup';
-        $userurl = $teamsite->fqdn . '/api/v1/newadmin';
+        $userurl = 'https://' . $teamsite->fqdn . '/api/v1/newadmin';
 //        $siteurl = $teamsite->fqdn . '/api/v1/siteparams';
 //
 //        $countryresponse = $countryclient->get($countryurl);
