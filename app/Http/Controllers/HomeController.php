@@ -167,29 +167,29 @@ class HomeController extends Controller
             'second_user_id'=>$team->owner_id,
         ]);
 
-        $countryurl = $teamsite->fqdn . '/api/v1/countrysetup';
-        $languageurl = $teamsite->fqdn . '/api/v1/languagesetup';
-        $setupurl = $teamsite->fqdn . '/api/v1/setup';
-        $userurl = $teamsite->fqdn . '/api/v1/newadmin';
-        $siteurl = $teamsite->fqdn . '/api/v1/siteparams';
-
-        $countryresponse = $countryclient->get($countryurl);
-        $countrycode = $countryresponse->getStatusCode();
-        $countryresult = $countryresponse->getBody()->getContents();
-
-
-        $languageresponse = $languageclient->get($languageurl);
-        $languagecode = $languageresponse->getStatusCode();
-        $languageresult = $languageresponse->getBody()->getContents();
-
-
-        $setupresponse = $setupclient->get($setupurl);
-        $setupcode = $setupresponse->getStatusCode();
-        $setupresult = $setupresponse->getBody()->getContents();
-
-        $siteresponse = $siteclient->post($siteurl, ['form_params' => $body ]);
-        $sitecode = $siteresponse->getStatusCode();
-        $siteresult = $siteresponse->getBody()->getContents();
+//        $countryurl = $teamsite->fqdn . '/api/v1/countrysetup';
+//        $languageurl = $teamsite->fqdn . '/api/v1/languagesetup';
+//        $setupurl = $teamsite->fqdn . '/api/v1/setup';
+//        $userurl = $teamsite->fqdn . '/api/v1/newadmin';
+//        $siteurl = $teamsite->fqdn . '/api/v1/siteparams';
+//
+//        $countryresponse = $countryclient->get($countryurl);
+//        $countrycode = $countryresponse->getStatusCode();
+//        $countryresult = $countryresponse->getBody()->getContents();
+//
+//
+//        $languageresponse = $languageclient->get($languageurl);
+//        $languagecode = $languageresponse->getStatusCode();
+//        $languageresult = $languageresponse->getBody()->getContents();
+//
+//
+//        $setupresponse = $setupclient->get($setupurl);
+//        $setupcode = $setupresponse->getStatusCode();
+//        $setupresult = $setupresponse->getBody()->getContents();
+//
+//        $siteresponse = $siteclient->post($siteurl, ['form_params' => $body ]);
+//        $sitecode = $siteresponse->getStatusCode();
+//        $siteresult = $siteresponse->getBody()->getContents();
 
         $userresponse = $userclient->post($userurl, ['form_params' => $body ]);
         $usercode = $userresponse->getStatusCode();

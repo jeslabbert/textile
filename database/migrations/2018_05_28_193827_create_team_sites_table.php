@@ -17,6 +17,7 @@ class CreateTeamSitesTable extends Migration
             $table->increments('id');
             $table->integer('team_id')->nullable();
             $table->string('fqdn');
+            $table->string('historical_fqdn')->nullable();
             $table->integer('website_id');
             $table->string('creator');
             $table->string('creator_email');
