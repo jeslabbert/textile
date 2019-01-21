@@ -104,7 +104,7 @@ class HomeController extends Controller
         $userclient = new \GuzzleHttp\Client();
         $siteclient = new \GuzzleHttp\Client();
 
-        $tenanturl = 'http://cloud.tartancms.com/api/v1/sites/create';
+        $tenanturl = 'https://cloud.tartancms.com/api/v1/sites/create';
 
         $body['_token'] = $request->_token;
         $body['subname'] = 'tts000' . $request->subname;
@@ -203,7 +203,7 @@ class HomeController extends Controller
     {
         $tenantclient = new \GuzzleHttp\Client();
 
-        $tenanturl = 'http://cloud.tartancms.com/api/v1/sites/update';
+        $tenanturl = 'https://cloud.tartancms.com/api/v1/sites/update';
 
         $body['_token'] = $request->_token;
         $body['domainname'] = $request->domainname;
