@@ -19,6 +19,7 @@ class CreateSiteTotalsTable extends Migration
             $table->integer('portfolio_total')->nullable();
             $table->integer('company_total')->nullable();
             $table->integer('bu_id')->nullable();
+            $table->string('bu_name')->nullable();
             $table->integer('department_total')->nullable();
             $table->integer('employeelevel_total')->nullable();
 
