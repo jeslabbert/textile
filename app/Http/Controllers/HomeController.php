@@ -105,10 +105,10 @@ class HomeController extends Controller
         $userclient = new \GuzzleHttp\Client();
         $siteclient = new \GuzzleHttp\Client();
 
-        $tenanturl = 'http://cloud.taskmule.com/api/v1/sites/create';
+        $tenanturl = 'http://cloud.tartancms.com/api/v1/sites/create';
 
         $body['_token'] = $request->_token;
-        $body['subname'] = 'tm000' . $request->subname;
+        $body['subname'] = 'tts000' . $request->subname;
         $body['sitename'] = $request->sitename;
         $body['publicregistration'] = $request->publicregistration;
         $body['first_name'] = Auth::user()->name;
@@ -204,7 +204,7 @@ class HomeController extends Controller
     {
         $tenantclient = new \GuzzleHttp\Client();
 
-        $tenanturl = 'http://cloud.taskmule.com/api/v1/sites/update';
+        $tenanturl = 'http://cloud.tartancms.com/api/v1/sites/update';
 
         $body['_token'] = $request->_token;
         $body['domainname'] = $request->domainname;
