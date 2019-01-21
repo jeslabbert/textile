@@ -95,7 +95,6 @@ class HomeController extends Controller
 
     public function newsite(Request $request)
     {
-        //TODO Add in Site Name to fieldlist through the api
         $input = $request->all();
 
         $tenantclient = new \GuzzleHttp\Client();
@@ -105,7 +104,7 @@ class HomeController extends Controller
         $userclient = new \GuzzleHttp\Client();
         $siteclient = new \GuzzleHttp\Client();
 
-        $tenanturl = 'http://tartancms.com/api/v1/sites/create';
+        $tenanturl = 'http://cloud.tartancms.com/api/v1/sites/create';
 
         $body['_token'] = $request->_token;
         $body['subname'] = 'tts000' . $request->subname;
@@ -204,7 +203,7 @@ class HomeController extends Controller
     {
         $tenantclient = new \GuzzleHttp\Client();
 
-        $tenanturl = 'http://tartancms.com/api/v1/sites/update';
+        $tenanturl = 'http://cloud.tartancms.com/api/v1/sites/update';
 
         $body['_token'] = $request->_token;
         $body['domainname'] = $request->domainname;
