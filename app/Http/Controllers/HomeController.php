@@ -169,7 +169,7 @@ class HomeController extends Controller
 
 //        $countryurl = $teamsite->fqdn . '/api/v1/countrysetup';
 //        $languageurl = $teamsite->fqdn . '/api/v1/languagesetup';
-//        $setupurl = $teamsite->fqdn . '/api/v1/setup';
+        $setupurl = 'https://' . $teamsite->fqdn . '/api/v1/setup';
         $userurl = 'https://' . $teamsite->fqdn . '/api/v1/newadmin';
 //        $siteurl = $teamsite->fqdn . '/api/v1/siteparams';
 //
@@ -183,9 +183,9 @@ class HomeController extends Controller
 //        $languageresult = $languageresponse->getBody()->getContents();
 //
 //
-//        $setupresponse = $setupclient->get($setupurl);
-//        $setupcode = $setupresponse->getStatusCode();
-//        $setupresult = $setupresponse->getBody()->getContents();
+        $setupresponse = $setupclient->get($setupurl);
+        $setupcode = $setupresponse->getStatusCode();
+        $setupresult = $setupresponse->getBody()->getContents();
 //
 //        $siteresponse = $siteclient->post($siteurl, ['form_params' => $body ]);
 //        $sitecode = $siteresponse->getStatusCode();
