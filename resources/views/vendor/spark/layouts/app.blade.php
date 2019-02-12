@@ -212,6 +212,7 @@
             {{--TODO Make sure it updates to current team correctly and has a pull out function to display name --}}
             {{--TODO Should only be on team specific pages--}}
             @if(Auth::User())
+                @if(Auth::User()->currentTeam)
             <div class="sticky" style="position: fixed;
     top: 85px;
     right: 0;
@@ -230,6 +231,7 @@
                 </div>
 
             </div>
+                    @endif
                 @endif
         </main>
 

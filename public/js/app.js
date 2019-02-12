@@ -67508,7 +67508,8 @@ __webpack_require__("./resources/assets/js/components/bootstrap.js");
 
 Spark.forms.register = {
     last_name: '',
-    username: ''
+    username: '',
+    allow_control: ''
 };
 
 var app = new Vue({
@@ -68176,7 +68177,26 @@ Vue.component('spark-mailed-invitations', {
 var base = __webpack_require__("./vendor/laravel/spark-aurelius/resources/assets/js/settings/teams/pending-invitations.js");
 
 Vue.component('spark-pending-invitations', {
-    mixins: [base]
+    mixins: [base],
+    methods: {
+        /**
+         * Accept the given invitation.
+         */
+        accept: function accept(invitation) {
+            var _this = this;
+
+            axios.post('/settings/invitations/' + invitation.id + '/accept').then(function () {
+                Bus.$emit('updateTeams');
+
+                _this.getPendingInvitations();
+            });
+
+            this.removeInvitation(invitation);
+
+            window.location.href = '/settings/teams/' + invitation.team_id + '/switch';
+            window.location.href = '/sites';
+        }
+    }
 });
 
 /***/ }),
@@ -72749,6 +72769,9 @@ module.exports = {
             });
 
             this.removeInvitation(invitation);
+
+            window.location.href = '/settings/teams/' + invitation.team_id + '/switch';
+            window.location.href = '/sites';
         },
 
 

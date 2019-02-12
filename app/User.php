@@ -18,6 +18,7 @@ class User extends SparkUser
         'name',
         'email',
         'username',
+        'allow_control',
     ];
 
     /**

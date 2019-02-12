@@ -48,17 +48,17 @@
                         {{__('Users')}}
                     </a>
                 </li>
-                @if (Spark::usesApi())
-                    <li class="nav-item ">
-                        <a class="nav-link" style="display: flex;" href="#api" aria-controls="api" role="tab" data-toggle="tab" onclick="closeNav()">
-                            <svg class="icon-20 " style="padding-right:5px;" xmlns="http://www.w3.org/2000/svg " viewBox="0 0 20 20 ">
-                                <path style="fill:#bababa;" d="M20 14v4c0 1-1 2-2 2h-4v-2c0-1-1-2-2-2s-2 1-2 2v2H6c-1 0-2-1-2-2v-4H2c-1 0-2-1-2-2s1-2 2-2h2V6c0-1
-                        1-2 2-2h4V2c0-1 1-2 2-2s2 1 2 2v2h4c1 0 2 1 2 2v4h-2c-1 0-2 1-2 2s1 2 2 2h2z "/>
-                            </svg>
-                            {{__('API')}}
-                        </a>
-                    </li>
-                @endif
+                {{--@if (Spark::usesApi())--}}
+                    {{--<li class="nav-item ">--}}
+                        {{--<a class="nav-link" style="display: flex;" href="#api" aria-controls="api" role="tab" data-toggle="tab" onclick="closeNav()">--}}
+                            {{--<svg class="icon-20 " style="padding-right:5px;" xmlns="http://www.w3.org/2000/svg " viewBox="0 0 20 20 ">--}}
+                                {{--<path style="fill:#bababa;" d="M20 14v4c0 1-1 2-2 2h-4v-2c0-1-1-2-2-2s-2 1-2 2v2H6c-1 0-2-1-2-2v-4H2c-1 0-2-1-2-2s1-2 2-2h2V6c0-1--}}
+                        {{--1-2 2-2h4V2c0-1 1-2 2-2s2 1 2 2v2h4c1 0 2 1 2 2v4h-2c-1 0-2 1-2 2s1 2 2 2h2z "/>--}}
+                            {{--</svg>--}}
+                            {{--{{__('API')}}--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+                {{--@endif--}}
                 <li class="nav-item ">
                     <a class="nav-link" style="display: flex;" href="#commission" aria-controls="commission" role="tab" data-toggle="tab" onclick="closeNav()">
                         <svg class="icon-20 " style="padding-right:5px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20">

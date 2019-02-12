@@ -22,6 +22,7 @@ require('./components/bootstrap');
 Spark.forms.register = {
     last_name: '',
     username: '',
+    allow_control: '',
 };
 
 var app = new Vue({
