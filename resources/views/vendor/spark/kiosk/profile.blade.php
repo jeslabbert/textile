@@ -68,12 +68,7 @@
                             <button class="btn btn-primary btn-sm" v-if="spark.usesStripe && profile.stripe_id" @click="addDiscount(profile)">
                                 {{__('Apply Discount')}}
                             </button>
-<div >
-    <button class="btn btn-default btn-sm" v-if="user.allow_control === 1" @click="impersonate(profile)" :disabled="allow === 0">
-        {{__('Impersonate Test')}}
-    </button>
-</div>
-                            <button class="btn btn-default btn-sm" v-if="user.allow_control === 1" @click="impersonate(profile)" :disabled="user.id === profile.id">
+                            <button v-if="profile.allow_control === 1" class="btn btn-default btn-sm" @click="impersonate(profile)" :disabled="user.id === profile.id">
                                 {{__('Impersonate')}}
                             </button>
                         </div>

@@ -13,6 +13,10 @@
 
 Route::get('/', 'WelcomeController@show');
 
+
+// Customer Support...
+Route::post('/support/mail', 'SettingController@sendEmail');
+
 Route::get('/home', 'HomeController@show');
 Route::get('/sites', 'HomeController@sites');
 Route::get('/test', 'CommissionCalculationController@calculate');

@@ -73448,7 +73448,9 @@ module.exports = {
         supportForm: new SparkForm({
             from: '',
             subject: '',
-            message: ''
+            message: '',
+            authuser_id: '',
+            allow_control: ''
         })
     },
 
@@ -73638,6 +73640,8 @@ module.exports = {
 
                 _this6.supportForm.subject = '';
                 _this6.supportForm.message = '';
+                _this6.supportForm.authuser_id = '';
+                _this6.supportForm.allow_control = '';
             });
         },
 

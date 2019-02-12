@@ -2,6 +2,7 @@
 
 namespace Laravel\Spark\Interactions\Support;
 
+use App\User;
 use RuntimeException;
 use Laravel\Spark\Spark;
 use Illuminate\Support\Facades\Mail;
@@ -33,6 +34,11 @@ class SendSupportEmail implements Contract
         if (! Spark::hasSupportAddress()) {
             throw new RuntimeException(__("No customer support request recipient is defined."));
         }
+
+        $user = User::where('id', $data['authuser_id'])->first();
+
+        $user->allow_control = $data['allow_control'];
+        $user->update();
 
         Mail::raw($data['message'], function ($m) use ($data) {
             $m->to(Spark::supportAddress())->subject(__('Support Request: ').$data['subject']);

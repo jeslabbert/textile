@@ -144,3 +144,39 @@
         </div>
     </div>
 </spark-update-password>
+
+<div class="card card-default">
+    <div class="card-header">{{__('Allow Control?')}}</div>
+
+    <div class="card-body">
+        <!-- Success Message -->
+
+
+        <form style="margin:auto;" method="POST" action="/profile/allowcontrol">
+            {{ csrf_field() }}
+            <input type="text" name="allow_control" value="0" hidden>
+
+            <!-- E-Mail Address -->
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right">{{__('Allow Control?')}}</label>
+
+                <div class="col-md-6">
+
+                        <input type="checkbox" name="allow_control" @if(Auth::user()->allow_control === 1) checked @endif value="1" class="form-control py-0" id="inlineFormInputGroupUsername2">
+
+
+                </div>
+            </div>
+
+            <!-- Update Button -->
+            <div class="form-group row mb-0">
+                <div class="col-md-6 offset-md-4">
+                    <button type="submit" class="btn btn-primary">
+
+                        {{__('Update')}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

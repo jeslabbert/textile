@@ -6,6 +6,7 @@ use App\GlobalCommission;
 use App\Setting;
 use App\TeamCommission;
 use Illuminate\Http\Request;
+use Laravel\Spark\Contracts\Interactions\Support\SendSupportEmail;
 
 class SettingController extends Controller
 {
@@ -27,6 +28,14 @@ class SettingController extends Controller
     public function create()
     {
         //
+    }
+
+    public function sendEmail(Request $request)
+    {
+
+        $this->interaction($request, SendSupportEmail::class, [
+            $request->all(),
+        ]);
     }
 
     /**
