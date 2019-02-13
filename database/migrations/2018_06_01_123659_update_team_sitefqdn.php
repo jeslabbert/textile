@@ -14,7 +14,7 @@ class UpdateTeamSitefqdn extends Migration
     public function up()
     {
         Schema::table('team_sites', function (Blueprint $table) {
-            $table->string('historical_fqdn');
+
         });
     }
 
