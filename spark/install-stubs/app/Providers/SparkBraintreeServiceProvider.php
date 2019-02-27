@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Laravel\Spark\Interactions\Auth\Register;
 use Laravel\Spark\Spark;
 use Laravel\Spark\Providers\AppServiceProvider as ServiceProvider;
 
@@ -50,6 +51,7 @@ class SparkServiceProvider extends ServiceProvider
      */
     public function booted()
     {
+
         Spark::useBraintree()->noCardUpFront()->trialDays(10);
 
         Spark::freePlan()

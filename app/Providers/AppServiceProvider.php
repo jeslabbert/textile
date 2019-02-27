@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(
+            'Laravel\Spark\Interactions\Auth\Register',
+            'App\Interactions\Auth\Register'
+        );
     }
 }

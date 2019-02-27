@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
+use Laravel\Spark\Contracts\Http\Requests\Auth\RegisterRequest;
+use Laravel\Spark\Interactions\Auth\Register;
 use Laravel\Spark\Spark;
 use Laravel\Spark\Providers\AppServiceProvider as ServiceProvider;
 
@@ -49,8 +51,13 @@ class SparkServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
+
+
     public function booted()
     {
+
+
         Spark::validateUsersWith(function () {
             return [
                 'name' => 'required|max:255',

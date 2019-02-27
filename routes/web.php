@@ -43,3 +43,4 @@ Route::get('/get_team/{team}', function($team)
     return App\TeamSite::where('team_id', $team->id)
         ->first()->fqdn;
 });
+

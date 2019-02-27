@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+
+use Laravel\Spark\Spark;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use Laravel\Spark\Contracts\Interactions\Auth\Register;
+use Laravel\Spark\Contracts\Http\Requests\Auth\RegisterRequest;
+use App\Contracts\Interactions\Auth\SparkRegister;
+
 use App\Http\Controllers\Controller;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+
+
+
 
 class RegisterController extends Controller
 {
@@ -65,11 +77,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        dd('test');
         return User::create([
             'name' => $data['name'],
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+        ]);
+    }
+
+    public function register(RegisterRequest $request)
+    {
+        Auth::login($user = Spark::interact(
+            SparkRegister::class, [$request]
+        ));
+
+        event(new UserRegistered($user));
+
+        return response()->json([
+            'redirect' => $this->redirectPath()
         ]);
     }
 }
