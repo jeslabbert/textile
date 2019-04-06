@@ -62,7 +62,7 @@ class TeamSiteController extends Controller
 
         $tenantclient = new \GuzzleHttp\Client();
 
-        $tenanturl = 'http://'.$teamSite->fqdn . '/api/sitebilling';
+        $tenanturl = 'https://'.$teamSite->fqdn . '/api/sitebilling';
         $tenantresponse = $tenantclient->post($tenanturl);
         $tenantcode = $tenantresponse->getStatusCode();
         $tenantresult = $tenantresponse->getBody()->getContents();

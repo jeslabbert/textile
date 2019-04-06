@@ -105,7 +105,7 @@ class HomeController extends Controller
         $userclient = new \GuzzleHttp\Client();
         $siteclient = new \GuzzleHttp\Client();
 
-        $tenanturl = 'http://cloud.taskmule.com/api/v1/sites/create';
+        $tenanturl = 'https://cloud.taskmule.com/api/v1/sites/create';
 
         $body['_token'] = $request->_token;
         $body['subname'] = 'tm000' . $request->subname;
@@ -197,14 +197,14 @@ class HomeController extends Controller
         $userresult = $userresponse->getBody()->getContents();
         $userdetails = \GuzzleHttp\json_decode($userresult);
 
-        return Redirect::to('http://' . $tenantdetails->fqdn);
+        return Redirect::to('https://' . $tenantdetails->fqdn);
     }
 
     public function updatesite(Request $request)
     {
         $tenantclient = new \GuzzleHttp\Client();
 
-        $tenanturl = 'http://cloud.taskmule.com/api/v1/sites/update';
+        $tenanturl = 'https://cloud.taskmule.com/api/v1/sites/update';
 
         $body['_token'] = $request->_token;
         $body['domainname'] = $request->domainname;
