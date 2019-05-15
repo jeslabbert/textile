@@ -168,11 +168,11 @@ class HomeController extends Controller
             'second_user_id'=>$team->owner_id,
         ]);
 
-        $countryurl = $teamsite->fqdn . '/api/v1/countrysetup';
-        $languageurl = $teamsite->fqdn . '/api/v1/languagesetup';
-        $setupurl = $teamsite->fqdn . '/api/v1/setup';
-        $userurl = $teamsite->fqdn . '/api/v1/newadmin';
-        $siteurl = $teamsite->fqdn . '/api/v1/siteparams';
+        $countryurl = 'https://'.$teamsite->fqdn . '/api/v1/countrysetup';
+        $languageurl = 'https://'.$teamsite->fqdn . '/api/v1/languagesetup';
+        $setupurl = 'https://'.$teamsite->fqdn . '/api/v1/setup';
+        $userurl = 'https://'.$teamsite->fqdn . '/api/v1/newadmin';
+        $siteurl = 'https://'.$teamsite->fqdn . '/api/v1/siteparams';
 
         $countryresponse = $countryclient->get($countryurl);
         $countrycode = $countryresponse->getStatusCode();
