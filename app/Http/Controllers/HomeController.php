@@ -185,9 +185,9 @@ class HomeController extends Controller
         $setupcode = $setupresponse->getStatusCode();
         $setupresult = $setupresponse->getBody()->getContents();
 //
-//        $siteresponse = $siteclient->post($siteurl, ['form_params' => $body ]);
-//        $sitecode = $siteresponse->getStatusCode();
-//        $siteresult = $siteresponse->getBody()->getContents();
+        $siteresponse = $siteclient->post($siteurl, ['form_params' => $body ]);
+        $sitecode = $siteresponse->getStatusCode();
+        $siteresult = $siteresponse->getBody()->getContents();
 
         $userresponse = $userclient->post($userurl, ['form_params' => $body ]);
         $usercode = $userresponse->getStatusCode();
