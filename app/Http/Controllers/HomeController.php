@@ -181,7 +181,7 @@ class HomeController extends Controller
 //        $languageresult = $languageresponse->getBody()->getContents();
 //
 //
-        $setupresponse = $setupclient->post($setupurl, ['form_params' => $body ]);
+        $setupresponse = $setupclient->get($setupurl, ['form_params' => $body ]);
         $setupcode = $setupresponse->getStatusCode();
         $setupresult = $setupresponse->getBody()->getContents();
 //
@@ -194,7 +194,7 @@ class HomeController extends Controller
         $userresult = $userresponse->getBody()->getContents();
         $userdetails = \GuzzleHttp\json_decode($userresult);
 
-        return Redirect::to('http://' . $tenantdetails->fqdn);
+        return Redirect::to('https://' . $tenantdetails->fqdn);
     }
 
     public function updatesite(Request $request)
@@ -228,7 +228,7 @@ class HomeController extends Controller
 
         $tenantclient = new \GuzzleHttp\Client();
 
-        $tenanturl = $request->website . '/api/v1/name/update';
+        $tenanturl = 'https://'.$request->website . '/api/v1/name/update';
 
         $body['sitename'] = $request->websitename;
 
