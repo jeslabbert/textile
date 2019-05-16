@@ -109,6 +109,8 @@ class HomeController extends Controller
         $body['_token'] = $request->_token;
         $body['subname'] = 'tts000' . $request->subname;
         $body['sitename'] = $request->sitename;
+        $body['language_id'] = 1;
+        $body['themename'] = $request->themename;
         $body['publicregistration'] = $request->publicregistration;
         $body['first_name'] = Auth::user()->name;
         $body['last_name'] = Auth::user()->last_name;
@@ -116,10 +118,6 @@ class HomeController extends Controller
         $body['email'] = Auth::user()->email;
         $body['password'] = Auth::user()->password;
 
-
-//        $body['grant_type'] = "client_credentials";
-//        $body['client_id'] = $this->client_id;
-//        $body['client_secret'] = $this->client_secret;
 
 
 
@@ -183,7 +181,7 @@ class HomeController extends Controller
 //        $languageresult = $languageresponse->getBody()->getContents();
 //
 //
-        $setupresponse = $setupclient->get($setupurl);
+        $setupresponse = $setupclient->post($setupurl, ['form_params' => $body ]);
         $setupcode = $setupresponse->getStatusCode();
         $setupresult = $setupresponse->getBody()->getContents();
 //
