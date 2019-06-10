@@ -228,8 +228,8 @@ class HomeController extends Controller
 
         $tenantclient = new \GuzzleHttp\Client();
 
-        $tenanturl = 'https://' . $request->website . '/api/v1/name/update';
-dd($tenanturl);
+        $tenanturl = $request->website . '/api/v1/name/update';
+
         $body['sitename'] = $request->websitename;
 
 
