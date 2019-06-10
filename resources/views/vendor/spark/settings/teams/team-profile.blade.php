@@ -19,7 +19,7 @@
                     <form class="form-horizontal" method="POST" action="/updatesitename">
                         {{ csrf_field() }}
                         <input id="siteid" type="hidden" class="form-control" name="website_id" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>
-                        <input id="sitename" type="hidden" class="form-control" name="website" value="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" required>
+                        <input id="sitename" type="hidden" class="form-control" name="website" value="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" required>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">Site Title</label>
                             <div class="col-md-6">
