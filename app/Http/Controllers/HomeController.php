@@ -139,7 +139,8 @@ class HomeController extends Controller
             'website_id' => $tenantdetails->website_id,
             'creator' => 'System',
             'creator_email' => 'info@taskmule.com',
-            'team_id' => $request->team_id
+            'team_id' => $request->team_id,
+            'tenant_sitename' =>$request->sitename
         ]);
 
         $comm1set = Setting::where('setting_type', 'Commission')->where('setting_name', 'Consultant')->first();
