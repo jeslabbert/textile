@@ -182,9 +182,7 @@ class HomeController extends Controller
 //        $languageresult = $languageresponse->getBody()->getContents();
 //
 //
-        $setupresponse = $setupclient->get($setupurl, ['form_params' => $body ]);
-        $setupcode = $setupresponse->getStatusCode();
-        $setupresult = $setupresponse->getBody()->getContents();
+
 //
         $siteresponse = $siteclient->post($siteurl, ['form_params' => $body ]);
         $sitecode = $siteresponse->getStatusCode();
@@ -194,6 +192,10 @@ class HomeController extends Controller
         $usercode = $userresponse->getStatusCode();
         $userresult = $userresponse->getBody()->getContents();
         $userdetails = \GuzzleHttp\json_decode($userresult);
+
+        $setupresponse = $setupclient->get($setupurl, ['form_params' => $body ]);
+        $setupcode = $setupresponse->getStatusCode();
+        $setupresult = $setupresponse->getBody()->getContents();
 
         return Redirect::to('https://' . $tenantdetails->fqdn);
     }
