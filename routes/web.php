@@ -13,6 +13,8 @@
 
 Route::get('/', 'WelcomeController@show');
 
+Route::get('/setup', 'WelcomeController@setup');
+
 Route::get('/home', 'HomeController@show');
 Route::get('/sites', 'HomeController@sites');
 Route::get('/test', 'CommissionCalculationController@calculate');
