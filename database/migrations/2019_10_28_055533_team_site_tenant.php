@@ -13,7 +13,7 @@ class TeamSiteTenant extends Migration
      */
     public function up()
     {
-        Schema::create('team_sites', function (Blueprint $table) {
+        Schema::table('team_sites', function (Blueprint $table) {
             $table->string('tenant_sitename');
         });
     }
