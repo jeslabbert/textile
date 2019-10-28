@@ -32,7 +32,7 @@ class WelcomeController extends Controller
         $comm2 = Setting::create([
             'setting_type' => 'Commission',
             'setting_name' => 'Marketing',
-            'setting_value' => 30
+            'setting_value' => 20
         ]);
         $comm3 = Setting::create([
             'setting_type' => 'Commission',
@@ -42,7 +42,12 @@ class WelcomeController extends Controller
         $global = Setting::create([
             'setting_type' => 'Commission',
             'setting_name' => 'Global Commission',
-            'setting_value' => 30
+            'setting_value' => 40
+        ]);
+        $global = Setting::create([
+            'setting_type' => 'Commission',
+            'setting_name' => 'PayPal',
+            'setting_string' => 'cmspaypal@tartancms.com'
         ]);
         return redirect('/home');
     }
