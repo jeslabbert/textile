@@ -47,7 +47,7 @@ class WelcomeController extends Controller
         $global = Setting::create([
             'setting_type' => 'Commission',
             'setting_name' => 'PayPal',
-            'setting_string' => 'cmspaypal@tartancms.com'
+            'setting_string' => 'paypal@cmspdf.com'
         ]);
         return redirect('/home');
     }
