@@ -21,6 +21,7 @@ class CreateTeamSitesTable extends Migration
             $table->integer('website_id');
             $table->string('creator');
             $table->string('creator_email');
+            $table->string('tenant_sitename');
             $table->timestamps();
         });
     }
