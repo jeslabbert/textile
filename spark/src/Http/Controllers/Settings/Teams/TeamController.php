@@ -36,6 +36,7 @@ class TeamController extends Controller
         $this->interaction($request, CreateTeam::class, [
             $request->user(), $request->all()
         ]);
+        dd('test');
     }
 
     /**
