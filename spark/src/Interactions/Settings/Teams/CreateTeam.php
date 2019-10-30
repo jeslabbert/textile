@@ -77,7 +77,6 @@ class CreateTeam implements Contract
         Spark::interact(AddTeamMemberContract::class, [
             $team, $user, 'owner'
         ]);
-
         return $team;
     }
 }

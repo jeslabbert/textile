@@ -16,6 +16,7 @@ Route::get('/', 'WelcomeController@show');
 Route::get('/setup', 'WelcomeController@setup');
 
 Route::get('/home', 'HomeController@show');
+Route::get('/teamswitchlatest', 'HomeController@switchTeamLatest');
 Route::get('/sites', 'HomeController@sites');
 Route::get('/test', 'CommissionCalculationController@calculate');
 Route::get('/setglobals', 'CommissionCalculationController@setGlobalComms');
@@ -25,6 +26,7 @@ Route::post('/updatesite', 'HomeController@updatesite');
 Route::post('/updatesitename', 'HomeController@updatesitename');
 
 Route::post('/teamcommission', 'TeamCommissionController@store');
+
 
 Route::get('/sitebilling', 'TeamSiteController@sitebilling');
 

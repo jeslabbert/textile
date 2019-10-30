@@ -88,7 +88,9 @@ module.exports = {
      * The component has been created by Vue.
      */
     created() {
+        console.log('Created');
         this.getPlans();
+
     },
 
 
@@ -115,7 +117,7 @@ module.exports = {
                 .then(() => {
                     this.form.name = '';
                     this.form.slug = '';
-
+console.log('Create Method')
                     Bus.$emit('updateUser');
                     Bus.$emit('updateTeams');
                 });

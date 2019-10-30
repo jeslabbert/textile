@@ -32,6 +32,7 @@ class TeamController extends Controller
         if (! Spark::createsAdditionalTeams()) {
             abort(404);
         }
+
         $this->interaction($request, CreateTeam::class, [
             $request->user(), $request->all()
         ]);

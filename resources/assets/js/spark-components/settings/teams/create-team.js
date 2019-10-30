@@ -8,9 +8,9 @@ Vue.component('spark-create-team', {
                 .then(() => {
                     this.form.name = '';
                     this.form.slug = '';
-                    console.log('hitting here.');
                     Bus.$emit('updateUser');
                     Bus.$emit('updateTeams');
+                    window.open('/teamswitchlatest', '_self');
                 });
         },
         visitSite(team) {

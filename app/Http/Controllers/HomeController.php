@@ -14,6 +14,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Laravel\Spark\Spark;
 
 class HomeController extends Controller
 {
@@ -91,6 +92,13 @@ class HomeController extends Controller
     public function sites()
     {
         return view('vendor.spark.sites');
+    }
+
+    public function switchTeamLatest()
+    {
+        $team = Team::where('owner_id', Auth::user()->id)->latest()->first();
+        return Redirect::to('/settings/'.Spark::teamsPrefix().'/'.$team->id);
+//        dd($team);
     }
 
     public function newsite(Request $request)
