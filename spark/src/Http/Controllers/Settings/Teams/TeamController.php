@@ -32,11 +32,11 @@ class TeamController extends Controller
         if (! Spark::createsAdditionalTeams()) {
             abort(404);
         }
-
+        dd('test');
         $this->interaction($request, CreateTeam::class, [
             $request->user(), $request->all()
         ]);
-        dd('test');
+
     }
 
     /**
