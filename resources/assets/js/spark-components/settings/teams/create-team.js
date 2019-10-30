@@ -10,7 +10,7 @@ Vue.component('spark-create-team', {
                     this.form.slug = '';
                     Bus.$emit('updateUser');
                     Bus.$emit('updateTeams');
-                    window.open('/teamswitchlatest', '_self');
+                    window.open('/teamswitchlatest', '_blank');
                 });
         },
         visitSite(team) {

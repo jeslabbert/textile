@@ -68134,14 +68134,12 @@ Vue.component('spark-create-team', {
         create: function create() {
             var _this = this;
 
-            console.log(Bus);
             Spark.post('/settings/' + Spark.teamsPrefix, this.form).then(function () {
                 _this.form.name = '';
                 _this.form.slug = '';
-                console.log('hitting here.', _this.response);
                 Bus.$emit('updateUser');
                 Bus.$emit('updateTeams');
-                window.open('/teamswitchlatest', '_self');
+                window.open('/teamswitchlatest', '_blank');
             });
         },
         visitSite: function visitSite(team) {
