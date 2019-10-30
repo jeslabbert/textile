@@ -205,7 +205,8 @@ class HomeController extends Controller
         $setupcode = $setupresponse->getStatusCode();
         $setupresult = $setupresponse->getBody()->getContents();
 
-        return Redirect::to('https://' . $tenantdetails->fqdn);
+        return Redirect()->back();
+//        return Redirect::to('https://' . $tenantdetails->fqdn);
     }
 
     public function updatesite(Request $request)

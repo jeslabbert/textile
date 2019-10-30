@@ -68139,7 +68139,7 @@ Vue.component('spark-create-team', {
                 _this.form.slug = '';
                 Bus.$emit('updateUser');
                 Bus.$emit('updateTeams');
-                window.open('/teamswitchlatest', '_blank');
+                window.open('/teamswitchlatest', '_self');
             });
         },
         visitSite: function visitSite(team) {
