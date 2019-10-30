@@ -15,7 +15,8 @@ Vue.component('spark-current-teams', {
                     //
                 });
 
-        }
+        },
+
     },
 
 });
