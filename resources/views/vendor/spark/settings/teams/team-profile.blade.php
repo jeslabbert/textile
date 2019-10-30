@@ -68,7 +68,7 @@
                                         An A record for the domain name is needed. It should point to 154.66.198.90
                                     </small>
                                 </div>
-                                <a class="btn btn-success" href="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" target="_blank">Got to Site</a>
+                                <a class="btn btn-success" href="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" target="_blank">Goto Site</a>
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </div>
