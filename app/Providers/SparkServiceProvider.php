@@ -62,7 +62,7 @@ class SparkServiceProvider extends ServiceProvider
                 'terms' => 'required|accepted',
             ];
         });
-        Spark::afterLoginRedirectTo('example');
+        Spark::afterLoginRedirectTo('userdashboard');
         Spark::createUsersWith(function ($request) {
             $user = Spark::user();
 
