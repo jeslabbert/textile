@@ -17,6 +17,7 @@ Route::get('/setup', 'WelcomeController@setup');
 
 Route::get('/home', 'HomeController@show');
 Route::get('/teamswitchlatest', 'HomeController@switchTeamLatest');
+Route::get('/userdashboard', 'HomeController@switchDashboard');
 Route::get('/sites', 'HomeController@sites');
 Route::get('/test', 'CommissionCalculationController@calculate');
 Route::get('/setglobals', 'CommissionCalculationController@setGlobalComms');
