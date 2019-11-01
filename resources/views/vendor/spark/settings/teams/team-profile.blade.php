@@ -1,6 +1,98 @@
 <spark-team-profile :user="user" :team="team" inline-template>
     <div>
         <div v-if="user && team">
+            @if (App\TeamSite::where('team_id', $team->id)->count() > 0)
+                <div class="card card-default">
+                    <div class="card-header">
+                        Update Domain Details
+                        <a class="pull-right" href="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" target="_blank"><img src="/url.png" style="width: 30px;"></a>
+                        {{--<button data-toggle="modal" data-target="#sitedns" class="btn btn-link btn-sm pull-right"><i style="color: black;" class="fa fa-info"></i></button>--}}
+                        {{--<a class="btn btn-link btn-sm pull-right" href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}"><i style="color: black;" class="fa fa-info"></i> Visit Site</a>--}}
+                    </div>
+                    <div class="card-body">
+                        <form class="form-horizontal" method="POST" action="/updatesite">
+                            {{ csrf_field() }}
+                            <input id="siteid" type="hidden" class="form-control" name="website_id" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>
+                            <input id="sitename" type="hidden" class="form-control" name="websitename" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label text-md-right">Domain Name</label>
+                                <div class="col-md-6">
+                                    <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+
+                                    <div class="input-group mb-2 mr-sm-2">
+                                        {{--TODO Fix up sizing of input--}}
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text" style="min-height: 38px;"><a href="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" target="_blank"><i style="color: black;" class="fa fa-link"></i></a></div>
+                                        </div>
+                                        <input name="domainname" type="text" class="form-control py-0" id="inlineFormInputGroupUsername2" aria-describedby="dnsHelpBlock" placeholder="URL" style="width: auto;">
+
+                                        <small id="dnsHelpBlock" class="form-text text-muted">
+                                            An A record for the domain name is needed. It should point to 154.66.198.90
+                                        </small>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label text-md-right">Default Domain Backup</label>
+                                <div class="col-md-6">
+                                    <input id="domainname" type="text" class="form-control " value="{{App\TeamSite::where('team_id', $team->id)->first()->historical_fqdn}}" readonly>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row mb-0"><div class="offset-md-4 col-md-6">
+                                    <a><button class="btn btn-primary">Set to Default</button></a>
+
+                                </div></div>
+                        </form>
+
+                        <h5> </h5>
+
+                    </div>
+                </div>
+                @else
+
+                <div class="card card-default">
+                    <div class="card-header">
+                        Create Tenant Site
+                    </div>
+                    <div class="card-body">
+                        <form class="form-horizontal" method="POST" action="/newsite">
+                            {{ csrf_field() }}
+                            <input id="team_id" type="hidden" class="form-control" name="team_id" value="{{$team->id}}" required autofocus>
+                            <div class="form-group hidden">
+
+                                <input id="subname" type="hidden" class="form-control" name="subname" value="{{$team->id}}" required autofocus>
+                            </div>
+                            <div class="form-group hidden">
+
+                                <div class="col-md-6">
+                                    <input id="sitename" type="hidden" class="form-control" name="sitename" value="{{$team->name}}" required autofocus>
+                                    @if ($errors->has('sitename'))
+                                        <span class="help-block">
+                    <strong>{{ $errors->first('sitename') }}</strong>
+                </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button class="btn btn-success">Create Site</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+
+            @endif
+
+
+
+
             <!-- Update Team Photo -->
             @include('spark::settings.teams.update-team-photo')
 
@@ -10,7 +102,8 @@
         @if (App\TeamSite::where('team_id', $team->id)->count() > 0)
 
 
-            <div class="card card-default"><div class="card-header">
+            <div class="card card-default">
+                <div class="card-header">
                     Update Site Details
                     {{--<button data-toggle="modal" data-target="#sitedns" class="btn btn-link btn-sm pull-right"><i style="color: black;" class="fa fa-info"></i></button>--}}
                     {{--<a class="btn btn-link btn-sm pull-right" href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}"><i style="color: black;" class="fa fa-info"></i> Visit Site</a>--}}
@@ -41,87 +134,8 @@
 
                 </div>
             </div>
-
-            <div class="card card-default"><div class="card-header">
-                    Update Domain Details
-                    {{--<button data-toggle="modal" data-target="#sitedns" class="btn btn-link btn-sm pull-right"><i style="color: black;" class="fa fa-info"></i></button>--}}
-                    {{--<a class="btn btn-link btn-sm pull-right" href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}"><i style="color: black;" class="fa fa-info"></i> Visit Site</a>--}}
-                </div>
-                <div class="card-body">
-                    <form class="form-horizontal" method="POST" action="/updatesite">
-                        {{ csrf_field() }}
-                        <input id="siteid" type="hidden" class="form-control" name="website_id" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>
-                        <input id="sitename" type="hidden" class="form-control" name="websitename" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>
-                        <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">Domain Name</label>
-                            <div class="col-md-6">
-                                <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
-
-                                <div class="input-group mb-2 mr-sm-2">
-                                    {{--TODO Fix up sizing of input--}}
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text" style="min-height: 38px;"><a href="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" target="_blank"><i style="color: black;" class="fa fa-link"></i></a></div>
-                                    </div>
-                                    <input name="domainname" type="text" class="form-control py-0" id="inlineFormInputGroupUsername2" aria-describedby="dnsHelpBlock" placeholder="URL" style="width: auto;">
-
-                                    <small id="dnsHelpBlock" class="form-text text-muted">
-                                        An A record for the domain name is needed. It should point to 154.66.198.90
-                                    </small>
-                                </div>
-                                <a class="btn btn-success" href="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" target="_blank">Goto Site</a>
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">Default Domain Backup</label>
-                            <div class="col-md-6">
-                                <input id="domainname" type="text" class="form-control " value="{{App\TeamSite::where('team_id', $team->id)->first()->historical_fqdn}}" readonly>
-                            </div>
-
-                        </div>
-
-                        <div class="form-group row mb-0"><div class="offset-md-4 col-md-6">
-                                <a><button class="btn btn-primary">Set to Default</button></a>
-
-                            </div></div>
-                    </form>
-
-                    <h5> </h5>
-
-                </div>
-            </div>
             @else
-            <div class="card card-default"><div class="card-header">
-                    Create Tenant Site
-                </div>
-                <div class="card-body">
-                    <form class="form-horizontal" method="POST" action="/newsite">
-                        {{ csrf_field() }}
-                        <input id="team_id" type="hidden" class="form-control" name="team_id" value="{{$team->id}}" required autofocus>
-                        <div class="form-group hidden">
 
-                            <input id="subname" type="hidden" class="form-control" name="subname" value="{{$team->id}}" required autofocus>
-                        </div>
-                        <div class="form-group hidden">
-
-                            <div class="col-md-6">
-                                <input id="sitename" type="hidden" class="form-control" name="sitename" value="{{$team->name}}" required autofocus>
-                                @if ($errors->has('sitename'))
-                                    <span class="help-block">
-                    <strong>{{ $errors->first('sitename') }}</strong>
-                </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="text-center">
-                            <button class="btn btn-success">Create Site</button>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
 
 
         @endif
