@@ -105,7 +105,7 @@ class HomeController extends Controller
     {
         $teamCount = Team::where('owner_id', Auth::user()->id)->count();
         if($teamCount > 1) {
-            return Redirect::to('/home');
+            return Redirect::to('/userdashboard');
         } else {
             $team = Team::where('owner_id', Auth::user()->id)->latest()->first();
             return Redirect::to('/settings/'.Spark::teamsPrefix().'/'.$team->id);
