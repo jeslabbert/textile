@@ -7,7 +7,9 @@
 -->
 @yield('navextra')
 <li class="sparknavli" style="min-width: 50px;">
-    @include('spark::nav.brand')
+    <a class="navbar-brand" href="/home" style="margin-right:0px;">
+        <img src="/{{env('BRAND')}}" height="32">
+    </a>
 </li>
 
 <li class="sparknavli">
