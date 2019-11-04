@@ -46,8 +46,8 @@
                     <div class="offset-md-4 col-md-6">
                         <button type="submit" class="btn btn-primary"
                                 @click.prevent="create"
-                                :disabled="form.busy">
-
+                                :disabled="form.busy"
+                                data-toggle="tooltip" title="{{__('teams.create_site')}}">
                             {{__('Create')}}
                         </button>
                     </div>

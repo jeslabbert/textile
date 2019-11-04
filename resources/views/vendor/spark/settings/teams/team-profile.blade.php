@@ -5,7 +5,7 @@
                 <div class="card card-default">
                     <div class="card-header">
                         Update Domain Details
-                        <a class="pull-right" href="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" target="_blank"><img src="/url.png" style="width: 30px;"></a>
+                        <a class="pull-right" href="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" target="_blank" data-toggle="tooltip" title="{{__('teams.visit_site')}}"><img src="/url.png" style="width: 30px;"></a>
                         {{--<button data-toggle="modal" data-target="#sitedns" class="btn btn-link btn-sm pull-right"><i style="color: black;" class="fa fa-info"></i></button>--}}
                         {{--<a class="btn btn-link btn-sm pull-right" href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}"><i style="color: black;" class="fa fa-info"></i> Visit Site</a>--}}
                     </div>
@@ -31,7 +31,7 @@
                                         </small>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="{{__('teams.update')}}">Update</button>
                                 </div>
                             </div>
                             <hr>
@@ -44,7 +44,7 @@
                             </div>
 
                             <div class="form-group row mb-0"><div class="offset-md-4 col-md-6">
-                                    <a><button class="btn btn-primary">Set to Default</button></a>
+                                    <a><button class="btn btn-primary" data-toggle="tooltip" title="{{__('teams.set_to_default')}}">Set to Default</button></a>
 
                                 </div></div>
                         </form>
@@ -80,7 +80,7 @@
                             </div>
 
                             <div class="text-center">
-                                <button class="btn btn-success">Create Site</button>
+                                <button class="btn btn-success" data-toggle="tooltip" title="{{__('teams.create_site')}}">Create Site</button>
                             </div>
                         </form>
 

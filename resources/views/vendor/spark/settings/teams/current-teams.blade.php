@@ -64,7 +64,7 @@
                             <!-- Edit Button -->
                             <td >
                                 @if (Spark::createsAdditionalTeams())
-                                    <button style="float: right; margin-left:5px; min-width:13px !important;" class="btn-sm btn-danger" @click="approveTeamDelete(team)" v-if="user.id === team.owner_id">
+                                    <button style="float: right; margin-left:5px; min-width:13px !important;" class="btn-sm btn-danger" @click="approveTeamDelete(team)" v-if="user.id === team.owner_id" data-toggle="tooltip" title="{{__('teams.delete_site')}}">
                                         <i class="fa fa-times" style="min-width:13px !important;"></i>
                                     </button>
                                 @endif

@@ -44,4 +44,12 @@ return [
     "user_already_invited_to_team" => "That user is already invited to the site.",
     "user_doesnt_belong_to_team" => "The user does not belong to the given site.",
     "not_eligible_based_on_current_members_teams" => "You are not eligible for this plan based on your current number of sites / site members.",
+
+
+    "create_site" => "Create Site",
+    "visit_site" => "Visit Site",
+    "leave_site" => "Leave Site",
+    "delete_site" => "Delete Site",
+    "set_to_default" => "Set To Default",
+    "update" => "Update",
 ];
