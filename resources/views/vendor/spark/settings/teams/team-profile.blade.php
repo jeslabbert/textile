@@ -4,54 +4,54 @@
             @if (App\TeamSite::where('team_id', $team->id)->count() > 0)
                 <div class="card card-default">
                     <div class="card-header">
-                        Update Domain Details
+                        Visit Site
                         <a class="pull-right" href="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" target="_blank" data-toggle="tooltip" title="{{__('teams.visit_site')}}"><img src="/url.png" style="width: 30px;"></a>
                         {{--<button data-toggle="modal" data-target="#sitedns" class="btn btn-link btn-sm pull-right"><i style="color: black;" class="fa fa-info"></i></button>--}}
                         {{--<a class="btn btn-link btn-sm pull-right" href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}"><i style="color: black;" class="fa fa-info"></i> Visit Site</a>--}}
                     </div>
-                    <div class="card-body">
-                        <form class="form-horizontal" method="POST" action="/updatesite">
-                            {{ csrf_field() }}
-                            <input id="siteid" type="hidden" class="form-control" name="website_id" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>
-                            <input id="sitename" type="hidden" class="form-control" name="websitename" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label text-md-right">Domain Name</label>
-                                <div class="col-md-6">
-                                    <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+                    {{--<div class="card-body">--}}
+                        {{--<form class="form-horizontal" method="POST" action="/updatesite">--}}
+                            {{--{{ csrf_field() }}--}}
+                            {{--<input id="siteid" type="hidden" class="form-control" name="website_id" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>--}}
+                            {{--<input id="sitename" type="hidden" class="form-control" name="websitename" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>--}}
+                            {{--<div class="form-group row">--}}
+                                {{--<label class="col-md-4 col-form-label text-md-right">Domain Name</label>--}}
+                                {{--<div class="col-md-6">--}}
+                                    {{--<label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>--}}
 
-                                    <div class="input-group mb-2 mr-sm-2">
+                                    {{--<div class="input-group mb-2 mr-sm-2">--}}
                                         {{--TODO Fix up sizing of input--}}
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text" style="min-height: 38px;"><a href="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" target="_blank" data-toggle="tooltip" title="{{__('teams.visit_site')}}"><i style="color: black;" class="fa fa-link"></i></a></div>
-                                        </div>
-                                        <input name="domainname" type="text" class="form-control py-0" id="inlineFormInputGroupUsername2" aria-describedby="dnsHelpBlock" placeholder="URL" style="width: auto;">
+                                        {{--<div class="input-group-prepend">--}}
+                                            {{--<div class="input-group-text" style="min-height: 38px;"><a href="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" target="_blank" data-toggle="tooltip" title="{{__('teams.visit_site')}}"><i style="color: black;" class="fa fa-link"></i></a></div>--}}
+                                        {{--</div>--}}
+                                        {{--<input name="domainname" type="text" class="form-control py-0" id="inlineFormInputGroupUsername2" aria-describedby="dnsHelpBlock" placeholder="URL" style="width: auto;">--}}
 
-                                        <small id="dnsHelpBlock" class="form-text text-muted">
-                                            An A record for the domain name is needed. It should point to 154.66.198.90
-                                        </small>
-                                    </div>
+                                        {{--<small id="dnsHelpBlock" class="form-text text-muted">--}}
+                                            {{--An A record for the domain name is needed. It should point to 154.66.198.90--}}
+                                        {{--</small>--}}
+                                    {{--</div>--}}
 
-                                    <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="{{__('teams.update')}}">Update</button>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label text-md-right">Default Domain Backup</label>
-                                <div class="col-md-6">
-                                    <input id="domainname" type="text" class="form-control " value="{{App\TeamSite::where('team_id', $team->id)->first()->historical_fqdn}}" readonly>
-                                </div>
+                                    {{--<button type="submit" class="btn btn-primary" data-toggle="tooltip" title="{{__('teams.update')}}">Update</button>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<hr>--}}
+                            {{--<div class="form-group row">--}}
+                                {{--<label class="col-md-4 col-form-label text-md-right">Default Domain Backup</label>--}}
+                                {{--<div class="col-md-6">--}}
+                                    {{--<input id="domainname" type="text" class="form-control " value="{{App\TeamSite::where('team_id', $team->id)->first()->historical_fqdn}}" readonly>--}}
+                                {{--</div>--}}
 
-                            </div>
+                            {{--</div>--}}
 
-                            <div class="form-group row mb-0"><div class="offset-md-4 col-md-6">
-                                    <a><button class="btn btn-primary" data-toggle="tooltip" title="{{__('teams.set_to_default')}}">Set to Default</button></a>
+                            {{--<div class="form-group row mb-0"><div class="offset-md-4 col-md-6">--}}
+                                    {{--<a><button class="btn btn-primary" data-toggle="tooltip" title="{{__('teams.set_to_default')}}">Set to Default</button></a>--}}
 
-                                </div></div>
-                        </form>
+                                {{--</div></div>--}}
+                        {{--</form>--}}
 
-                        <h5> </h5>
+                        {{--<h5> </h5>--}}
 
-                    </div>
+                    {{--</div>--}}
                 </div>
                 @else
 
