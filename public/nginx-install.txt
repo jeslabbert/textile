@@ -1,0 +1,47 @@
+# Setup New User
+adduser tartan
+usermod -aG sudo tartan
+ufw allow OpenSSH
+ufw enable
+ufw status
+
+
+# Install Nginx
+sudo apt update && sudo apt install nginx
+sudo ufw allow 'Nginx HTTP'
+
+# Install MySQL
+sudo apt-get install mysql-server
+sudo service mysql stop # Stop the MySQL if is running.
+#sudo mysql_install_db
+sudo mysqld --initialize
+sudo service mysql start
+sudo mysql_secure_installation
+
+# Install PHP 7.2
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
+sudo apt-get install php7.2-fpm
+
+# Install needed modules for PHP
+sudo apt-get install php7.2-fpm php7.2-mysql php7.2-curl php7.2-gd php7.2-bz2 php7.2-mbstring php7.2-xml php7.2-zip php7.2-soap
+
+# Install Composer (PHP dependencies manager)
+## First install php-cli, unzip, git, curl, php-mbstring
+sudo apt-get install curl git unzip
+## Downloading and installing Composer
+cd ~
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+
+mysql -uroot -e "CREATE USER 'tartandba'@'localhost' IDENTIFIED BY 'T0byP1per'"
+mysql -uroot -e "ALTER USER 'tartandba'@'localhost' IDENTIFIED WITH mysql_native_password BY 'T0byP1per'"
+mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO 'tartandba'@'localhost' WITH GRANT OPTION"
+
+# Install Lets Encrypt SSL Certificates CERT BOT
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt update
+sudo apt install python-certbot-nginx
+sudo ufw allow 'Nginx Full'
+sudo ufw delete allow 'Nginx HTTP'
+
+apt-get install -y libxrender1 libfontconfig1 libx11-dev libjpeg62 libxtst6 wget && wget https://github.com/h4cc/wkhtmltopdf-amd64/blob/master/bin/wkhtmltopdf-amd64?raw=true -O /usr/local/bin/wkhtmltopdf && chmod +x /usr/local/bin/wkhtmltopdf

@@ -60,29 +60,117 @@
                         Create Tenant Site
                     </div>
                     <div class="card-body">
-                        <form class="form-horizontal" method="POST" action="/newsite">
-                            {{ csrf_field() }}
-                            <input id="team_id" type="hidden" class="form-control" name="team_id" value="{{$team->id}}" required autofocus>
-                            <div class="form-group hidden">
+                        <!-- Tab links -->
+                        <div class="tab">
+                            <button class="tablinks" onclick="openCity(event, 'London')">Subdomain Based Site</button>
+                            <button class="tablinks" onclick="openCity(event, 'Paris')">Port Based Site</button>
 
-                                <input id="subname" type="hidden" class="form-control" name="subname" value="{{$team->id}}" required autofocus>
-                            </div>
-                            <div class="form-group hidden">
+                        </div>
 
-                                <div class="col-md-6">
-                                    <input id="sitename" type="hidden" class="form-control" name="sitename" value="{{$team->name}}" required autofocus>
-                                    @if ($errors->has('sitename'))
-                                        <span class="help-block">
+                        <!-- Tab content -->
+                        <div id="London" class="tabcontent">
+                            <h3>Automated Subdomain Site Creation</h3>
+                            <p>This will create a subdomain based site off our cloud based hosting. Domain: yoursite.{{ env('TENANT_EXT') }}</p>
+
+                            <form class="form-horizontal" method="POST" action="/newsite">
+                                {{ csrf_field() }}
+                                <input id="team_id" type="hidden" class="form-control" name="team_id" value="{{$team->id}}" required autofocus>
+                                <div class="form-group hidden">
+
+                                    <input id="subname" type="hidden" class="form-control" name="subname" value="{{$team->id}}" required autofocus>
+                                </div>
+                                <div class="form-group hidden">
+
+                                    <div class="col-md-6">
+                                        <input id="sitename" type="hidden" class="form-control" name="sitename" value="{{$team->name}}" required autofocus>
+                                        @if ($errors->has('sitename'))
+                                            <span class="help-block">
                     <strong>{{ $errors->first('sitename') }}</strong>
                 </span>
-                                    @endif
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="text-center">
-                                <button class="btn btn-success" data-toggle="tooltip" title="{{__('teams.create_site')}}">Create Site</button>
-                            </div>
-                        </form>
+                                <div class="text-center">
+                                    <button class="btn btn-success" data-toggle="tooltip" title="{{__('teams.create_site')}}">Create Site</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="Paris" class="tabcontent">
+                            <h3>Manual Port Site Creation</h3>
+
+                            <form class="form-horizontal" method="POST" action="/new-standalone-site">
+                                {{ csrf_field() }}
+                                <input id="team_id" type="hidden" class="form-control" name="team_id" value="{{$team->id}}" required autofocus>
+                                <div class="form-group hidden">
+
+                                    <input id="subname" type="hidden" class="form-control" name="subname" value="{{$team->id}}" required autofocus>
+                                </div>
+                                <div class="form-group hidden">
+
+                                    <div class="col-md-6">
+                                        <input id="sitename" type="hidden" class="form-control" name="sitename" value="{{$team->name}}" required autofocus>
+                                        @if ($errors->has('sitename'))
+                                            <span class="help-block">
+                    <strong>{{ $errors->first('sitename') }}</strong>
+                </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>If you require a fresh server installation. Please set up an Ubuntu 18.04 box. Once set up, run the following in order.</p>
+                                        <ol>
+                                            <li>source <(curl -s {{ env('APP_URL') }}/nginx-install.txt)</li> (RAMPEC must be env hosting variable)
+                                            <li>source <(curl -s {{ env('APP_URL') }}/composer-setup.txt)</li> (RAMPEC must be env hosting variable)
+                                            <li>source <(curl -s {{ env('APP_URL') }}/website-install.txt)</li> (RAMPEC must be env hosting variable)
+                                        </ol>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p>If you already have a server set up from before and would like to add a new site. Please run the following:</p>
+                                        <ol>
+                                            <li>source <(curl -s {{ env('APP_URL') }}/website-install.txt)</li> (RAMPEC must be env hosting variable)
+                                        </ol>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p>After the above has been completed. Please fill in the details below based on your setup of the website-install command.</p>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="siteurl">Site URL</label>
+                                            <input id="siteurl" class="form-control" name="site_url">
+                                            @if ($errors->has('site_url'))
+                                                <span class="help-block">
+                    <strong>{{ $errors->first('site_url') }}</strong>
+                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="siteport">Site Port</label>
+                                            <input id="siteport" class="form-control" type="integer" name="site_port">
+                                            @if ($errors->has('site_port'))
+                                                <span class="help-block">
+                    <strong>{{ $errors->first('site_port') }}</strong>
+                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button class="btn btn-success" data-toggle="tooltip" title="{{__('teams.create_site')}}">Create Site</button>
+                                </div>
+                            </form>
+                        </div>
+
+
+
+
+
 
                     </div>
                 </div>

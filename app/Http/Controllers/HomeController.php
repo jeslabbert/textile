@@ -223,6 +223,111 @@ class HomeController extends Controller
 //        return Redirect::to('https://' . $tenantdetails->fqdn);
     }
 
+    public function newsiteNonTenant(Request $request)
+    {
+        $input = $request->all();
+
+        $tenantclient = new \GuzzleHttp\Client();
+        $countryclient = new \GuzzleHttp\Client();
+        $languageclient = new \GuzzleHttp\Client();
+        $setupclient = new \GuzzleHttp\Client();
+        $userclient = new \GuzzleHttp\Client();
+        $siteclient = new \GuzzleHttp\Client();
+
+        $tenanturl = $request->site_url.'/api/v1/sites/create';
+
+        $body['_token'] = $request->_token;
+        $body['subname'] = 'tts000' . $request->subname;
+        $body['sitename'] = $request->sitename;
+        $body['language_id'] = 1;
+        $body['themename'] = $request->themename;
+        $body['publicregistration'] = $request->publicregistration;
+        $body['first_name'] = Auth::user()->name;
+        $body['last_name'] = Auth::user()->last_name;
+        $body['username'] = Auth::user()->username;
+        $body['email'] = Auth::user()->email;
+        $body['password'] = Auth::user()->password;
+
+
+
+
+//        $tenantresponse = $tenantclient->post($tenanturl, ['form_params' => $body ]);
+//
+//        $tenantcode = $tenantresponse->getStatusCode();
+//        $tenantresult = $tenantresponse->getBody()->getContents();
+//
+//        $tenantdetails = \GuzzleHttp\json_decode($tenantresult);
+
+        $teamsite = TeamSite::create([
+            'fqdn' => $request->site_url.':'.$request->site_port,
+            'historical_fqdn' => $request->site_url.':'.$request->site_port,
+            'website_id' => $request->site_port,
+            'creator' => 'System',
+            'creator_email' => 'info@tartancms.com',
+            'team_id' => $request->team_id,
+            'tenant_sitename' =>$request->sitename,
+            'site_url' => $request->site_url,
+            'site_port' =>$request->site_port
+        ]);
+
+        $comm1set = Setting::where('setting_type', 'Commission')->where('setting_name', 'Consultant')->first();
+        $comm2set = Setting::where('setting_type', 'Commission')->where('setting_name', 'Marketing')->first();
+        $comm3set = Setting::where('setting_type', 'Commission')->where('setting_name', 'IT Support')->first();
+        $globalset = Setting::where('setting_type', 'Commission')->where('setting_name', 'Global Commission')->first();
+
+        $teamglobalcomm = GlobalCommission::create([
+            'team_id' => $request->team_id,
+            'comm1' => $comm1set->setting_value,
+            'comm2' => $comm2set->setting_value,
+            'comm3' => $comm3set->setting_value,
+            'global_commission' => $globalset->setting_value
+        ]);
+        $team = Team::where('id', $request->team_id)->first();
+        TeamCommission::create([
+            'team_id'=>$request->team_id,
+            'first_name'=>'Support',
+            'first_user_id'=>$team->owner_id,
+            'first_split'=>50,
+            'second_name'=>'Sales',
+            'second_split'=>50,
+            'second_user_id'=>$team->owner_id,
+        ]);
+
+//        $countryurl = $teamsite->fqdn . '/api/v1/countrysetup';
+//        $languageurl = $teamsite->fqdn . '/api/v1/languagesetup';
+        $setupurl = 'http://' . $teamsite->fqdn . '/api/v1/setup';
+        $userurl = 'http://' . $teamsite->fqdn . '/api/v1/newadmin';
+        $siteurl = 'http://' . $teamsite->fqdn . '/api/v1/siteparams';
+//
+//        $countryresponse = $countryclient->get($countryurl);
+//        $countrycode = $countryresponse->getStatusCode();
+//        $countryresult = $countryresponse->getBody()->getContents();
+//
+//
+//        $languageresponse = $languageclient->get($languageurl);
+//        $languagecode = $languageresponse->getStatusCode();
+//        $languageresult = $languageresponse->getBody()->getContents();
+//
+//
+
+//
+        $siteresponse = $siteclient->post($siteurl, ['form_params' => $body ]);
+        $sitecode = $siteresponse->getStatusCode();
+        $siteresult = $siteresponse->getBody()->getContents();
+
+        $userresponse = $userclient->post($userurl, ['form_params' => $body ]);
+        $usercode = $userresponse->getStatusCode();
+        $userresult = $userresponse->getBody()->getContents();
+        $userdetails = \GuzzleHttp\json_decode($userresult);
+
+        $setupresponse = $setupclient->get($setupurl, ['form_params' => $body ]);
+        $setupcode = $setupresponse->getStatusCode();
+        $setupresult = $setupresponse->getBody()->getContents();
+
+        return Redirect()->back();
+//        return Redirect::to('https://' . $tenantdetails->fqdn);
+    }
+
     public function updatesite(Request $request)
     {
         $tenantclient = new \GuzzleHttp\Client();

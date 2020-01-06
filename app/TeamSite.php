@@ -13,7 +13,9 @@ class TeamSite extends Model
         'team_id',
         'creator',
         'creator_email',
-        'tenant_sitename'
+        'tenant_sitename',
+        'site_url',
+        'site_port'
     ];
 }
 

@@ -18,6 +18,8 @@ class CreateTeamSitesTable extends Migration
             $table->integer('team_id')->nullable();
             $table->string('fqdn');
             $table->string('historical_fqdn')->nullable();
+            $table->string('site_url')->nullable();
+            $table->integer('site_port')->nullable();
             $table->integer('website_id');
             $table->string('creator');
             $table->string('creator_email');
