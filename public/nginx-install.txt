@@ -1,9 +1,10 @@
 # Setup New User
-adduser tartan
-usermod -aG sudo tartan
-ufw allow OpenSSH
-ufw enable
-ufw status
+read -p "Please give a username for creation of system administrator:" USERNAME;
+sudo adduser ${USERNAME}
+sudo usermod -aG sudo ${USERNAME}
+sudo ufw allow OpenSSH
+sudo ufw enable
+sudo ufw status
 
 
 # Install Nginx
@@ -32,10 +33,11 @@ sudo apt-get install curl git unzip
 ## Downloading and installing Composer
 cd ~
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
-
-mysql -uroot -e "CREATE USER 'tartandba'@'localhost' IDENTIFIED BY 'T0byP1per'"
-mysql -uroot -e "ALTER USER 'tartandba'@'localhost' IDENTIFIED WITH mysql_native_password BY 'T0byP1per'"
-mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO 'tartandba'@'localhost' WITH GRANT OPTION"
+read -p "Please give a username for creation of MySQL system administrator:" MYSQLUSER;
+read -p "Please give a password for creation of MySQL system administrator:" MYSQLPASSWORD;
+mysql -uroot -e "CREATE USER '${MYSQLUSER}'@'localhost' IDENTIFIED BY '${MYSQLPASSWORD}'"
+mysql -uroot -e "ALTER USER '${MYSQLUSER}'@'localhost' IDENTIFIED WITH mysql_native_password BY '${MYSQLPASSWORD}'"
+mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQLUSER}'@'localhost' WITH GRANT OPTION"
 
 # Install Lets Encrypt SSL Certificates CERT BOT
 sudo add-apt-repository ppa:certbot/certbot
@@ -44,4 +46,4 @@ sudo apt install python-certbot-nginx
 sudo ufw allow 'Nginx Full'
 sudo ufw delete allow 'Nginx HTTP'
 
-apt-get install -y libxrender1 libfontconfig1 libx11-dev libjpeg62 libxtst6 wget && wget https://github.com/h4cc/wkhtmltopdf-amd64/blob/master/bin/wkhtmltopdf-amd64?raw=true -O /usr/local/bin/wkhtmltopdf && chmod +x /usr/local/bin/wkhtmltopdf
+sudo apt-get install -y libxrender1 libfontconfig1 libx11-dev libjpeg62 libxtst6 wget && wget https://github.com/h4cc/wkhtmltopdf-amd64/blob/master/bin/wkhtmltopdf-amd64?raw=true -O /usr/local/bin/wkhtmltopdf && chmod +x /usr/local/bin/wkhtmltopdf

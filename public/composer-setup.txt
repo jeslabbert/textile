@@ -10,6 +10,7 @@ WC='\033[0;33m' # Warning Color
 NC='\033[0m' # No Color
 read -p "Please give a Database name, eg. googledb:" DATABASE;
 read -p "Please give a domain name, eg. google.com:" FOLDER;
+read -p "What is your Username?" USERNAME;
 
 
 GIT_URL="https://github.com/jeslabbert/tartancms"
@@ -21,7 +22,7 @@ mysql -uroot -p${mysqlpasswd} -e "CREATE DATABASE ${DATABASE}"
 echo -e "${HC}::::::::::::::::::::::::::Creating Project Directory::::::::::::::::::::::::::${NC}"
 cd /var/www/html
 sudo mkdir ${FOLDER}
-sudo chown -R tartan:tartan ${FOLDER}
+sudo chown -R ${USERNAME}:${USERNAME} ${FOLDER}
 
 echo -e "${HC}::::::::::::::::::::::::::Cloning Git Repo::::::::::::::::::::::::::${NC}"
 git clone ${GIT_URL} ${FOLDER}
@@ -55,7 +56,7 @@ esac
 
 echo -e "${HC}::::::::::::::::::::::::::Configuring Nginx::::::::::::::::::::::::::${NC}"
 sudo touch /etc/nginx/sites-available/${FOLDER}
-sudo chown -R tartan:tartan /etc/nginx/sites-available/${FOLDER}
+sudo chown -R ${USERNAME}:${USERNAME} /etc/nginx/sites-available/${FOLDER}
 sudo cat > /etc/nginx/sites-available/${FOLDER} <<EOF
 server {
     listen 80;
