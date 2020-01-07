@@ -46,4 +46,6 @@ sudo apt install python-certbot-nginx
 sudo ufw allow 'Nginx Full'
 sudo ufw delete allow 'Nginx HTTP'
 
-sudo apt-get install -y libxrender1 libfontconfig1 libx11-dev libjpeg62 libxtst6 wget && wget https://github.com/h4cc/wkhtmltopdf-amd64/blob/master/bin/wkhtmltopdf-amd64?raw=true -O /usr/local/bin/wkhtmltopdf && chmod +x /usr/local/bin/wkhtmltopdf
+sudo apt-get install -y libxrender1 libfontconfig1 libx11-dev libjpeg62 libxtst6 wget
+sudo wget https://github.com/h4cc/wkhtmltopdf-amd64/blob/master/bin/wkhtmltopdf-amd64?raw=true -O /usr/local/bin/wkhtmltopdf
+sudo chmod +x /usr/local/bin/wkhtmltopdf
