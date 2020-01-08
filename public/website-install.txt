@@ -40,7 +40,7 @@ composer install --optimize-autoloader
 echo -e "${HC}::::::::::::::::::::::::::Setting Permissions::::::::::::::::::::::::::${NC}"
 sudo chmod -R 0775 /var/www/html/${FOLDER}-${PORT}/storage
 sudo chmod -R 0775 /var/www/html/${FOLDER}-${PORT}/bootstrap/cache
-sudo chown -R tartan:www-data /var/www/html/${FOLDER}-${PORT}/storage
+sudo chown -R ${USERNAME}:www-data /var/www/html/${FOLDER}-${PORT}/storage
 
 echo -e "${HC}::::::::::::::::::::::::::Creating Storage Directory::::::::::::::::::::::::::${NC}"
 sudo php artisan storage:link
