@@ -1,0 +1,28 @@
+#!/bin/sh
+
+########################################################
+# Bash script to install Tartan Laravel App
+# Written by Justin Slabbert
+########################################################
+
+HC='\033[0;32m' # Heading Color
+WC='\033[0;33m' # Warning Color
+NC='\033[0m' # No Color
+read -p "Please give a Database name, eg. googledb:" DATABASE;
+read -p "Please give a domain name, eg. google.com:" FOLDER;
+read -p "Please give a port number, eg. 9001:" PORT;
+read -p "What is your Username?" USERNAME;
+
+
+
+echo -e "${HC}::::::::::::::::::::::::::Configuring SSL::::::::::::::::::::::::::${NC}"
+#We will add in the various DNS plugins that the user can choose from here.
+sudo certbot --nginx -d ${FOLDER} -d
+
+#certbot certonly --manual --manual-public-ip-logging-ok --preferred-challenges dns-01 --server https://acme-v02.api.letsencrypt.org/directory -d "*.${FOLDER}-${PORT}" -d ${FOLDER}-${PORT}
+sudo certbot --server https://acme-v02.api.letsencrypt.org/directory -d *.${FOLDER} --manual --preferred-challenges dns-01 certonly
+
+# certbot certonly --manual --preferred-challenges dns --server https://acme-v02.api.letsencrypt.org/directory --manual-public-ip-logging-ok -d '*.<your.domain>' -d <your.domain>
+sudo service nginx restart
+
+echo -e "${HC}::::::::::::::::::::::::::All Completed::::::::::::::::::::::::::${NC}"

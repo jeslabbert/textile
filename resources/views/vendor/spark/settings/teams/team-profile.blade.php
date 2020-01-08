@@ -70,8 +70,13 @@
                         <!-- Tab content -->
                         <div id="London" class="tabcontent">
                             <h3>Automated Subdomain Site Creation</h3>
-                            <p>This will create a subdomain based site off our cloud based hosting. Domain: yoursite.{{ env('TENANT_EXT') }}</p>
-
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                            <p>This will create a subdomain based site off our cloud based hosting. </p>
+                                    {{--Domain: yoursite.{{ env('TENANT_EXT') }}--}}
+                                </div>
+                            </div>
                             <form class="form-horizontal" method="POST" action="/newsite">
                                 {{ csrf_field() }}
                                 <input id="team_id" type="hidden" class="form-control" name="team_id" value="{{$team->id}}" required autofocus>
@@ -121,22 +126,31 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p>If you require a fresh server installation. Please set up an Ubuntu 18.04 box. Once set up, run the following in order using a SUDO account for the first command.</p>
-                                        <ol>
+                                        <ul>
                                             <li>source <(curl -s {{ env('APP_URL') }}/nginx-install.txt)</li>
+                                        </ul>
                                             {{--<li>source <(curl -s {{ env('APP_URL') }}/composer-setup.txt)</li>--}}
+<hr>
                                             <p>Use the newly created user account for the second command.</p>
+                                        <ul>
                                             <li>source <(curl -s {{ env('APP_URL') }}/website-install.txt)</li>
-                                        </ol>
+                                        </ul>
                                     </div>
                                     <div class="col-md-12">
+                                        <hr>
                                         <p>If you already have a server set up from before and would like to add a new site. Please run the following:</p>
-                                        <ol>
+                                        <ul>
                                             <li>source <(curl -s {{ env('APP_URL') }}/website-install.txt)</li>
-                                        </ol>
+                                        </ul>
                                     </div>
                                     <div class="col-md-12">
+                                        <hr>
                                         <p>After the above has been completed. Please fill in the details below based on your setup of the website-install command.</p>
-
+                                        <hr>
+                                        <p>If you require Let's Encrypt SSL, please run the following:</p>
+                                        <ul>
+                                            <li>source <(curl -s {{ env('APP_URL') }}/SSL-install.txt)</li>
+                                        </ul>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
