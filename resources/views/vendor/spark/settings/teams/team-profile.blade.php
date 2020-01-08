@@ -120,10 +120,11 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <p>If you require a fresh server installation. Please set up an Ubuntu 18.04 box. Once set up, run the following in order using a SUDO account for the first command and then the newly created user account for the second command.</p>
+                                        <p>If you require a fresh server installation. Please set up an Ubuntu 18.04 box. Once set up, run the following in order using a SUDO account for the first command.</p>
                                         <ol>
                                             <li>source <(curl -s {{ env('APP_URL') }}/nginx-install.txt)</li>
                                             {{--<li>source <(curl -s {{ env('APP_URL') }}/composer-setup.txt)</li>--}}
+                                            <p>Use the newly created user account for the second command.</p>
                                             <li>source <(curl -s {{ env('APP_URL') }}/website-install.txt)</li>
                                         </ol>
                                     </div>
