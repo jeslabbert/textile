@@ -11,18 +11,21 @@ NC='\033[0m' # No Color
 read -p "Please give a Database name, eg. googledb:" DATABASE;
 read -p "Please give a domain name, eg. google.com:" FOLDER;
 read -p "Please give a port number, eg. 9001:" PORT;
+read -p "What is your Username?" USERNAME;
+
 
 
 GIT_URL="https://github.com/jeslabbert/tartan-cms"
 
 echo -e "${HC}::::::::::::::::::::::::::Creating Database::::::::::::::::::::::::::${NC}"
-read -p "Please enter password for MySQL Tartan user :" mysqlpasswd
-mysql -utartandba -p${mysqlpasswd} -e "CREATE DATABASE ${DATABASE}"
+read -p "What is your MySQL Username?" MYSQLUSERNAME;
+read -p "What is your MySQL Password?" MYSQLPASSWORD;
+mysql -u${MYSQLUSERNAME} -p${MYSQLPASSWORD} -e "CREATE DATABASE ${DATABASE}"
 
 echo -e "${HC}::::::::::::::::::::::::::Creating Project Directory::::::::::::::::::::::::::${NC}"
 cd /var/www/html
 sudo mkdir ${FOLDER}-${PORT}
-sudo chown -R tartan:tartan ${FOLDER}-${PORT}
+sudo chown -R ${USERNAME}:${USERNAME} ${FOLDER}-${PORT}
 
 echo -e "${HC}::::::::::::::::::::::::::Cloning Git Repo::::::::::::::::::::::::::${NC}"
 git clone ${GIT_URL} ${FOLDER}-${PORT}
@@ -57,8 +60,8 @@ DB_CONNECTION=system
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=${DATABASE}
-DB_USERNAME=tartandba
-DB_PASSWORD=${mysqlpasswd}
+DB_USERNAME=${MYSQLUSERNAME}
+DB_PASSWORD=${MYSQLPASSWORD}
 
 LIMIT_UUID_LENGTH_32=true
 
@@ -106,7 +109,7 @@ esac
 
 echo -e "${HC}::::::::::::::::::::::::::Configuring Nginx::::::::::::::::::::::::::${NC}"
 sudo touch /etc/nginx/sites-available/${FOLDER}-${PORT}
-sudo chown -R tartan:tartan /etc/nginx/sites-available/${FOLDER}-${PORT}
+sudo chown -R ${USERNAME}:${USERNAME} /etc/nginx/sites-available/${FOLDER}-${PORT}
 sudo cat > /etc/nginx/sites-available/${FOLDER}-${PORT} <<EOF
 server {
     listen ${PORT};
