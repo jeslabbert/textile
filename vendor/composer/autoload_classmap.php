@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\AvailableModule' => $baseDir . '/app/AvailableModule.php',
     'App\\CommissionCalculation' => $baseDir . '/app/CommissionCalculation.php',
     'App\\CommissionSplit' => $baseDir . '/app/CommissionSplit.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
@@ -15,6 +16,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
     'App\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
+    'App\\Http\\Controllers\\AvailableModuleController' => $baseDir . '/app/Http/Controllers/AvailableModuleController.php',
     'App\\Http\\Controllers\\CommissionCalculationController' => $baseDir . '/app/Http/Controllers/CommissionCalculationController.php',
     'App\\Http\\Controllers\\CommissionSplitController' => $baseDir . '/app/Http/Controllers/CommissionSplitController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
@@ -27,6 +29,8 @@ return array(
     'App\\Http\\Controllers\\ProfileDetailsController' => $baseDir . '/app/Http/Controllers/ProfileDetailsController.php',
     'App\\Http\\Controllers\\RoleController' => $baseDir . '/app/Http/Controllers/RoleController.php',
     'App\\Http\\Controllers\\SettingController' => $baseDir . '/app/Http/Controllers/SettingController.php',
+    'App\\Http\\Controllers\\SiteModuleController' => $baseDir . '/app/Http/Controllers/SiteModuleController.php',
+    'App\\Http\\Controllers\\SiteStatisticController' => $baseDir . '/app/Http/Controllers/SiteStatisticController.php',
     'App\\Http\\Controllers\\SiteTotalController' => $baseDir . '/app/Http/Controllers/SiteTotalController.php',
     'App\\Http\\Controllers\\TeamCommissionController' => $baseDir . '/app/Http/Controllers/TeamCommissionController.php',
     'App\\Http\\Controllers\\TeamSiteController' => $baseDir . '/app/Http/Controllers/TeamSiteController.php',
@@ -39,6 +43,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\MeteredInvoice' => $baseDir . '/app/MeteredInvoice.php',
+    'App\\ModuleTotal' => $baseDir . '/app/ModuleTotal.php',
     'App\\PayoutProvider' => $baseDir . '/app/PayoutProvider.php',
     'App\\Privilege' => $baseDir . '/app/Privilege.php',
     'App\\PrivilegeUser' => $baseDir . '/app/PrivilegeUser.php',
@@ -50,6 +55,8 @@ return array(
     'App\\Providers\\SparkServiceProvider' => $baseDir . '/app/Providers/SparkServiceProvider.php',
     'App\\Role' => $baseDir . '/app/Role.php',
     'App\\Setting' => $baseDir . '/app/Setting.php',
+    'App\\SiteModule' => $baseDir . '/app/SiteModule.php',
+    'App\\SiteStatistic' => $baseDir . '/app/SiteStatistic.php',
     'App\\SiteTotal' => $baseDir . '/app/SiteTotal.php',
     'App\\Team' => $baseDir . '/app/Team.php',
     'App\\TeamCommission' => $baseDir . '/app/TeamCommission.php',

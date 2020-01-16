@@ -421,6 +421,7 @@ class ComposerStaticInit136dd79619daee1887ec12531da1bb4f
     );
 
     public static $classMap = array (
+        'App\\AvailableModule' => __DIR__ . '/../..' . '/app/AvailableModule.php',
         'App\\CommissionCalculation' => __DIR__ . '/../..' . '/app/CommissionCalculation.php',
         'App\\CommissionSplit' => __DIR__ . '/../..' . '/app/CommissionSplit.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
@@ -430,6 +431,7 @@ class ComposerStaticInit136dd79619daee1887ec12531da1bb4f
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
+        'App\\Http\\Controllers\\AvailableModuleController' => __DIR__ . '/../..' . '/app/Http/Controllers/AvailableModuleController.php',
         'App\\Http\\Controllers\\CommissionCalculationController' => __DIR__ . '/../..' . '/app/Http/Controllers/CommissionCalculationController.php',
         'App\\Http\\Controllers\\CommissionSplitController' => __DIR__ . '/../..' . '/app/Http/Controllers/CommissionSplitController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
@@ -442,6 +444,8 @@ class ComposerStaticInit136dd79619daee1887ec12531da1bb4f
         'App\\Http\\Controllers\\ProfileDetailsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileDetailsController.php',
         'App\\Http\\Controllers\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/RoleController.php',
         'App\\Http\\Controllers\\SettingController' => __DIR__ . '/../..' . '/app/Http/Controllers/SettingController.php',
+        'App\\Http\\Controllers\\SiteModuleController' => __DIR__ . '/../..' . '/app/Http/Controllers/SiteModuleController.php',
+        'App\\Http\\Controllers\\SiteStatisticController' => __DIR__ . '/../..' . '/app/Http/Controllers/SiteStatisticController.php',
         'App\\Http\\Controllers\\SiteTotalController' => __DIR__ . '/../..' . '/app/Http/Controllers/SiteTotalController.php',
         'App\\Http\\Controllers\\TeamCommissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/TeamCommissionController.php',
         'App\\Http\\Controllers\\TeamSiteController' => __DIR__ . '/../..' . '/app/Http/Controllers/TeamSiteController.php',
@@ -454,6 +458,7 @@ class ComposerStaticInit136dd79619daee1887ec12531da1bb4f
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\MeteredInvoice' => __DIR__ . '/../..' . '/app/MeteredInvoice.php',
+        'App\\ModuleTotal' => __DIR__ . '/../..' . '/app/ModuleTotal.php',
         'App\\PayoutProvider' => __DIR__ . '/../..' . '/app/PayoutProvider.php',
         'App\\Privilege' => __DIR__ . '/../..' . '/app/Privilege.php',
         'App\\PrivilegeUser' => __DIR__ . '/../..' . '/app/PrivilegeUser.php',
@@ -465,6 +470,8 @@ class ComposerStaticInit136dd79619daee1887ec12531da1bb4f
         'App\\Providers\\SparkServiceProvider' => __DIR__ . '/../..' . '/app/Providers/SparkServiceProvider.php',
         'App\\Role' => __DIR__ . '/../..' . '/app/Role.php',
         'App\\Setting' => __DIR__ . '/../..' . '/app/Setting.php',
+        'App\\SiteModule' => __DIR__ . '/../..' . '/app/SiteModule.php',
+        'App\\SiteStatistic' => __DIR__ . '/../..' . '/app/SiteStatistic.php',
         'App\\SiteTotal' => __DIR__ . '/../..' . '/app/SiteTotal.php',
         'App\\Team' => __DIR__ . '/../..' . '/app/Team.php',
         'App\\TeamCommission' => __DIR__ . '/../..' . '/app/TeamCommission.php',

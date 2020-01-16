@@ -147,7 +147,7 @@
                                         <hr>
                                         <p>After the above has been completed. Please fill in the details below based on your setup of the website-install command.</p>
                                         <hr>
-                                        <p>If you require Let's Encrypt SSL, please run the following:</p>
+                                        <p>If you require a standard free SSL, please run the following:</p>
                                         <ul>
                                             <li>source <(curl -s {{ env('APP_URL') }}/SSL-install.txt)</li>
                                         </ul>

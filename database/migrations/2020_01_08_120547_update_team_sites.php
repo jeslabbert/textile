@@ -15,8 +15,7 @@ class UpdateTeamSites extends Migration
     {
         Schema::table('team_sites', function (Blueprint $table) {
 
-            $table->string('site_url')->nullable();
-            $table->integer('site_port')->nullable();
+
 
         });
     }
