@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\SubscriptionTotal;
 use Carbon\Carbon;
 use Laravel\Spark\Spark;
 use Laravel\Spark\Providers\AppServiceProvider as ServiceProvider;
@@ -34,7 +35,9 @@ class SparkServiceProvider extends ServiceProvider
      */
     protected $developers = [
         'justin@icarative.com',
-        'witkruisarend@gmail.com'
+        'witkruisarend@gmail.com',
+        'gawieh@aigs.co.za',
+        'gustavp@aigs.co.za'
     ];
 
     /**
@@ -81,30 +84,66 @@ class SparkServiceProvider extends ServiceProvider
             return $user;
         });
 
-        Spark::useBraintree()->noCardUpFront()->teamTrialDays(10);
+        Spark::useBraintree()->noCardUpFront()->teamTrialDays(0);
 
         Spark::freeTeamPlan()
             ->features([
                 '1 to 5 Tasks'
             ]);
 
+//        Spark::teamPlan('Bronze Plan', 'taskmule-bronze-eur')
+//            ->price(1)
+//            ->features([
+//                '6 to 20 Tasks', '600 Transactions'
+//            ]);
+//
+//        Spark::teamPlan('Silver Plan', 'taskmule-silver-eur')
+//            ->price(10)
+//            ->features([
+//                '21 to 100 Tasks', '3000 Transactions'
+//            ]);
+//
+//        Spark::teamPlan('Gold Plan', 'taskmule-gold-eur')
+//            ->price(100)
+//            ->features([
+//                '101 to 500 Tasks', '15000 Transactions'
+//            ]);
+        $bronze = SubscriptionTotal::where('plan', 'taskmule-bronze-eur')->first();
+        $silver = SubscriptionTotal::where('plan', 'taskmule-silver-eur')->first();
+        $gold = SubscriptionTotal::where('plan', 'taskmule-gold-eur')->first();
+
         Spark::teamPlan('Bronze Plan', 'taskmule-bronze-eur')
             ->price(1)
             ->features([
-                '6 to 20 Tasks', '600 Transactions'
+                $bronze->doc_active_total.' Documents', $bronze->first()->doc_exported_total.' Exports'
             ]);
 
         Spark::teamPlan('Silver Plan', 'taskmule-silver-eur')
             ->price(10)
             ->features([
-                '21 to 100 Tasks', '3000 Transactions'
+                $silver->doc_active_total.' Documents', $silver->doc_exported_total.' Exports'
             ]);
 
         Spark::teamPlan('Gold Plan', 'taskmule-gold-eur')
             ->price(100)
             ->features([
-                '101 to 500 Tasks', '15000 Transactions'
+                $gold->doc_active_total.' Documents', $gold->doc_exported_total.' Exports'
             ]);
+
+//        Spark::freeTeamPlan()
+//            ->features([
+//                '1 to 5 Documents (Non Active)'
+//            ]);
+//        Spark::teamPlan('Basic Plan', 'cmspdf-basic-usd')
+//            ->price(20)
+//            ->features([
+//                '5 Users', '10 Documents', '100 Exports'
+//            ]);
+//        Spark::teamPlan('Premium Plan', 'cmspdf-premium-usd')
+//            ->price(100)
+//            ->features([
+//                '10 Users', '50 Documents', '500 Exports'
+//            ]);
 
     }
 }

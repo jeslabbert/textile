@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\GlobalCommission;
 use App\Setting;
+use App\SubscriptionTotal;
 use App\TeamCommission;
 use Illuminate\Http\Request;
 
@@ -119,6 +120,8 @@ class SettingController extends Controller
 
         return redirect('/spark/kiosk#/commission');
     }
+
+
 
     /**
      * Remove the specified resource from storage.

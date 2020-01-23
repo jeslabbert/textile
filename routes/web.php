@@ -29,10 +29,12 @@ Route::post('/updatesitename', 'HomeController@updatesitename');
 
 Route::post('/teamcommission', 'TeamCommissionController@store');
 
-
 Route::get('/sitebilling', 'TeamSiteController@sitebilling');
 
 Route::post('/updatesiteowner', 'TeamSiteController@ownerswitch');
+
+Route::post('/kiosk/limits/update/{subTotal}', 'SubscriptionTotalController@updateLimit');
+
 
 Route::post('/commission/defaults', 'SettingController@updateCommission');
 Route::post('/commission/update', 'SettingController@updateTeamCommission');

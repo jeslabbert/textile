@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/check-subscription', 'WelcomeController@checkSubscription')->name('check_subscription');
+
 
 Route::group([
     'middleware' => 'auth:api'

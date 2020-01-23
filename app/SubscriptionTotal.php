@@ -4,20 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ModuleTotal extends Model
+class SubscriptionTotal extends Model
 {
-    protected $primaryKey = 'moduletotal_id';
+    protected $primaryKey = 'subscription_total_id';
 
     protected $fillable = [
-        'site_id',
         'user_total',
+        'plan',
         'doc_edited_total',
         'doc_created_total',
         'doc_exported_total',
         'doc_viewed_total',
         'doc_total',
         'doc_active_total',
-        'billing_month',
-        'billing_year',
+        'add_user_price',
+        'add_doc_price'
+
     ];
 }

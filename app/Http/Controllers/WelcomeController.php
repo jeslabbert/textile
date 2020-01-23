@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\ModuleTotal;
 use App\Setting;
+use App\SubscriptionTotal;
+use App\Team;
+use App\TeamSite;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Spark\TeamSubscription;
 
 class WelcomeController extends Controller
 {
@@ -15,6 +21,9 @@ class WelcomeController extends Controller
      */
     public function show()
     {
+
+
+
         if(Auth::user()) {
             return redirect('/login');
         } else {
@@ -51,4 +60,42 @@ class WelcomeController extends Controller
         ]);
         return redirect('/home');
     }
+
+    public function checkSubscription(Request $request)
+    {
+
+        $now = Carbon::now();
+        $team = Team::where('name', $request->sitename)->first();
+        $status = false;
+        $subs = TeamSubscription::where('team_id', $team->id)->get();
+        foreach($subs as $sub) {
+            if($sub->ends_at != null) {
+                if(Carbon::parse($sub->ends_at) < $now) {
+                    $status = false;
+                } else {
+                    $status = true;
+                }
+            } else {
+                if(isset($sub->trial_ends_at)) {
+                if(Carbon::parse($sub->trial_ends_at) < $now) {
+
+                        if(Carbon::parse($sub->ends_at) < $now) {
+                            $status = false;
+                        } else {
+                            $status = true;
+                        }
+                    }
+
+                } else {
+                    $status = true;
+                }
+
+            }
+
+        }
+
+        return response()->json($status, 201);
+
+    }
+
 }

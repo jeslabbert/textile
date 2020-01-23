@@ -41,7 +41,39 @@
                 <div class="m-4" v-if="activePlan.active">
                     <?php echo __('You are currently subscribed to the :planName plan.', ['planName' => '{{ activePlan.name }} ({{ __(activePlan.interval) | capitalize }})']); ?>
                 </div>
+                @if(isset($team->Site->id))
+                <div class="m-4" v-if="activePlan.active">
+                    Your current site totals are:
+                    <ul>
+                        @forelse(\App\ModuleTotal::where('site_id', $team->Site->id)->where('billing_month', \Carbon\Carbon::now()->subMonth()->month)->get() as $stat)
 
+                            <li>
+                                Total Users: {{$stat->user_total}}
+                            </li>
+                            <li>
+                                Total Documents: {{$stat->doc_total}}
+                            </li>
+                            <li>
+                                Total Documents Active: {{$stat->doc_active_total}}
+                            </li>
+                            <li>
+                                Total Document Edits: {{$stat->doc_edited_total}}
+                            </li>
+                            <li>
+                                Total Document Exports: {{$stat->doc_exported_total}}
+                            </li>
+                            <li>
+                                Total Document Views: {{$stat->doc_viewed_total}}
+                            </li>
+                            @empty
+                            <li>
+None recorded so far.
+                            </li>
+
+                        @endforelse
+                    </ul>
+                </div>
+@endif
                 <!-- Current Subscription (Archived) -->
                 <div class="alert alert-warning m-4" v-if=" ! activePlan.active">
                     <?php echo __('You are currently subscribed to the :planName plan.', ['planName' => '{{ activePlan.name }} ({{ __(activePlan.interval) | capitalize }})']); ?>

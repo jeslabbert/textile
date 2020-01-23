@@ -54,6 +54,8 @@ APP_LOG_LEVEL=debug
 APP_URL_BASE=${FOLDER}
 APP_URL=https://${APP_URL_BASE}
 
+PORTAL_URL=https://portal.tartancms.com
+
 BRAND=logo.png
 
 DB_CONNECTION=system

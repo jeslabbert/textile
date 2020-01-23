@@ -1,7 +1,6 @@
 <spark-kiosk-metrics :user="user" inline-template>
     <!-- The Landsman™ -->
     <div>
-
         <div class="card card-default mb-4">
             <div class="card-header">
                 <h2 class="card-title mb-0">{{__('Metrics')}}</h2>
@@ -184,6 +183,76 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="card card-default mb-12">
+            <div class="card-header">
+                <h2 class="card-title mb-0">{{__('Plan Extra Billing')}}</h2>
+            </div>
+            <div class="card-body">
+                @forelse(App\SubscriptionTotal::all() as $subTotal)
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4>Plan Name</h4>
+                            <h5>{{$subTotal->plan}}</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label class="col-form-label text-md-right">{{__('User Total')}}</label>
+                                        <input class="form-control" type="integer" name="user_total" value="{{$subTotal->user_total}}">
+                                    </div>
+                                    {{--<div class="col-md-4">--}}
+                                        {{--<label class="col-form-label text-md-right">{{__('Document Total')}}</label>--}}
+                                        {{--<input class="form-control" type="integer" name="doc_total" value="{{$subTotal->doc_total}}">--}}
+                                    {{--</div>--}}
+                                    <div class="col-md-4">
+                                        <label class="col-form-label text-md-right">{{__('Active Total')}}</label>
+                                        <input class="form-control" type="integer" name="doc_active_total" value="{{$subTotal->doc_active_total}}">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="col-form-label text-md-right">{{__('Document Print Total')}}</label>
+                                        <input class="form-control" type="integer" name="doc_exported_total" value="{{$subTotal->doc_exported_total}}">
+                                    </div>
+                                </div>
+                                {{--<div class="row">--}}
+                                    {{--<div class="col-md-4">--}}
+                                        {{--<label class="col-form-label text-md-right">{{__('View Total')}}</label>--}}
+                                        {{--<input class="form-control" type="integer" name="doc_viewed_total" value="{{$subTotal->doc_viewed_total}}">--}}
+                                    {{--</div>--}}
+                                    {{--<div class="col-md-4">--}}
+                                        {{--<label class="col-form-label text-md-right">{{__('Edit Total')}}</label>--}}
+                                        {{--<input class="form-control" type="integer" name="doc_edited_total" value="{{$subTotal->doc_edited_total}}">--}}
+                                    {{--</div>--}}
+                                    {{--<div class="col-md-4">--}}
+                                        {{--<label class="col-form-label text-md-right">{{__('Document Print Total')}}</label>--}}
+                                        {{--<input class="form-control" type="integer" name="doc_exported_total" value="{{$subTotal->doc_exported_total}}">--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="col-form-label text-md-right">{{__('Extra Rate Document')}}</label>
+                                        <input class="form-control" type="integer" step="0.01" name="add_doc_price" value="{{$subTotal->add_doc_price}}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="col-form-label text-md-right">{{__('Extra Rate User')}}</label>
+                                        <input class="form-control" type="integer" step="0.01" name="add_user_price" value="{{$subTotal->add_user_price}}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-primary">
+                                            {{__('Update')}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <hr>
+                @empty
+                @endforelse
             </div>
         </div>
     </div>
