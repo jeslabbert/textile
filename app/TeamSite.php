@@ -17,5 +17,10 @@ class TeamSite extends Model
         'site_url',
         'site_port'
     ];
+
+    public function Team()
+    {
+        return $this->hasOne('App\Team', 'id', 'team_id');
+    }
 }
 

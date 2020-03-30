@@ -136,5 +136,5 @@ cd /var/www/html
 sudo chown -R www-data:www-data ${FOLDER}-${PORT}
 
 sudo -u www-data php artisan migrate
-sudo iptables -I INPUT 1 -i eth0 -p tcp --dport ${PORT} -j ACCEPTs
+sudo iptables -I INPUT 1 -i eth0 -p tcp --dport ${PORT} -j ACCEPT
 echo -e "${HC}::::::::::::::::::::::::::All Completed::::::::::::::::::::::::::${NC}"

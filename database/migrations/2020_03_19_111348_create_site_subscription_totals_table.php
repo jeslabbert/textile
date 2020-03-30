@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubscriptionTotalsTable extends Migration
+class CreateSiteSubscriptionTotalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateSubscriptionTotalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscription_totals', function (Blueprint $table) {
-            $table->increments('subscription_total_id');
-
+        Schema::create('site_subscription_totals', function (Blueprint $table) {
+            $table->increments('site_subscription_total_id');
+            $table->integer('site_id')->nullable();
             $table->string('plan')->nullable();
             $table->integer('user_total')->nullable();
             $table->integer('doc_edited_total')->nullable();
@@ -40,6 +40,6 @@ class CreateSubscriptionTotalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscription_totals');
+        Schema::dropIfExists('site_subscription_totals');
     }
 }

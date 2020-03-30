@@ -68,7 +68,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" style="display: flex;" href="#limits" aria-controls="limits" role="tab" data-toggle="tab" onclick="closeNav()">
+                    <a class="nav-link" style="display: flex;" href="#default-limits" aria-controls="default-limits" role="tab" data-toggle="tab" onclick="closeNav()">
                         <svg class="icon-20 " style="padding-right:5px;" viewBox="0 0 20 20 " xmlns="http://www.w3.org/2000/svg ">
                             <path style="fill:#bababa;" d="M3 8V6c0-3.3 2.7-6 6-6s6 2.7 6 6v2h1c1 0 2 1 2 2v8c0 1-1 2-2 2H2c-1 0-2-1-2-2v-8c0-1 1-2 2-2h1zm5
               6.7V17h2v-2.3c.6-.3 1-1 1-1.7 0-1-1-2-2-2s-2 1-2 2c0 .7.4 1.4 1 1.7zM6 6v2h6V6c0-1.7-1.3-3-3-3S6 4.3 6 6z "/>
@@ -206,78 +206,8 @@
                     </div>
 
                     <!-- Plan Limit Management -->
-                    <div role="tabcard" class="tab-pane" id="limits">
-                        <div class="card card-default mb-12">
-                            <div class="card-header">
-                                <h2 class="card-title mb-0">{{__('Plan Limits')}}</h2>
-                            </div>
-                            <div class="card-body">
-                                @forelse(App\SubscriptionTotal::all() as $subTotal)
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h4>Plan Name</h4>
-                                            <h5>{{$subTotal->plan}}</h5>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <form method="POST" action="/kiosk/limits/update/{{$subTotal->subscription_total_id}}">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="subscription_total_id" value="{{$subTotal->subscription_total_id}}">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <label class="col-form-label text-md-right">{{__('User Total')}}</label>
-                                                        <input class="form-control" type="integer" name="user_total" value="{{$subTotal->user_total}}">
-                                                    </div>
-                                                    {{--<div class="col-md-4">--}}
-                                                    {{--<label class="col-form-label text-md-right">{{__('Document Total')}}</label>--}}
-                                                    {{--<input class="form-control" type="integer" name="doc_total" value="{{$subTotal->doc_total}}">--}}
-                                                    {{--</div>--}}
-                                                    <div class="col-md-4">
-                                                        <label class="col-form-label text-md-right">{{__('Active Total')}}</label>
-                                                        <input class="form-control" type="integer" name="doc_active_total" value="{{$subTotal->doc_active_total}}">
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label class="col-form-label text-md-right">{{__('Document Print Total')}}</label>
-                                                        <input class="form-control" type="integer" name="doc_exported_total" value="{{$subTotal->doc_exported_total}}">
-                                                    </div>
-                                                </div>
-                                                {{--<div class="row">--}}
-                                                {{--<div class="col-md-4">--}}
-                                                {{--<label class="col-form-label text-md-right">{{__('View Total')}}</label>--}}
-                                                {{--<input class="form-control" type="integer" name="doc_viewed_total" value="{{$subTotal->doc_viewed_total}}">--}}
-                                                {{--</div>--}}
-                                                {{--<div class="col-md-4">--}}
-                                                {{--<label class="col-form-label text-md-right">{{__('Edit Total')}}</label>--}}
-                                                {{--<input class="form-control" type="integer" name="doc_edited_total" value="{{$subTotal->doc_edited_total}}">--}}
-                                                {{--</div>--}}
-                                                {{--<div class="col-md-4">--}}
-                                                {{--<label class="col-form-label text-md-right">{{__('Document Print Total')}}</label>--}}
-                                                {{--<input class="form-control" type="integer" name="doc_exported_total" value="{{$subTotal->doc_exported_total}}">--}}
-                                                {{--</div>--}}
-                                                {{--</div>--}}
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <label class="col-form-label text-md-right">{{__('Extra Rate Document')}}</label>
-                                                        <input class="form-control" type="integer" step="0.01" name="add_doc_price" value="{{$subTotal->add_doc_price}}">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label class="col-form-label text-md-right">{{__('Extra Rate User')}}</label>
-                                                        <input class="form-control" type="integer" step="0.01" name="add_user_price" value="{{$subTotal->add_user_price}}">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <button type="submit" class="btn btn-primary">
-                                                            {{__('Update')}}
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                    </div>
-                                    <hr>
-                                @empty
-                                @endforelse
-                            </div>
-                        </div>
+                    <div role="tabcard" class="tab-pane" id="default-limits">
+                        @include('spark::kiosk.limits')
                     </div>
                 </div>
             </div>

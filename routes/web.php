@@ -35,6 +35,16 @@ Route::post('/updatesiteowner', 'TeamSiteController@ownerswitch');
 
 Route::post('/kiosk/limits/update/{subTotal}', 'SubscriptionTotalController@updateLimit');
 
+Route::get('/kiosk/sitelimits/show/{subTotal}', 'SiteSubscriptionTotalController@show');
+
+Route::post('/kiosk/sitelimits/update/{subTotal}', 'SiteSubscriptionTotalController@updateSiteLimit');
+
+Route::post('/kiosk/module-extras/add/{site}', 'ExtraSiteBillingController@addSiteExtra');
+
+Route::post('/kiosk/module-extras/update/{extraBilling}', 'ExtraSiteBillingController@updateSiteExtra');
+
+Route::get('/kiosk/module-extras/remove/{extraBilling}', 'ExtraSiteBillingController@destroy');
+
 
 Route::post('/commission/defaults', 'SettingController@updateCommission');
 Route::post('/commission/update', 'SettingController@updateTeamCommission');

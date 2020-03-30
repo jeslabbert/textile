@@ -4,11 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SubscriptionTotal extends Model
+class SiteSubscriptionTotal extends Model
 {
-    protected $primaryKey = 'subscription_total_id';
+    protected $primaryKey = 'site_subscription_total_id';
 
     protected $fillable = [
+        'site_id',
         'user_total',
         'plan',
         'doc_edited_total',
@@ -21,4 +22,9 @@ class SubscriptionTotal extends Model
         'add_user_price',
         'add_doc_price'
     ];
+
+    public function Site()
+    {
+        return $this->hasOne('App\TeamSite', 'id', 'site_id');
+    }
 }
