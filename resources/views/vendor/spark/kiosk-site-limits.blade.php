@@ -183,8 +183,10 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <label class="col-form-label text-md-right">{{__('Users')}}</label>
+                                                        <input class="form-control" hidden type="integer" name="user_total" value="{{$defaultTotal->user_total}}">
                                                         <input class="form-control" disabled type="integer" name="user_total" value="{{$defaultTotal->user_total}}">
                                                         <label class="col-form-label text-md-right">{{__('User Rate')}}</label>
+                                                        <input class="form-control" hidden type="integer" step="0.01" name="add_user_price" value="{{$defaultTotal->add_user_price}}">
                                                         <input class="form-control" disabled type="integer" step="0.01" name="add_user_price" value="{{$defaultTotal->add_user_price}}">
                                                     </div>
                                                     {{--<div class="col-md-4">--}}
@@ -193,14 +195,18 @@
                                                     {{--</div>--}}
                                                     <div class="col-md-4">
                                                         <label class="col-form-label text-md-right">{{__('Wallboards')}}</label>
+                                                        <input class="form-control" hidden type="integer" name="wallboard_total" value="{{$defaultTotal->wallboard_total}}">
                                                         <input class="form-control" disabled type="integer" name="wallboard_total" value="{{$defaultTotal->wallboard_total}}">
                                                         <label class="col-form-label text-md-right">{{__('Wallboard Rate')}}</label>
+                                                        <input class="form-control" hidden type="integer" step="0.01" name="add_wallboard_price" value="{{$defaultTotal->add_wallboard_price}}">
                                                         <input class="form-control" disabled type="integer" step="0.01" name="add_wallboard_price" value="{{$defaultTotal->add_wallboard_price}}">
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label class="col-form-label text-md-right">{{__('Document Prints')}}</label>
+                                                        <input class="form-control" hidden type="integer" name="doc_exported_total" value="{{$defaultTotal->doc_exported_total}}">
                                                         <input class="form-control" disabled type="integer" name="doc_exported_total" value="{{$defaultTotal->doc_exported_total}}">
                                                         <label class="col-form-label text-md-right">{{__('Document Rate')}}</label>
+                                                        <input class="form-control" hidden type="integer" step="0.01" name="add_doc_price" value="{{$defaultTotal->add_doc_price}}">
                                                         <input class="form-control" disabled type="integer" step="0.01" name="add_doc_price" value="{{$defaultTotal->add_doc_price}}">
                                                     </div>
                                                 </div>

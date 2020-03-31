@@ -43,7 +43,7 @@ class SiteSubscriptionTotalController extends Controller
     {
         $input = $request->all();
 
-        $subTotal = SiteSubscriptionTotal::where('site_subscription_total_id', $request->site_subscription_total_id)->first()->update($input);
+        $subTotal = SiteSubscriptionTotal::where('site_subscription_total_id', $subTotal->site_subscription_total_id)->first()->update($input);
         return redirect('/spark/kiosk');
     }
 
