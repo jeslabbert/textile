@@ -188,63 +188,35 @@
 
         <div class="card card-default mb-12">
             <div class="card-header">
-                <h2 class="card-title mb-0">{{__('Plan Extra Billing')}}</h2>
+                <h2 class="card-title mb-0">{{__('Plan Extra Billing Categories')}}</h2>
             </div>
             <div class="card-body">
-                @forelse(App\SubscriptionTotal::all() as $subTotal)
+                @forelse(App\ExtraModuleBilling::all() as $extraMod)
                     <div class="row">
-                        <div class="col-md-4">
-                            <h4>Plan Name</h4>
-                            <h5>{{$subTotal->plan}}</h5>
-                        </div>
-                        <div class="col-md-8">
-                            <form>
+
+                        <div class="col-md-12">
+                            <form method="POST" action="/kiosk/metrics/modulecategories/update/{{$extraMod->module_billing_id}}">
+                                {{ csrf_field() }}
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <label class="col-form-label text-md-right">{{__('User Total')}}</label>
-                                        <input class="form-control" type="integer" name="user_total" value="{{$subTotal->user_total}}">
+                                    <div class="col-md-12">
+                                        <label class="col-form-label text-md-right">{{__('Extra Name')}}</label>
+                                        <input class="form-control" type="text" name="name" value="{{$extraMod->name}}">
                                     </div>
-                                    {{--<div class="col-md-4">--}}
-                                        {{--<label class="col-form-label text-md-right">{{__('Document Total')}}</label>--}}
-                                        {{--<input class="form-control" type="integer" name="doc_total" value="{{$subTotal->doc_total}}">--}}
-                                    {{--</div>--}}
-                                    <div class="col-md-4">
-                                        <label class="col-form-label text-md-right">{{__('Active Total')}}</label>
-                                        <input class="form-control" type="integer" name="doc_active_total" value="{{$subTotal->doc_active_total}}">
+                                    <div class="col-md-12">
+                                        <label class="col-form-label text-md-right">{{__('Description')}}</label>
+                                        <input class="form-control" type="text" name="description" value="{{$extraMod->description}}">
                                     </div>
-                                    <div class="col-md-4">
-                                        <label class="col-form-label text-md-right">{{__('Document Print Total')}}</label>
-                                        <input class="form-control" type="integer" name="doc_exported_total" value="{{$subTotal->doc_exported_total}}">
-                                    </div>
+
                                 </div>
-                                {{--<div class="row">--}}
-                                    {{--<div class="col-md-4">--}}
-                                        {{--<label class="col-form-label text-md-right">{{__('View Total')}}</label>--}}
-                                        {{--<input class="form-control" type="integer" name="doc_viewed_total" value="{{$subTotal->doc_viewed_total}}">--}}
-                                    {{--</div>--}}
-                                    {{--<div class="col-md-4">--}}
-                                        {{--<label class="col-form-label text-md-right">{{__('Edit Total')}}</label>--}}
-                                        {{--<input class="form-control" type="integer" name="doc_edited_total" value="{{$subTotal->doc_edited_total}}">--}}
-                                    {{--</div>--}}
-                                    {{--<div class="col-md-4">--}}
-                                        {{--<label class="col-form-label text-md-right">{{__('Document Print Total')}}</label>--}}
-                                        {{--<input class="form-control" type="integer" name="doc_exported_total" value="{{$subTotal->doc_exported_total}}">--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
+
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label class="col-form-label text-md-right">{{__('Extra Rate Document')}}</label>
-                                        <input class="form-control" type="integer" step="0.01" name="add_doc_price" value="{{$subTotal->add_doc_price}}">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="col-form-label text-md-right">{{__('Extra Rate User')}}</label>
-                                        <input class="form-control" type="integer" step="0.01" name="add_user_price" value="{{$subTotal->add_user_price}}">
-                                    </div>
+
                                     <div class="col-md-6">
                                         <button type="submit" class="btn btn-primary">
                                             {{__('Update')}}
                                         </button>
                                     </div>
+                                    <hr>
                                 </div>
                             </form>
                         </div>
@@ -253,6 +225,37 @@
                     <hr>
                 @empty
                 @endforelse
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <form method="POST" action="/kiosk/metrics/modulecategories/create">
+                                {{ csrf_field() }}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h2>Add New Category</h2>
+                                        <label class="col-form-label text-md-right">{{__('Extra Name')}}</label>
+                                        <input class="form-control" type="text" name="name" placeholder="description">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="col-form-label text-md-right">{{__('Description')}}</label>
+                                        <input class="form-control" type="text" name="description" placeholder="Description">
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-primary">
+                                            {{__('Update')}}
+                                        </button>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
             </div>
         </div>
     </div>

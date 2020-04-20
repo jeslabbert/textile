@@ -45,6 +45,12 @@ Route::post('/kiosk/module-extras/update/{extraBilling}', 'ExtraSiteBillingContr
 
 Route::get('/kiosk/module-extras/remove/{extraBilling}', 'ExtraSiteBillingController@destroy');
 
+Route::post('/kiosk/metrics/modulecategories/create', 'ExtraModuleBillingController@store');
+
+Route::post('/kiosk/metrics/modulecategories/update/{extraModule}', 'ExtraModuleBillingController@update');
+
+Route::get('/kiosk/metrics/modulecategories/remove/{extraModule}', 'ExtraModuleBillingController@destroy');
+
 
 Route::post('/commission/defaults', 'SettingController@updateCommission');
 Route::post('/commission/update', 'SettingController@updateTeamCommission');

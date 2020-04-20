@@ -36,7 +36,9 @@ class ExtraModuleBillingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        ExtraModuleBilling::create($input);
+        return back();
     }
 
     /**
@@ -68,9 +70,12 @@ class ExtraModuleBillingController extends Controller
      * @param  \App\ExtraModuleBilling  $extraModuleBilling
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ExtraModuleBilling $extraModuleBilling)
+    public function update(Request $request, ExtraModuleBilling $extraModule)
     {
-        //
+        $input = $request->all();
+        $extraModule->update($input);
+
+        return back();
     }
 
     /**
