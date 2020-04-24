@@ -49,7 +49,7 @@ sudo cat > /var/www/html/${FOLDER}-${PORT}/.env <<EOF
 APP_NAME=TartanCMS
 APP_ENV=local
 APP_KEY=base64:UInV/8MxloQNjf2IdXK2Nf0eYREgx02BxlA5AOHUPYA=
-APP_DEBUG=true
+APP_DEBUG=false
 APP_LOG_LEVEL=debug
 APP_URL_BASE=${FOLDER}
 APP_URL=https://${APP_URL_BASE}

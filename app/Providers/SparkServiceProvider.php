@@ -35,6 +35,7 @@ class SparkServiceProvider extends ServiceProvider
      */
     protected $developers = [
         'justin@icarative.com',
+        'icarative@gmail.com',
         'witkruisarend@gmail.com',
         'gawieh@aigs.co.za',
         'gustavp@aigs.co.za'
@@ -108,27 +109,50 @@ class SparkServiceProvider extends ServiceProvider
 //            ->features([
 //                '101 to 500 Tasks', '15000 Transactions'
 //            ]);
-        $bronze = SubscriptionTotal::where('plan', 'taskmule-bronze-eur')->first();
-        $silver = SubscriptionTotal::where('plan', 'taskmule-silver-eur')->first();
-        $gold = SubscriptionTotal::where('plan', 'taskmule-gold-eur')->first();
+//        $bronze = SubscriptionTotal::where('plan', 'taskmule-bronze-eur')->first();
+//        $silver = SubscriptionTotal::where('plan', 'taskmule-silver-eur')->first();
+//        $gold = SubscriptionTotal::where('plan', 'taskmule-gold-eur')->first();
 
-        Spark::teamPlan('Bronze Plan', 'taskmule-bronze-eur')
+        $bronze = SubscriptionTotal::where('plan', 'cmspdf-bronze-usd')->first();
+        $silver = SubscriptionTotal::where('plan', 'cmspdf-silver-usd')->first();
+        $gold = SubscriptionTotal::where('plan', 'cmspdf-gold-usd')->first();
+
+        Spark::teamPlan('Bronze Plan', 'cmspdf-bronze-usd')
             ->price(1)
             ->features([
-                $bronze->doc_active_total.' Documents', $bronze->first()->doc_exported_total.' Exports'
+                $bronze->doc_total.' Documents', $bronze->first()->doc_exported_total.' Exports'
             ]);
 
-        Spark::teamPlan('Silver Plan', 'taskmule-silver-eur')
+        Spark::teamPlan('Silver Plan', 'cmspdf-silver-usd')
             ->price(10)
             ->features([
-                $silver->doc_active_total.' Documents', $silver->doc_exported_total.' Exports'
+                $silver->doc_total.' Documents', $silver->doc_exported_total.' Exports'
             ]);
 
-        Spark::teamPlan('Gold Plan', 'taskmule-gold-eur')
+        Spark::teamPlan('Gold Plan', 'cmspdf-gold-usd')
             ->price(100)
             ->features([
-                $gold->doc_active_total.' Documents', $gold->doc_exported_total.' Exports'
+                $gold->doc_total.' Documents', $gold->doc_exported_total.' Exports'
             ]);
+
+
+//        Spark::teamPlan('Bronze Plan', 'taskmule-bronze-eur')
+//            ->price(1)
+//            ->features([
+//                $bronze->doc_active_total.' Documents', $bronze->first()->doc_exported_total.' Exports'
+//            ]);
+//
+//        Spark::teamPlan('Silver Plan', 'taskmule-silver-eur')
+//            ->price(10)
+//            ->features([
+//                $silver->doc_active_total.' Documents', $silver->doc_exported_total.' Exports'
+//            ]);
+//
+//        Spark::teamPlan('Gold Plan', 'taskmule-gold-eur')
+//            ->price(100)
+//            ->features([
+//                $gold->doc_active_total.' Documents', $gold->doc_exported_total.' Exports'
+//            ]);
 
 //        Spark::freeTeamPlan()
 //            ->features([

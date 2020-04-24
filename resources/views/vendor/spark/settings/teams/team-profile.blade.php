@@ -62,8 +62,9 @@
                     <div class="card-body">
                         <!-- Tab links -->
                         <div class="tab">
-                            <button class="tablinks" onclick="openCity(event, 'London')">Subdomain Based Site</button>
                             <button class="tablinks" onclick="openCity(event, 'Paris')">Port Based Site</button>
+                            <button class="tablinks" onclick="openCity(event, 'London')">Subdomain Based Site</button>
+
 
                         </div>
 
@@ -97,7 +98,7 @@
                                 </div>
 
                                 <div class="text-center">
-                                    <button class="btn btn-success" data-toggle="tooltip" title="{{__('teams.create_site')}}">Create Site</button>
+                                    <button disabled class="btn btn-success" data-toggle="tooltip" title="{{__('teams.create_site')}}">Create Site</button>
                                 </div>
                             </form>
                         </div>

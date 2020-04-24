@@ -193,8 +193,15 @@
             <div class="card-body">
                 @forelse(App\ExtraModuleBilling::all() as $extraMod)
                     <div class="row">
-
                         <div class="col-md-12">
+
+
+                        <h3>{{$extraMod->name}}<a class="btn btn-sm btn-primary pull-right" data-toggle="collapse" href="#collapseCatPlan{{$extraMod->module_billing_id}}" role="button" aria-expanded="false" aria-controls="collapseDefaultPlan">
+                                +
+                            </a>
+                        </h3>
+                        </div>
+                        <div class="col-md-12 collapse" id="collapseCatPlan{{$extraMod->module_billing_id}}">
                             <form method="POST" action="/kiosk/metrics/modulecategories/update/{{$extraMod->module_billing_id}}">
                                 {{ csrf_field() }}
                                 <div class="row">

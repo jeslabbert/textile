@@ -29,17 +29,22 @@ $subscriptions = TeamSubscription::all();
 //dd($subscriptions);
 foreach($subscriptions as $subscription) {
     $default = SubscriptionTotal::where('plan', $subscription->braintree_plan)->first();
-    $setup = $default->toArray();
-    $teamSite = TeamSite::where('team_id', $subscription->team_id)->first();
-    $setup['site_id'] = $teamSite->id;
-    $siteDefault = SiteSubscriptionTotal::where('site_id', $teamSite->id)->whereDate('created_at', '>=', $subscription->created_at)->first();
+    if(isset($default)) {
+        $setup = $default->toArray();
+        $teamSite = TeamSite::where('team_id', $subscription->team_id)->first();
+        $setup['site_id'] = $teamSite->id;
+        $siteDefault = SiteSubscriptionTotal::where('site_id', $teamSite->id)->whereDate('created_at', '>=', $subscription->created_at)->first();
+        if(isset($siteDefault)) {
 
-    if(isset($siteDefault)) {
-
+        } else {
+            $oldSiteSubscriptions = SiteSubscriptionTotal::where('site_id', $teamSite->id)->delete();
+            $newDefault = SiteSubscriptionTotal::create($setup);
+        }
     } else {
-        $oldSiteSubscriptions = SiteSubscriptionTotal::where('site_id', $teamSite->id)->delete();
-        $newDefault = SiteSubscriptionTotal::create($setup);
+
     }
+
+
 
 
 }
