@@ -24,7 +24,7 @@ mysql -u${MYSQLUSERNAME} -p${MYSQLPASSWORD} -e "CREATE DATABASE ${DATABASE}"
 
 echo -e "${HC}::::::::::::::::::::::::::Creating Project Directory::::::::::::::::::::::::::${NC}"
 cd /var/www/html
-sudo mkdir ${FOLDER}-${PORT}
+sudo mkdir ${FOLDER}
 sudo chown -R ${USERNAME}:${USERNAME} ${FOLDER}
 
 echo -e "${HC}::::::::::::::::::::::::::Cloning Git Repo::::::::::::::::::::::::::${NC}"
