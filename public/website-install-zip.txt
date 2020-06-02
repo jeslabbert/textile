@@ -1,0 +1,138 @@
+#!/bin/sh
+
+########################################################
+# Bash script to install Tartan Laravel App
+# Written by Justin Slabbert
+########################################################
+
+HC='\033[0;32m' # Heading Color
+WC='\033[0;33m' # Warning Color
+NC='\033[0m' # No Color
+read -p "Please give a Database name, eg. googledb:" DATABASE;
+read -p "Please give a domain name, eg. google.com:" FOLDER;
+read -p "Please give a port number, eg. 9001:" PORT;
+read -p "What is your Username?" USERNAME;
+
+
+
+APP_URL="https://portal.cmspdf.com/package/v001-2020-06-01.zip"
+
+echo -e "${HC}::::::::::::::::::::::::::Creating Database::::::::::::::::::::::::::${NC}"
+read -p "What is your MySQL Username?" MYSQLUSERNAME;
+read -p "What is your MySQL Password?" MYSQLPASSWORD;
+mysql -u${MYSQLUSERNAME} -p${MYSQLPASSWORD} -e "CREATE DATABASE ${DATABASE}"
+
+echo -e "${HC}::::::::::::::::::::::::::Creating Project Directory::::::::::::::::::::::::::${NC}"
+cd /var/www/html
+sudo mkdir ${FOLDER}-${PORT}
+sudo chown -R ${USERNAME}:${USERNAME} ${FOLDER}-${PORT}
+
+echo -e "${HC}::::::::::::::::::::::::::Cloning Git Repo::::::::::::::::::::::::::${NC}"
+wget -N ${APP_URL} 2>&1  | grep "not retrieving" 2>&1 > /dev/null || unzip file.zip
+cd /var/www/html/${FOLDER}-${PORT}
+
+
+echo -e "${HC}::::::::::::::::::::::::::Composer Install::::::::::::::::::::::::::${NC}"
+composer install --optimize-autoloader
+
+echo -e "${HC}::::::::::::::::::::::::::Setting Permissions::::::::::::::::::::::::::${NC}"
+sudo chmod -R 0775 /var/www/html/${FOLDER}-${PORT}/storage
+sudo chmod -R 0775 /var/www/html/${FOLDER}-${PORT}/bootstrap/cache
+sudo chown -R ${USERNAME}:www-data /var/www/html/${FOLDER}-${PORT}/storage
+
+echo -e "${HC}::::::::::::::::::::::::::Creating Storage Directory::::::::::::::::::::::::::${NC}"
+sudo php artisan storage:link
+echo -e "${HC}::::::::::::::::::::::::::Creating Environment File::::::::::::::::::::::::::${NC}"
+sudo cat > /var/www/html/${FOLDER}-${PORT}/.env <<EOF
+APP_NAME=TartanCMS
+APP_ENV=local
+APP_KEY=base64:UInV/8MxloQNjf2IdXK2Nf0eYREgx02BxlA5AOHUPYA=
+APP_DEBUG=false
+APP_LOG_LEVEL=debug
+APP_URL_BASE=${FOLDER}
+APP_URL=https://${APP_URL_BASE}
+
+PORTAL_URL=https://portal.tartancms.com
+
+BRAND=logo.png
+
+DB_CONNECTION=system
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=${DATABASE}
+DB_USERNAME=${MYSQLUSERNAME}
+DB_PASSWORD=${MYSQLPASSWORD}
+
+LIMIT_UUID_LENGTH_32=true
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+QUEUE_DRIVER=sync
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+
+LIMIT_UUID_LENGTH_32=true
+AUTO_DELETE_TENANT_DIRECTORY=true
+AUTO_DELETE_TENANT_DATABASE=true
+
+EOF
+
+echo -e "${HC}::::::::::::::::::::::::::Database Setup::::::::::::::::::::::::::${NC}"
+read -p "PLEASE FIRST UPLOAD YOUR .env FILE TO SERVER AND THEN PRESS y : " answer
+case ${answer:0:1} in
+    y|Y )
+        echo -e "${HC}::::::::::::::::::::::::::Database Migration::::::::::::::::::::::::::${NC}"
+        sudo php artisan migrate
+
+        echo -e "${HC}::::::::::::::::::::::::::Seed Database::::::::::::::::::::::::::${NC}"
+        sudo php artisan db:seed
+    ;;
+    * )
+        echo  -e "${WC}>PLEASE REMEMBER TO UPLOAD .env FILE ON SERVER THEN MIGRATE & SEED THE DATABASE LATER${NC}"
+    ;;
+esac
+
+echo -e "${HC}::::::::::::::::::::::::::Configuring Nginx::::::::::::::::::::::::::${NC}"
+sudo touch /etc/nginx/sites-available/${FOLDER}-${PORT}
+sudo chown -R ${USERNAME}:${USERNAME} /etc/nginx/sites-available/${FOLDER}-${PORT}
+sudo cat > /etc/nginx/sites-available/${FOLDER}-${PORT} <<EOF
+server {
+    listen ${PORT};
+    listen [::]:${PORT};
+    root /var/www/html/${FOLDER}-${PORT}/public;
+    index index.php index.html;
+    server_name ${FOLDER};
+    location / {
+        try_files \$uri \$uri/ /index.php?\$query_string;
+    }
+    # pass the PHP scripts to FastCGI server
+    #
+    location ~ \.php\$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+    }
+}
+EOF
+sudo ln -s /etc/nginx/sites-available/${FOLDER}-${PORT} /etc/nginx/sites-enabled/
+sudo service nginx restart
+cd /var/www/html
+sudo chown -R www-data:www-data ${FOLDER}-${PORT}
+
+sudo -u www-data php artisan migrate
+sudo iptables -I INPUT 1 -i eth0 -p tcp --dport ${PORT} -j ACCEPT
+echo -e "${HC}::::::::::::::::::::::::::All Completed::::::::::::::::::::::::::${NC}"
