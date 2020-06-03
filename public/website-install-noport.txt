@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ########################################################
-# Bash script to install Tartan Laravel App
+# Bash script to install Laravel App from GitHub
 # Written by Justin Slabbert
 ########################################################
 
@@ -10,12 +10,11 @@ WC='\033[0;33m' # Warning Color
 NC='\033[0m' # No Color
 read -p "Please give a Database name, eg. googledb:" DATABASE;
 read -p "Please give a domain name, eg. google.com:" FOLDER;
-read -p "Please give a port number, eg. 9001:" PORT;
 read -p "What is your Username?" USERNAME;
 
 
 
-GIT_URL="https://github.com/jeslabbert/tartan-cms"
+read -p "What is your Private GIT URL?" GIT_URL;
 
 echo -e "${HC}::::::::::::::::::::::::::Creating Database::::::::::::::::::::::::::${NC}"
 read -p "What is your MySQL Username?" MYSQLUSERNAME;
@@ -115,7 +114,7 @@ sudo chown -R ${USERNAME}:${USERNAME} /etc/nginx/sites-available/${FOLDER}
 sudo cat > /etc/nginx/sites-available/${FOLDER} <<EOF
 server {
     listen 80;
-    listen [::]:80};
+    listen [::]:80;
     root /var/www/html/${FOLDER}/public;
     index index.php index.html;
     server_name ${FOLDER};
