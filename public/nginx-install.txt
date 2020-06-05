@@ -19,13 +19,13 @@ sudo mysqld --initialize
 sudo service mysql start
 sudo mysql_secure_installation
 
-# Install PHP 7.2
+# Install PHP 7.4
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
-sudo apt-get install php7.2-fpm
+sudo apt-get install php7.4-fpm
 
 # Install needed modules for PHP
-sudo apt-get install php7.2-fpm php7.2-mysql php7.2-curl php7.2-gd php7.2-bz2 php7.2-mbstring php7.2-xml php7.2-zip php7.2-soap
+sudo apt-get install php7.4-fpm php7.4-mysql php7.4-curl php7.4-gd php7.4-bz2 php7.4-mbstring php7.4-xml php7.4-zip php7.4-soap
 
 # Install Composer (PHP dependencies manager)
 ## First install php-cli, unzip, git, curl, php-mbstring
@@ -38,6 +38,16 @@ read -p "Please give a password for creation of MySQL system administrator:" MYS
 sudo mysql -uroot -e "CREATE USER '${MYSQLUSER}'@'localhost' IDENTIFIED BY '${MYSQLPASSWORD}'"
 sudo mysql -uroot -e "ALTER USER '${MYSQLUSER}'@'localhost' IDENTIFIED WITH mysql_native_password BY '${MYSQLPASSWORD}'"
 sudo mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQLUSER}'@'localhost' WITH GRANT OPTION"
+
+# Install Source Guardian
+sudo mkdir /usr/src/loader
+cd /usr/src/loader
+sudo wget http://www.sourceguardian.com/loaders/download/loaders.linux-x86_64.tar.gz
+sudo tar vxf loader*.tar.gz
+sudo cp ixed.7.4.lin /usr/lib/php/20190902
+sudo bash -c 'echo "zend_extension=/usr/lib/php/20190902/ixed.7.4.lin" > /etc/php/7.4/mods-available/sourceguardian.ini'
+sudo service php7.4-fpm restart
+
 
 # Install Lets Encrypt SSL Certificates CERT BOT
 sudo add-apt-repository ppa:certbot/certbot
