@@ -15,7 +15,7 @@ read -p "What is your Username?" USERNAME;
 
 
 
-APP_URL="https://portal.cmspdf.com/package/v001-2020-06-01.zip"
+APP_URL="https://portal.tartancms.com/package/cmspdf-v05062020.zip"
 
 echo -e "${HC}::::::::::::::::::::::::::Creating Database::::::::::::::::::::::::::${NC}"
 read -p "What is your MySQL Username?" MYSQLUSERNAME;
@@ -25,10 +25,11 @@ mysql -u${MYSQLUSERNAME} -p${MYSQLPASSWORD} -e "CREATE DATABASE ${DATABASE}"
 echo -e "${HC}::::::::::::::::::::::::::Creating Project Directory::::::::::::::::::::::::::${NC}"
 cd /var/www/html
 sudo mkdir ${FOLDER}-${PORT}
+unzip zipped_file.zip -d unzipped_directory
 sudo chown -R ${USERNAME}:${USERNAME} ${FOLDER}-${PORT}
 
 echo -e "${HC}::::::::::::::::::::::::::Cloning Git Repo::::::::::::::::::::::::::${NC}"
-wget -N ${APP_URL} 2>&1  | grep "not retrieving" 2>&1 > /dev/null || unzip file.zip
+wget -N ${APP_URL} 2>&1  | grep "not retrieving" 2>&1 > /dev/null || unzip cmspdf-v05062020.zip -d /var/www/html/${FOLDER}-${PORT}
 cd /var/www/html/${FOLDER}-${PORT}
 
 
