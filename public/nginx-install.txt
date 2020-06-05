@@ -46,6 +46,7 @@ sudo wget http://www.sourceguardian.com/loaders/download/loaders.linux-x86_64.ta
 sudo tar vxf loader*.tar.gz
 sudo cp ixed.7.4.lin /usr/lib/php/20190902
 sudo bash -c 'echo "zend_extension=/usr/lib/php/20190902/ixed.7.4.lin" > /etc/php/7.4/mods-available/sourceguardian.ini'
+sudo phpenmod sourceguardian
 sudo service php7.4-fpm restart
 
 
