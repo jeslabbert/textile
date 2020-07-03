@@ -113,6 +113,8 @@ class SparkServiceProvider extends ServiceProvider
 //        $silver = SubscriptionTotal::where('plan', 'taskmule-silver-eur')->first();
 //        $gold = SubscriptionTotal::where('plan', 'taskmule-gold-eur')->first();
 
+        if(\Schema::hasTable('subscription_totals')) {
+
         $bronze = SubscriptionTotal::where('plan', 'cmspdf-bronze-usd')->first();
         $silver = SubscriptionTotal::where('plan', 'cmspdf-silver-usd')->first();
         $gold = SubscriptionTotal::where('plan', 'cmspdf-gold-usd')->first();
@@ -134,7 +136,7 @@ class SparkServiceProvider extends ServiceProvider
             ->features([
                 $gold->doc_total.' Documents', $gold->doc_exported_total.' Exports'
             ]);
-
+        }
 
 //        Spark::teamPlan('Bronze Plan', 'taskmule-bronze-eur')
 //            ->price(1)
