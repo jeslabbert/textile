@@ -62,15 +62,15 @@
                     <div class="card-body">
                         <!-- Tab links -->
                         <div class="tab">
-                            <button class="tablinks" onclick="openCity(event, 'port')">Port Based Site</button>
-                            <button class="tablinks" onclick="openCity(event, 'standard')">Standard Site</button>
-                            <button class="tablinks" onclick="openCity(event, 'subdomain')">Subdomain Based Site</button>
+                            <button class="tablinks" onclick="openCity(event, 'port')">Self Hosted Port Based Site</button>
+                            <button class="tablinks" onclick="openCity(event, 'standard')">Self Hosted Subdomain Site</button>
+                            <button class="tablinks" onclick="openCity(event, 'subdomain')">Cloud Hosted Subdomain Site</button>
 
                         </div>
 
                         <!-- Tab content -->
                         <div id="subdomain" class="tabcontent">
-                            <h3>Automated Subdomain Site Creation</h3>
+                            <h3>Cloud Hosted Subdomain Site</h3>
                             <br>
                             <div class="row">
                                 <div class="col-md-12">
@@ -104,7 +104,7 @@
                         </div>
 
                         <div id="port" class="tabcontent">
-                            <h3>Manual Port Site Creation</h3>
+                            <h3>Self Hosted Port Based Site</h3>
 
                             <form class="form-horizontal" method="POST" action="/new-standalone-site-port">
                                 {{ csrf_field() }}
@@ -184,7 +184,7 @@
                         </div>
 
                         <div id="standard" class="tabcontent">
-                            <h3>Manual Site Creation</h3>
+                            <h3>Self Hosted Subdomain Site</h3>
 
                             <form class="form-horizontal" method="POST" action="/new-standalone-site">
                                 {{ csrf_field() }}
