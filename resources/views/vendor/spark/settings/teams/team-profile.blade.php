@@ -274,7 +274,35 @@
         </div>
         @if (App\TeamSite::where('team_id', $team->id)->count() > 0)
 
+            <div class="card card-default">
+                <div class="card-header">
+                    Update Site Security
+                    {{--<button data-toggle="modal" data-target="#sitedns" class="btn btn-link btn-sm pull-right"><i style="color: black;" class="fa fa-info"></i></button>--}}
+                    {{--<a class="btn btn-link btn-sm pull-right" href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}"><i style="color: black;" class="fa fa-info"></i> Visit Site</a>--}}
+                </div>
+                <div class="card-body">
+                    <form class="form-horizontal" method="POST" action="/updatesitehttps">
+                        {{ csrf_field() }}
+                        <input id="siteid" type="hidden" class="form-control" name="website_id" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>
+                        <input id="sitename" type="hidden" class="form-control" name="website" @if(App\TeamSite::where('team_id', $team->id)->first()->https > 0) value="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" @else value="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" @endif required>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">Use HTTPS?</label>
+                            <div class="col-md-6">
+                                <div class="input-group mb-2 mr-sm-2">
+                                    {{--TODO Fix up sizing of input--}}
+                                    <input type="hidden" name="https" value="0">
+                                    <input type="checkbox" name="https" value="1">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
 
+                    </form>
+
+                    <h5> </h5>
+
+                </div>
+            </div>
             <div class="card card-default">
                 <div class="card-header">
                     Update Site Details

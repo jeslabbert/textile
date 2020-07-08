@@ -26,6 +26,8 @@ Route::post('/new-standalone-site-port', 'HomeController@newsiteNonTenantPort');
 Route::post('/new-standalone-site', 'HomeController@newsiteNonTenant');
 Route::post('/newsite', 'HomeController@newsite');
 Route::post('/updatesite', 'HomeController@updatesite');
+Route::post('/updatesitehttps', 'HomeController@siteHttpsUpdate');
+
 Route::post('/updatesitename', 'HomeController@updatesitename');
 
 Route::post('/teamcommission', 'TeamCommissionController@store');

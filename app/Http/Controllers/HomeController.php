@@ -223,6 +223,13 @@ class HomeController extends Controller
 //        return Redirect::to('https://' . $tenantdetails->fqdn);
     }
 
+    public function siteHttpsUpdate(Request $request)
+    {
+        $teamsite = TeamSite::where('website_id', $request->website_id)->update([
+            'https' => $request->https
+        ]);
+        return Redirect()->back();
+    }
     public function newsiteNonTenantPort(Request $request)
     {
         $input = $request->all();
