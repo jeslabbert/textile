@@ -134,14 +134,14 @@
 <hr>
                                             <p>Use the newly created user account for the second command.</p>
                                         <ul>
-                                            <li>source <(curl -s {{ env('APP_URL') }}/website-install.txt)</li>
+                                            <li>source <(curl -s {{ env('APP_URL') }}/website-install-port.txt)</li>
                                         </ul>
                                     </div>
                                     <div class="col-md-12">
                                         <hr>
                                         <p>If you already have a server set up from before and would like to add a new site. Please run the following:</p>
                                         <ul>
-                                            <li>source <(curl -s {{ env('APP_URL') }}/website-install.txt)</li>
+                                            <li>source <(curl -s {{ env('APP_URL') }}/website-install-port.txt)</li>
                                         </ul>
                                     </div>
                                     <div class="col-md-12">

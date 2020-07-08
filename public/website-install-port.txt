@@ -10,6 +10,7 @@ WC='\033[0;33m' # Warning Color
 NC='\033[0m' # No Color
 read -p "Please give a Database name, eg. googledb:" DATABASE;
 read -p "Please give a domain name, eg. google.com:" FOLDER;
+read -p "Please give a port number, eg. 9001:" PORT;
 read -p "What is your Username?" USERNAME;
 
 
@@ -23,12 +24,12 @@ mysql -u${MYSQLUSERNAME} -p${MYSQLPASSWORD} -e "CREATE DATABASE ${DATABASE}"
 
 echo -e "${HC}::::::::::::::::::::::::::Creating Project Directory::::::::::::::::::::::::::${NC}"
 cd /var/www/html
-sudo mkdir ${FOLDER}
-sudo chown -R ${USERNAME}:${USERNAME} ${FOLDER}
+sudo mkdir ${FOLDER}-${PORT}
+sudo chown -R ${USERNAME}:${USERNAME} ${FOLDER}-${PORT}
 
 echo -e "${HC}::::::::::::::::::::::::::Cloning Git Repo::::::::::::::::::::::::::${NC}"
-git clone ${GIT_URL} ${FOLDER}
-cd /var/www/html/${FOLDER}
+git clone ${GIT_URL} ${FOLDER}-${PORT}
+cd /var/www/html/${FOLDER}-${PORT}
 git config --global credential.helper store
 git config --global credential.helper cache
 git pull
@@ -37,14 +38,14 @@ echo -e "${HC}::::::::::::::::::::::::::Composer Install::::::::::::::::::::::::
 composer install --optimize-autoloader
 
 echo -e "${HC}::::::::::::::::::::::::::Setting Permissions::::::::::::::::::::::::::${NC}"
-sudo chmod -R 0775 /var/www/html/${FOLDER}/storage
-sudo chmod -R 0775 /var/www/html/${FOLDER}/bootstrap/cache
-sudo chown -R ${USERNAME}:www-data /var/www/html/${FOLDER}/storage
+sudo chmod -R 0775 /var/www/html/${FOLDER}-${PORT}/storage
+sudo chmod -R 0775 /var/www/html/${FOLDER}-${PORT}/bootstrap/cache
+sudo chown -R ${USERNAME}:www-data /var/www/html/${FOLDER}-${PORT}/storage
 
 echo -e "${HC}::::::::::::::::::::::::::Creating Storage Directory::::::::::::::::::::::::::${NC}"
 sudo php artisan storage:link
 echo -e "${HC}::::::::::::::::::::::::::Creating Environment File::::::::::::::::::::::::::${NC}"
-sudo cat > /var/www/html/${FOLDER}/.env <<EOF
+sudo cat > /var/www/html/${FOLDER}-${PORT}/.env <<EOF
 APP_NAME=TartanCMS
 APP_ENV=local
 APP_KEY=base64:UInV/8MxloQNjf2IdXK2Nf0eYREgx02BxlA5AOHUPYA=
@@ -109,13 +110,13 @@ case ${answer:0:1} in
 esac
 
 echo -e "${HC}::::::::::::::::::::::::::Configuring Nginx::::::::::::::::::::::::::${NC}"
-sudo touch /etc/nginx/sites-available/${FOLDER}
-sudo chown -R ${USERNAME}:${USERNAME} /etc/nginx/sites-available/${FOLDER}
-sudo cat > /etc/nginx/sites-available/${FOLDER} <<EOF
+sudo touch /etc/nginx/sites-available/${FOLDER}-${PORT}
+sudo chown -R ${USERNAME}:${USERNAME} /etc/nginx/sites-available/${FOLDER}-${PORT}
+sudo cat > /etc/nginx/sites-available/${FOLDER}-${PORT} <<EOF
 server {
-    listen 80;
-    listen 443 ssl;
-    root /var/www/html/${FOLDER}/public;
+    listen ${PORT};
+    listen [::]:${PORT};
+    root /var/www/html/${FOLDER}-${PORT}/public;
     index index.php index.html;
     server_name ${FOLDER};
     location / {
@@ -130,10 +131,11 @@ server {
     }
 }
 EOF
-sudo ln -s /etc/nginx/sites-available/${FOLDER} /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/${FOLDER}-${PORT} /etc/nginx/sites-enabled/
 sudo service nginx restart
 cd /var/www/html
-sudo chown -R www-data:www-data ${FOLDER}
+sudo chown -R www-data:www-data ${FOLDER}-${PORT}
 
 sudo -u www-data php artisan migrate
+sudo iptables -I INPUT 1 -i eth0 -p tcp --dport ${PORT} -j ACCEPT
 echo -e "${HC}::::::::::::::::::::::::::All Completed::::::::::::::::::::::::::${NC}"
