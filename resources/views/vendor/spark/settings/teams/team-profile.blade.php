@@ -291,7 +291,7 @@
                                 <div class="input-group mb-2 mr-sm-2">
                                     {{--TODO Fix up sizing of input--}}
                                     <input type="hidden" name="https" value="0">
-                                    <input type="checkbox" name="https" value="1">
+                                    <input type="checkbox" name="https" value="1" @if (App\TeamSite::where('team_id', $team->id)->first()->https > 0) checked @endif style="margin-top: 15px; margin-bottom: 15px;">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </div>
