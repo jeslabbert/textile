@@ -22,6 +22,7 @@ Route::get('/sites', 'HomeController@sites');
 Route::get('/test', 'CommissionCalculationController@calculate');
 Route::get('/setglobals', 'CommissionCalculationController@setGlobalComms');
 
+Route::post('/new-standalone-site-port', 'HomeController@newsiteNonTenantPort');
 Route::post('/new-standalone-site', 'HomeController@newsiteNonTenant');
 Route::post('/newsite', 'HomeController@newsite');
 Route::post('/updatesite', 'HomeController@updatesite');

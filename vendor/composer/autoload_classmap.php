@@ -24,6 +24,7 @@ return array(
     'App\\Http\\Controllers\\CommissionSplitController' => $baseDir . '/app/Http/Controllers/CommissionSplitController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\ExtraModuleBillingController' => $baseDir . '/app/Http/Controllers/ExtraModuleBillingController.php',
+    'App\\Http\\Controllers\\ExtraSiteBillingController' => $baseDir . '/app/Http/Controllers/ExtraSiteBillingController.php',
     'App\\Http\\Controllers\\GlobalCommisionController' => $baseDir . '/app/Http/Controllers/GlobalCommisionController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\MeteredInvoiceController' => $baseDir . '/app/Http/Controllers/MeteredInvoiceController.php',

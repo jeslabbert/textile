@@ -439,6 +439,7 @@ class ComposerStaticInit136dd79619daee1887ec12531da1bb4f
         'App\\Http\\Controllers\\CommissionSplitController' => __DIR__ . '/../..' . '/app/Http/Controllers/CommissionSplitController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\ExtraModuleBillingController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExtraModuleBillingController.php',
+        'App\\Http\\Controllers\\ExtraSiteBillingController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExtraSiteBillingController.php',
         'App\\Http\\Controllers\\GlobalCommisionController' => __DIR__ . '/../..' . '/app/Http/Controllers/GlobalCommisionController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\MeteredInvoiceController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeteredInvoiceController.php',

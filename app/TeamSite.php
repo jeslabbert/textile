@@ -15,7 +15,8 @@ class TeamSite extends Model
         'creator_email',
         'tenant_sitename',
         'site_url',
-        'site_port'
+        'site_port',
+        'https'
     ];
 
     public function Team()

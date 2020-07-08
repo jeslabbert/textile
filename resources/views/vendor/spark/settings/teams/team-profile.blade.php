@@ -5,7 +5,7 @@
                 <div class="card card-default">
                     <div class="card-header">
                         Visit Site
-                        <a class="pull-right" href="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" target="_blank" data-toggle="tooltip" title="{{__('teams.visit_site')}}"><img src="/url.png" style="width: 30px;"></a>
+                        <a class="pull-right" @if(App\TeamSite::where('team_id', $team->id)->first()->https > 0) href="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" @else href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" @endif target="_blank" data-toggle="tooltip" title="{{__('teams.visit_site')}}"><img src="/url.png" style="width: 30px;"></a>
                         {{--<button data-toggle="modal" data-target="#sitedns" class="btn btn-link btn-sm pull-right"><i style="color: black;" class="fa fa-info"></i></button>--}}
                         {{--<a class="btn btn-link btn-sm pull-right" href="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}"><i style="color: black;" class="fa fa-info"></i> Visit Site</a>--}}
                     </div>
@@ -62,14 +62,14 @@
                     <div class="card-body">
                         <!-- Tab links -->
                         <div class="tab">
-                            <button class="tablinks" onclick="openCity(event, 'Paris')">Port Based Site</button>
-                            <button class="tablinks" onclick="openCity(event, 'London')">Subdomain Based Site</button>
-
+                            <button class="tablinks" onclick="openCity(event, 'port')">Port Based Site</button>
+                            <button class="tablinks" onclick="openCity(event, 'standard')">Standard Site</button>
+                            <button class="tablinks" onclick="openCity(event, 'subdomain')">Subdomain Based Site</button>
 
                         </div>
 
                         <!-- Tab content -->
-                        <div id="London" class="tabcontent">
+                        <div id="subdomain" class="tabcontent">
                             <h3>Automated Subdomain Site Creation</h3>
                             <br>
                             <div class="row">
@@ -103,10 +103,10 @@
                             </form>
                         </div>
 
-                        <div id="Paris" class="tabcontent">
+                        <div id="port" class="tabcontent">
                             <h3>Manual Port Site Creation</h3>
 
-                            <form class="form-horizontal" method="POST" action="/new-standalone-site">
+                            <form class="form-horizontal" method="POST" action="/new-standalone-site-port">
                                 {{ csrf_field() }}
                                 <input id="team_id" type="hidden" class="form-control" name="team_id" value="{{$team->id}}" required autofocus>
                                 <div class="form-group hidden">
@@ -183,6 +183,75 @@
                             </form>
                         </div>
 
+                        <div id="standard" class="tabcontent">
+                            <h3>Manual Site Creation</h3>
+
+                            <form class="form-horizontal" method="POST" action="/new-standalone-site">
+                                {{ csrf_field() }}
+                                <input id="team_id" type="hidden" class="form-control" name="team_id" value="{{$team->id}}" required autofocus>
+                                <div class="form-group hidden">
+
+                                    <input id="subname" type="hidden" class="form-control" name="subname" value="{{$team->id}}" required autofocus>
+                                </div>
+                                <div class="form-group hidden">
+
+                                    <div class="col-md-6">
+                                        <input id="sitename" type="hidden" class="form-control" name="sitename" value="{{$team->name}}" required autofocus>
+                                        @if ($errors->has('sitename'))
+                                            <span class="help-block">
+                    <strong>{{ $errors->first('sitename') }}</strong>
+                </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>If you require a fresh server installation. Please set up an Ubuntu 18.04 box. Once set up, run the following in order using a SUDO account for the first command.</p>
+                                        <ul>
+                                            <li>source <(curl -s {{ env('APP_URL') }}/nginx-install.txt)</li>
+                                        </ul>
+                                        {{--<li>source <(curl -s {{ env('APP_URL') }}/composer-setup.txt)</li>--}}
+                                        <hr>
+                                        <p>Use the newly created user account for the second command.</p>
+                                        <ul>
+                                            <li>source <(curl -s {{ env('APP_URL') }}/website-install.txt)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <hr>
+                                        <p>If you already have a server set up from before and would like to add a new site. Please run the following:</p>
+                                        <ul>
+                                            <li>source <(curl -s {{ env('APP_URL') }}/website-install.txt)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <hr>
+                                        <p>After the above has been completed. Please fill in the details below based on your setup of the website-install command.</p>
+                                        <hr>
+                                        <p>If you require a standard free SSL, please run the following:</p>
+                                        <ul>
+                                            <li>source <(curl -s {{ env('APP_URL') }}/SSL-install.txt)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="siteurl">Site URL</label>
+                                            <input id="siteurl" class="form-control" name="site_url">
+                                            @if ($errors->has('site_url'))
+                                                <span class="help-block">
+                    <strong>{{ $errors->first('site_url') }}</strong>
+                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button class="btn btn-success" data-toggle="tooltip" title="{{__('teams.create_site')}}">Create Site</button>
+                                </div>
+                            </form>
+                        </div>
+
 
 
 
@@ -216,7 +285,7 @@
                     <form class="form-horizontal" method="POST" action="/updatesitename">
                         {{ csrf_field() }}
                         <input id="siteid" type="hidden" class="form-control" name="website_id" value="{{App\TeamSite::where('team_id', $team->id)->first()->website_id}}" required>
-                        <input id="sitename" type="hidden" class="form-control" name="website" value="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" required>
+                        <input id="sitename" type="hidden" class="form-control" name="website" @if(App\TeamSite::where('team_id', $team->id)->first()->https > 0) value="https://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" @else value="http://{{App\TeamSite::where('team_id', $team->id)->first()->fqdn}}" @endif required>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">Site Title</label>
                             <div class="col-md-6">
