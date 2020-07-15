@@ -52,6 +52,7 @@ APP_DEBUG=false
 APP_LOG_LEVEL=debug
 APP_URL_BASE=${FOLDER}
 APP_URL=https://${APP_URL_BASE}
+DOC_BASE=http://${APP_URL_BASE}
 
 PORTAL_URL=https://portal.tartancms.com
 
