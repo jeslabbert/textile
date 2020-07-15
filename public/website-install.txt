@@ -135,6 +135,6 @@ sudo ln -s /etc/nginx/sites-available/${FOLDER} /etc/nginx/sites-enabled/
 sudo service nginx restart
 cd /var/www/html
 sudo chown -R www-data:www-data ${FOLDER}
-
-sudo -u www-data php artisan migrate
+cd /var/www/html/${FOLDER}
+sudo php artisan storage:link
 echo -e "${HC}::::::::::::::::::::::::::All Completed::::::::::::::::::::::::::${NC}"
