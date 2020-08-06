@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Laravel\Spark\Spark;
 
+
 class HomeController extends Controller
 {
     /**
@@ -113,6 +114,323 @@ class HomeController extends Controller
 
 
 //        dd($team);
+    }
+
+    public function newSiteCloud(Request $request)
+    {
+        $input = $request->all();
+
+        $runcloudUserClient = new \GuzzleHttp\Client();
+        $runcloudAppClient = new \GuzzleHttp\Client();
+        $runcloudGitClient = new \GuzzleHttp\Client();
+        $runcloudDbClient = new \GuzzleHttp\Client();
+        $runcloudDbUserClient = new \GuzzleHttp\Client();
+        $siteclient = new \GuzzleHttp\Client();
+
+        $apiKey = '7am578w2eXdPRlpoHar6hpTH726BsYRMaNON005qtDfg';
+        $apiSecret = 'vo72pj9jhs9l2ueZFYGFSjkc5du1Irt2biFZlVQNF7JQ4OIj37BF7M7HNJEvSLf6';
+
+        $serverId = '103587';
+        $username = 'cmspdf';
+        $password = 'T0by&P1per';
+
+        $runcloudUserUrl = 'https://manage.runcloud.io/api/v2/servers/'.$serverId.'/users';
+        $runcloudAppUrl = 'https://manage.runcloud.io/api/v2/servers/'.$serverId.'/webapps/custom';
+        $runcloudDbUrl = 'https://manage.runcloud.io/api/v2/servers/'.$serverId.'/databases';
+
+        $team = Team::find($request->team_id);
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $team->name)));
+        $dbslug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $team->name)));
+
+//        $target = [
+//            'host'      => '206.189.126.10',
+//
+//            'username'  => 'cmspdf',
+//            'password'  => 'T0by&P1per',
+//            'key'       => '',
+//            'keytext'   => '',
+//            'keyphrase' => '',
+//            'agent'     => '',
+//            'timeout'   => 20,
+//        ];
+////        config([
+////            'remote.connections.runtime.host' => $target['host'],
+////            'remote.connections.runtime.username' => $target['username'],
+////            'remote.connections.runtime.password' => $target['password']
+////        ]);
+
+        $siteUrl =
+        //SETUP WEBAPP IN RUNCLOUD
+        $appUrl = 'tts000' . $request->subname.".cmspdf.com";
+
+            $runcloudAppPost = array(
+                "name"=> $slug,
+                "domainName"=> $appUrl,
+                "user"=> 282158,
+                "publicPath"=> '/public',
+                "phpVersion"=> "php74rc",
+                "stack"=> "hybrid",
+                "stackMode"=> "production",
+                "clickjackingProtection"=> true,
+                "xssProtection"=> true,
+                "mimeSniffingProtection"=> true,
+                "processManager"=> "ondemand",
+                "processManagerMaxChildren"=> 50,
+                "processManagerMaxRequests"=> 500,
+                "timezone"=> "UTC",
+                "disableFunctions"=> "",
+                "maxExecutionTime"=> 600,
+                "maxInputTime"=> 600,
+                "maxInputVars"=> 1000,
+                "memoryLimit"=> 256,
+                "postMaxSize"=> 256,
+                "uploadMaxFilesize"=> 256,
+                "sessionGcMaxlifetime"=> 1440,
+                "allowUrlFopen"=> true
+            );
+
+        $runCloudAppResponse = $runcloudAppClient->post($runcloudAppUrl, [
+            'auth' => [
+            $apiKey,
+            $apiSecret
+        ],
+            'form_params' => $runcloudAppPost
+        ]);
+
+        $runcloudAppCode = $runCloudAppResponse->getStatusCode();
+        $runcloudAppResult = $runCloudAppResponse->getBody()->getContents();
+        $runcloudAppDetails = \GuzzleHttp\json_decode($runcloudAppResult);
+
+        $runcloudAppId = $runcloudAppDetails->id;
+        $runcloudUserId = $runcloudAppDetails->server_user_id;
+
+        //SETUP WEBAPP DATABASE IN RUNCLOUD
+        $dbName = $dbslug.$runcloudAppId;
+        $dbUser = $dbslug.$runcloudAppId.'dba';
+        $dbPassword = uniqid();
+        $runcloudDbPost = array(
+            "name"=> $dbName
+        );
+        $runCloudDbResponse = $runcloudDbClient->post($runcloudDbUrl, [
+            'auth' => [
+                $apiKey,
+                $apiSecret
+            ],
+            'form_params' => $runcloudDbPost
+        ]);
+        $runcloudDbCode = $runCloudDbResponse->getStatusCode();
+        $runcloudDbResult = $runCloudDbResponse->getBody()->getContents();
+        $runcloudDbDetails = \GuzzleHttp\json_decode($runcloudDbResult);
+        $dbId = $runcloudDbDetails->id;
+
+
+        //SETUP WEBAPP DATABASE USER IN RUNCLOUD
+        $runcloudDbUserPost = array(
+            "username"=> $dbUser,
+            "password"=> $dbPassword
+        );
+        $runcloudDbUserUrl = 'https://manage.runcloud.io/api/v2/servers/'.$serverId.'/databaseusers';
+        $runCloudDbUserResponse = $runcloudDbUserClient->post($runcloudDbUserUrl, [
+            'auth' => [
+                $apiKey,
+                $apiSecret
+            ],
+            'form_params' => $runcloudDbUserPost
+        ]);
+        $runcloudDbUserCode = $runCloudDbUserResponse->getStatusCode();
+        $runcloudDbUserResult = $runCloudDbUserResponse->getBody()->getContents();
+        $runcloudDbUserDetails = \GuzzleHttp\json_decode($runcloudDbUserResult);
+        $dbUserId = $runcloudDbUserDetails->id;
+
+
+        //ATTACH DATABASE USER TO DATABASE IN RUNCLOUD
+        $runcloudDbUserAttachPost = array(
+            "id"=> $dbUserId
+        );
+        $runcloudDbUserAttachUrl = 'https://manage.runcloud.io/api/v2/servers/'.$serverId.'/databases/'.$dbId.'/grant';
+        $runCloudDbUserAttachResponse = $runcloudDbUserClient->post($runcloudDbUserAttachUrl, [
+            'auth' => [
+                $apiKey,
+                $apiSecret
+            ],
+            'form_params' => $runcloudDbUserAttachPost
+        ]);
+        $runcloudDbUserAttachCode = $runCloudDbUserAttachResponse->getStatusCode();
+        $runcloudDbUserAttachResult = $runCloudDbUserAttachResponse->getBody()->getContents();
+        $runCloudDbUserAttachDetails = \GuzzleHttp\json_decode($runcloudDbUserAttachResult);
+
+        //SETUP WEBAPP GIT REPO IN RUNCLOUD
+        $runcloudGitUrl = 'https://manage.runcloud.io/api/v2/servers/'.$serverId.'/webapps/'.$runcloudAppId.'/git';
+        $runcloudGitPost = array(
+            "provider"=> "github",
+            "repository"=> "jeslabbert/tartan-cms",
+            "branch"=> "NoTenant"
+        );
+
+        $runCloudGitResponse = $runcloudGitClient->post($runcloudGitUrl, [
+            'auth' => [
+                $apiKey,
+                $apiSecret
+            ],
+            'form_params' => $runcloudGitPost
+        ]);
+        $runcloudGitCode = $runCloudDbUserAttachResponse->getStatusCode();
+        $runcloudGitResult = $runCloudDbUserAttachResponse->getBody()->getContents();
+        $runCloudGitDetails = \GuzzleHttp\json_decode($runcloudDbUserAttachResult);
+
+
+
+        $debugStatus = 'true';
+        $envFile = 'cat > .env <<EOF
+APP_NAME=CMSPDF
+APP_ENV=local
+APP_KEY=base64:UInV/8MxloQNjf2IdXK2Nf0eYREgx02BxlA5AOHUPYA=
+APP_DEBUG='.$debugStatus.'
+APP_LOG_LEVEL=debug
+APP_URL_BASE='.$appUrl.'
+APP_URL='.$appUrl.'
+DOC_BASE='.$appUrl.'
+
+PORTAL_URL=https://portal.cmspdf.com
+
+BRAND=logo.png
+
+DB_CONNECTION=system
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE='.$dbName.'
+DB_USERNAME='.$dbUser.'
+DB_PASSWORD='.$dbPassword.'
+
+LIMIT_UUID_LENGTH_32=true
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+QUEUE_DRIVER=sync
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+
+EOF
+        ';
+        $commands = [
+            'cd webapps/'.$slug,
+            $envFile,
+        ];
+        try {
+            \SSH::into('cmspdfcloud')->run($commands, function($line)
+            {
+//                echo $line.PHP_EOL;
+            });
+        } catch (\ErrorException $e) {
+            echo $e->getMessage();
+        }
+
+        $commandsSecond = [
+            'cd webapps/'.$slug,
+            'composer install',
+            'php artisan migrate'
+        ];
+        try {
+            \SSH::into('cmspdfcloud')->run($commandsSecond, function($line)
+            {
+//                echo $line.PHP_EOL;
+            });
+        } catch (\ErrorException $e) {
+            echo $e->getMessage();
+        }
+
+
+        $input = $request->all();
+
+        $tenantclient = new \GuzzleHttp\Client();
+        $countryclient = new \GuzzleHttp\Client();
+        $languageclient = new \GuzzleHttp\Client();
+        $setupclient = new \GuzzleHttp\Client();
+        $userclient = new \GuzzleHttp\Client();
+        $siteclient = new \GuzzleHttp\Client();
+
+        $tenanturl = $appUrl.'/api/v1/sites/create';
+
+        $body['_token'] = $request->_token;
+        $body['subname'] = $appUrl;
+        $body['sitename'] = $team->name;
+        $body['language_id'] = 1;
+        $body['themename'] = $request->themename;
+        $body['publicregistration'] = $request->publicregistration;
+        $body['first_name'] = Auth::user()->name;
+        $body['last_name'] = Auth::user()->last_name;
+        $body['username'] = Auth::user()->username;
+        $body['email'] = Auth::user()->email;
+        $body['password'] = Auth::user()->password;
+
+        $teamsite = TeamSite::create([
+            'fqdn' => $appUrl,
+            'historical_fqdn' => $appUrl,
+            'website_id' => $runcloudAppId,
+            'creator' => 'System',
+            'creator_email' => 'info@cmspdf.com',
+            'team_id' => $request->team_id,
+            'tenant_sitename' =>$request->sitename
+        ]);
+
+        $comm1set = Setting::where('setting_type', 'Commission')->where('setting_name', 'Consultant')->first();
+        $comm2set = Setting::where('setting_type', 'Commission')->where('setting_name', 'Marketing')->first();
+        $comm3set = Setting::where('setting_type', 'Commission')->where('setting_name', 'IT Support')->first();
+        $globalset = Setting::where('setting_type', 'Commission')->where('setting_name', 'Global Commission')->first();
+
+        $teamglobalcomm = GlobalCommission::create([
+            'team_id' => $request->team_id,
+            'comm1' => $comm1set->setting_value,
+            'comm2' => $comm2set->setting_value,
+            'comm3' => $comm3set->setting_value,
+            'global_commission' => $globalset->setting_value
+        ]);
+        $team = Team::where('id', $request->team_id)->first();
+
+        TeamCommission::create([
+            'team_id'=>$request->team_id,
+            'first_name'=>'Support',
+            'first_user_id'=>$team->owner_id,
+            'first_split'=>50,
+            'second_name'=>'Sales',
+            'second_split'=>50,
+            'second_user_id'=>$team->owner_id,
+        ]);
+
+        $setupurl = 'http://' . $teamsite->fqdn . '/api/v1/setup';
+        $userurl = 'http://' . $teamsite->fqdn . '/api/v1/newadmin';
+        $siteurl = 'http://' . $teamsite->fqdn . '/api/v1/siteparams';
+
+        $siteresponse = $siteclient->post($siteurl, ['form_params' => $body ]);
+        $sitecode = $siteresponse->getStatusCode();
+        $siteresult = $siteresponse->getBody()->getContents();
+
+        $userresponse = $userclient->post($userurl, ['form_params' => $body ]);
+        $usercode = $userresponse->getStatusCode();
+        $userresult = $userresponse->getBody()->getContents();
+        $userdetails = \GuzzleHttp\json_decode($userresult);
+
+        $setupresponse = $setupclient->get($setupurl, ['form_params' => $body ]);
+        $setupcode = $setupresponse->getStatusCode();
+        $setupresult = $setupresponse->getBody()->getContents();
+
+        return Redirect()->back();
+
     }
 
     public function newsite(Request $request)

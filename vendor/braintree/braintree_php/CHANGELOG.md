@@ -1,3 +1,29 @@
+## 3.40.0
+* Deprecate `GRANTED_PAYMENT_INSTRUMENT_UPDATE` and add `GRANTOR_UPDATED_GRANTED_PAYMENT_METHOD` and `RECIPIENT_UPDATED_GRANTED_PAYMENT_METHOD`
+* Add `accountType` field to `TransactionGateway`, `CreditCardGateway`, `PaymentMethodGateway`, and `CreditCardVerification`.
+* Add Hiper and Hipercard test numbers.
+
+## 3.39.0
+* Add `bin` field to `paymentMethodNonceDetails`
+* Add Error indicating pdf uploads too long for dispute evidence.
+* Add `GrantedPaymentMethodRevoked` webhook response objects
+
+## 3.38.0
+* Add `fraudServiceProvider` field in `riskData`
+* Fix issue where merchant reporting calls would throw an exception in PHP 7 (#236)
+
+## 3.37.0
+* Add `processorResponseType` to `Transaction`, `AuthorizationAdjustment`, and `CreditCardVerification`.
+* Add `authorizationExpiresAt` to `Transaction`
+* Add support for additional PayPal options when vaulting a PayPal Order during customer update
+* Allow PayPal payment ID and payer ID to be passed during transaction create
+* Add `travel_flight` support to industry-specific data
+
+## 3.36.0
+* Fix dispute results in transactions not showing the correct status sometimes
+* Add `externalVault` option to transaction sale
+* Add `LocalPaymentCompleted` webhook
+
 ## 3.35.0
 * Add subscription charged unsuccessfully sample webhook to webhook testing gateway
 * Add `processor_response_code` and `processor_response_text` to authorization adjustments subfield in transaction response.
@@ -273,7 +299,7 @@
 * Allow payee_email to be passed in options params for Transaction create
 
 ## 2.31.0
-* Added paypal specific fields to transaction calls               
+* Added paypal specific fields to transaction calls
 * Added SettlementPending, SettlementDeclined transaction statuses
 
 ## 2.30.0

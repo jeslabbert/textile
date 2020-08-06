@@ -44,7 +44,7 @@ sudo chown -R ${USERNAME}:www-data /var/www/html/${FOLDER}/storage
 echo -e "${HC}::::::::::::::::::::::::::Creating Storage Directory::::::::::::::::::::::::::${NC}"
 sudo php artisan storage:link
 echo -e "${HC}::::::::::::::::::::::::::Creating Environment File::::::::::::::::::::::::::${NC}"
-sudo cat > /var/www/html/${FOLDER}/.env <<EOF
+sudo cat > .env <<EOF
 APP_NAME=CMSPDF
 APP_ENV=local
 APP_KEY=base64:UInV/8MxloQNjf2IdXK2Nf0eYREgx02BxlA5AOHUPYA=

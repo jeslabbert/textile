@@ -30,6 +30,8 @@ Route::post('/updatesitehttps', 'HomeController@siteHttpsUpdate');
 
 Route::post('/updatesitename', 'HomeController@updatesitename');
 
+Route::post('/cloud/setup/new', 'HomeController@newSiteCloud');
+
 Route::post('/teamcommission', 'TeamCommissionController@store');
 
 Route::get('/sitebilling', 'TeamSiteController@sitebilling');

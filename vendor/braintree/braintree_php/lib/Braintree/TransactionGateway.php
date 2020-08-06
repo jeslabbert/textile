@@ -178,6 +178,9 @@ class TransactionGateway
                     'skipAdvancedFraudChecking',
                     'skipAvs',
                     'skipCvv',
+                    ['creditCard' =>
+                        ['accountType']
+                    ],
                     ['threeDSecure' =>
                         ['required']
                     ],
@@ -213,7 +216,7 @@ class TransactionGateway
             ],
             ['customFields' => ['_anyKey_']],
             ['descriptor' => ['name', 'phone', 'url']],
-            ['paypalAccount' => ['payeeId', 'payeeEmail']],
+            ['paypalAccount' => ['payeeId', 'payeeEmail', 'payerId', 'paymentId']],
             # TODO: Snake case version included for backwards compatiblity. Remove in the next major version
             ['apple_pay_card' => ['number', 'cardholder_name', 'cryptogram', 'expiration_month', 'expiration_year', 'eci_indicator']], 
 
@@ -230,12 +233,50 @@ class TransactionGateway
                             'lodgingCheckInDate',
                             'lodgingCheckOutDate',
                             'lodgingName',
-                            'roomRate'
+                            'roomRate',
+                            'passengerFirstName',
+                            'passengerLastName',
+                            'passengerMiddleInitial',
+                            'passengerTitle',
+                            'issuedDate',
+                            'travelAgencyName',
+                            'travelAgencyCode',
+                            'ticketNumber',
+                            'issuingCarrierCode',
+                            'customerCode',
+                            'fareAmount',
+                            'feeAmount',
+                            'taxAmount',
+                            'restrictedTicket',
+                            ['legs' =>
+                                [
+                                    'conjunctionTicket',
+                                    'exchangeTicket',
+                                    'couponNumber',
+                                    'serviceClass',
+                                    'carrierCode',
+                                    'fareBasisCode',
+                                    'flightNumber',
+                                    'departureDate',
+                                    'departureAirportCode',
+                                    'departureTime',
+                                    'arrivalAirportCode',
+                                    'arrivalTime',
+                                    'stopoverPermitted',
+                                    'fareAmount',
+                                    'feeAmount',
+                                    'taxAmount',
+                                    'endorsementOrRestrictions'
+                                ]
+                            ]
                         ]
                     ]
                 ]
             ],
             ['lineItems' => ['quantity', 'name', 'description', 'kind', 'unitAmount', 'unitTaxAmount', 'totalAmount', 'discountAmount', 'taxAmount', 'unitOfMeasure', 'productCode', 'commodityCode', 'url']],
+            ['externalVault' =>
+                ['status' , 'previousNetworkTransactionId'],
+            ]
         ];
     }
 

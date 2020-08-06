@@ -105,6 +105,103 @@ class CustomerTest extends Setup
         $this->assertNotNull($customer->merchantId);
     }
 
+    public function testCreateWithAccountTypeDebit()
+    {
+        $result = Braintree\Customer::create([
+            'firstName' => 'Mike',
+            'lastName' => 'Jones',
+            'company' => 'Jones Co.',
+            'email' => 'mike.jones@example.com',
+            'phone' => '419.555.1234',
+            'fax' => '419.555.1235',
+            'website' => 'http://example.com',
+            'creditCard' => [
+                'number' => Braintree\Test\CreditCardNumbers::$hiper,
+                'expirationDate' => '05/12',
+                'options' => [
+                    'verifyCard' => true,
+                    'verificationMerchantAccountId' => 'hiper_brl',
+                    'verificationAccountType' => 'debit'
+                ]
+            ]
+        ]);
+        $this->assertEquals(true, $result->success);
+        $this->assertEquals('debit', $result->customer->creditCards[0]->verification->creditCard['accountType']);
+    }
+
+    public function testCreateWithAccountTypeCredit()
+    {
+        $result = Braintree\Customer::create([
+            'firstName' => 'Mike',
+            'lastName' => 'Jones',
+            'company' => 'Jones Co.',
+            'email' => 'mike.jones@example.com',
+            'phone' => '419.555.1234',
+            'fax' => '419.555.1235',
+            'website' => 'http://example.com',
+            'creditCard' => [
+                'number' => Braintree\Test\CreditCardNumbers::$hiper,
+                'expirationDate' => '05/12',
+                'options' => [
+                    'verifyCard' => true,
+                    'verificationMerchantAccountId' => 'hiper_brl',
+                    'verificationAccountType' => 'credit'
+                ]
+            ]
+        ]);
+        $this->assertEquals(true, $result->success);
+        $this->assertEquals('credit', $result->customer->creditCards[0]->verification->creditCard['accountType']);
+    }
+
+    public function testCreateErrorsWithVerificationAccountTypeIsInvalid()
+    {
+        $result = Braintree\Customer::create([
+            'firstName' => 'Mike',
+            'lastName' => 'Jones',
+            'company' => 'Jones Co.',
+            'email' => 'mike.jones@example.com',
+            'phone' => '419.555.1234',
+            'fax' => '419.555.1235',
+            'website' => 'http://example.com',
+            'creditCard' => [
+                'number' => Braintree\Test\CreditCardNumbers::$hiper,
+                'expirationDate' => '05/12',
+                'options' => [
+                    'verifyCard' => true,
+                    'verificationMerchantAccountId' => 'hiper_brl',
+                    'verificationAccountType' => 'wrong'
+                ]
+            ]
+        ]);
+        $this->assertFalse($result->success);
+        $errors = $result->errors->forKey('customer')->forKey('creditCard')->forKey('options')->onAttribute('verificationAccountType');
+        $this->assertEquals(Braintree\Error\Codes::CREDIT_CARD_OPTIONS_VERIFICATION_ACCOUNT_TYPE_IS_INVALID, $errors[0]->code);
+    }
+
+    public function testCreateErrorsWithVerificationAccountTypeNotSupported()
+    {
+        $result = Braintree\Customer::create([
+            'firstName' => 'Mike',
+            'lastName' => 'Jones',
+            'company' => 'Jones Co.',
+            'email' => 'mike.jones@example.com',
+            'phone' => '419.555.1234',
+            'fax' => '419.555.1235',
+            'website' => 'http://example.com',
+            'creditCard' => [
+                "number" => "4111111111111111",
+                'expirationDate' => '05/12',
+                'options' => [
+                    'verifyCard' => true,
+                    'verificationAccountType' => 'credit'
+                ]
+            ]
+        ]);
+        $this->assertFalse($result->success);
+        $errors = $result->errors->forKey('customer')->forKey('creditCard')->forKey('options')->onAttribute('verificationAccountType');
+        $this->assertEquals(Braintree\Error\Codes::CREDIT_CARD_OPTIONS_VERIFICATION_ACCOUNT_TYPE_NOT_SUPPORTED, $errors[0]->code);
+    }
+
     public function testCreateCustomerWithCardUsingNonce()
     {
         $http = new HttpClientApi(Braintree\Configuration::$global);
@@ -647,7 +744,7 @@ class CustomerTest extends Setup
         $this->assertTrue($result->success);
     }
 
-    public function testCreate_worksWithOrderPaymentPayPalNonceWithPayeeEmailSnakeCase()
+    public function testCreate_worksWithOrderPaymentPayPalNonceWithSnakeCase()
     {
         $http = new HttpClientApi(Braintree\Configuration::$global);
         $nonce = $http->nonceForPayPalAccount([
@@ -674,7 +771,7 @@ class CustomerTest extends Setup
         $this->assertTrue($result->success);
     }
 
-    public function testCreate_worksWithOrderPaymentPayPalNonceWithPayeeEmailCamelCase()
+    public function testCreate_worksWithOrderPaymentPayPalNonceWithCamelCase()
     {
         $http = new HttpClientApi(Braintree\Configuration::$global);
         $nonce = $http->nonceForPayPalAccount([
@@ -1175,7 +1272,7 @@ class CustomerTest extends Setup
         $this->assertEquals($result->customer->defaultPaymentMethod()->token, $paypalAccountToken);
     }
 
-    public function testUpdate_worksWithOrderPaymentPayPalNonceWithPayeeEmailSnakeCase()
+    public function testUpdate_worksWithOrderPaymentPayPalNonceWithSnakeCase()
     {
         $customerResult = Braintree\Customer::create([
             'creditCard' => [
@@ -1205,6 +1302,10 @@ class CustomerTest extends Setup
             'options' => [
                 'paypal' => [
                     'payee_email' => 'payee@example.com',
+                    'order_id' => 'merchant-order-id',
+                    'custom_field' => 'custom merchant field',
+                    'description' => 'merchant description',
+                    'amount' => '1.23',
                 ],
             ],
         ]);
@@ -1213,7 +1314,7 @@ class CustomerTest extends Setup
         $this->assertEquals($result->customer->defaultPaymentMethod()->token, $paypalAccountToken);
     }
 
-    public function testUpdate_worksWithOrderPaymentPayPalNonceWithPayeeEmailCamelCase()
+    public function testUpdate_worksWithOrderPaymentPayPalNonceWithCamelCase()
     {
         $customerResult = Braintree\Customer::create([
             'creditCard' => [
@@ -1243,6 +1344,10 @@ class CustomerTest extends Setup
             'options' => [
                 'paypal' => [
                     'payeeEmail' => 'payee@example.com',
+                    'orderId' => 'merchant-order-id',
+                    'customField' => 'custom merchant field',
+                    'description' => 'merchant description',
+                    'amount' => '1.23',
                     'shipping' => [
                         'firstName' => 'Andrew',
                         'lastName' => 'Mason',
