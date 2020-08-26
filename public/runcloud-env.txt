@@ -1,0 +1,20 @@
+# Install RunCloud
+
+# Install WKHTMLTOPDF
+sudo wget https://github.com/h4cc/wkhtmltopdf-amd64/blob/master/bin/wkhtmltopdf-amd64?raw=true -O /usr/local/bin/wkhtmltopdf
+sudo chmod +x /usr/local/bin/wkhtmltopdf
+
+
+# Install SourceGuardian
+### Download & Extract
+cd ~
+sudo mkdir /usr/src/loader
+cd /usr/src/loader
+sudo wget http://www.sourceguardian.com/loaders/download/loaders.linux-x86_64.tar.gz
+sudo tar vxf loader*.tar.gz
+
+### Installing for PHP7.4
+cp ixed.7.4.lin /RunCloud/Packages/php74rc/lib/php/extensions/no-debug-non-zts-20190902
+echo "zend_extension=ixed.7.4.lin" > /etc/php74rc/conf.d/sourceguardian.ini
+systemctl restart php74rc-fpm
+/RunCloud/Packages/php74rc/bin/php -m | grep "SourceGuardian"

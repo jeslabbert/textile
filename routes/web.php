@@ -31,6 +31,9 @@ Route::post('/updatesitehttps', 'HomeController@siteHttpsUpdate');
 Route::post('/updatesitename', 'HomeController@updatesitename');
 
 Route::post('/cloud/setup/new', 'HomeController@newSiteCloud');
+Route::post('/runcloud/setup/subdomain', 'HomeController@newSiteSubDomain');
+Route::post('/runcloud/setup/port1', 'HomeController@newSitePort1');
+Route::post('/runcloud/setup/port2', 'HomeController@newSitePort2');
 
 Route::post('/teamcommission', 'TeamCommissionController@store');
 
@@ -55,6 +58,8 @@ Route::post('/kiosk/metrics/modulecategories/create', 'ExtraModuleBillingControl
 Route::post('/kiosk/metrics/modulecategories/update/{extraModule}', 'ExtraModuleBillingController@update');
 
 Route::get('/kiosk/metrics/modulecategories/remove/{extraModule}', 'ExtraModuleBillingController@destroy');
+
+Route::post('/profile/addserver', 'RuncloudServerController@store');
 
 
 Route::post('/commission/defaults', 'SettingController@updateCommission');

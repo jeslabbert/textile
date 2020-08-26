@@ -116,6 +116,7 @@
                             @include('spark::settings.profile')
                         </div>
 
+
                         <!-- Teams -->
                         @if (Spark::usesTeams())
                             <div role="tabcard" class="tab-pane" id="{{Spark::teamsPrefix()}}">

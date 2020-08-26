@@ -18,6 +18,8 @@ class User extends SparkUser
         'name',
         'email',
         'username',
+        'runcloud_api_key',
+        'runcloud_api_secret'
     ];
 
     /**
