@@ -264,8 +264,8 @@ class HomeController extends Controller
         //SETUP WEBAPP GIT REPO IN RUNCLOUD
         $runcloudGitUrl = 'https://manage.runcloud.io/api/v2/servers/'.$serverId.'/webapps/'.$runcloudAppId.'/git';
         $runcloudGitPost = array(
-            "provider"=> "github",
-            "repository"=> "jeslabbert/tartan-cms",
+            "provider"=> "gitlab",
+            "repository"=> "icarative/cmspdf-dev",
             "branch"=> "NoTenant"
         );
 
@@ -605,8 +605,8 @@ EOF
         //SETUP WEBAPP GIT REPO IN RUNCLOUD
         $runcloudGitUrl = 'https://manage.runcloud.io/api/v2/servers/'.$serverId.'/webapps/'.$runcloudAppId.'/git';
         $runcloudGitPost = array(
-            "provider"=> "github",
-            "repository"=> "jeslabbert/tartan-cms",
+            "provider"=> "gitlab",
+            "repository"=> "icarative/cmspdf-dev",
             "branch"=> "NoTenant"
         );
 
@@ -951,8 +951,8 @@ EOF
         //SETUP WEBAPP GIT REPO IN RUNCLOUD
         $runcloudGitUrl = 'https://manage.runcloud.io/api/v2/servers/'.$serverId.'/webapps/'.$runcloudAppId.'/git';
         $runcloudGitPost = array(
-            "provider"=> "github",
-            "repository"=> "jeslabbert/tartan-cms",
+            "provider"=> "gitlab",
+            "repository"=> "icarative/cmspdf-dev",
             "branch"=> "NoTenant"
         );
 
