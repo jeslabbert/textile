@@ -854,7 +854,7 @@ EOF
         $input['slug'] = $slug;
         $runcloudAppPost = array(
             "name"=> $slug,
-            "domainName"=> $appUrl,
+            "domainName"=> $slug.$appUrl,
             "user"=> $serverUserId,
             "publicPath"=> '/public',
             "phpVersion"=> "php74rc",
