@@ -952,7 +952,7 @@ EOF
         $runcloudGitUrl = 'https://manage.runcloud.io/api/v2/servers/'.$serverId.'/webapps/'.$runcloudAppId.'/git';
         $runcloudGitPost = array(
             "provider"=> "gitlab",
-            "repository"=> "icarative/cmspdf-dev",
+            "repository"=> "icarative/cmspdf",
             "branch"=> "NoTenant"
         );
 
