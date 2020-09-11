@@ -953,7 +953,7 @@ EOF
         $runcloudGitPost = array(
             "provider"=> "gitlab",
             "repository"=> "icarative/cmspdf",
-            "branch"=> "NoTenant"
+            "branch"=> "master"
         );
 
         $runCloudGitResponse = $runcloudGitClient->post($runcloudGitUrl, [
