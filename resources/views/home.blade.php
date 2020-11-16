@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card card-default">
-                    <div class="card-header">{{__('Dashboard')}}</div>
+                    <div class="card-header">{{__('Dashboard')}} V1</div>
 
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
